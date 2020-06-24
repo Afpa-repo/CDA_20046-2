@@ -1,5 +1,0 @@
-Accéder à vos branches :
-
-- git checkout Florian
-- git checkout Benjamin
-- git checkout Jeremy
