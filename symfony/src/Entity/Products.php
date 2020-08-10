@@ -16,8 +16,6 @@ class Products
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity=Material::class, inversedBy="product")
-     * @ORM\ManyToOne(targetEntity=Format::class, inversedBy="product")
      */
     private $id;
 

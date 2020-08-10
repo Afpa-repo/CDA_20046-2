@@ -51,6 +51,12 @@ class Order
      */
     private $orders;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
 
 
     public function __construct()
@@ -165,6 +171,18 @@ class Order
                 $order->setOrders(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

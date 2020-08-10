@@ -21,7 +21,30 @@
   <component name="ChangeListManager">
     <list default="true" id="f2c926f0-df4f-4d3a-9c61-09f07c1f2edf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/bdd/insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/bdd/insert.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200805081433.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200805082340.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200805084717.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200805090802.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200805092412.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200805114937.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200805122944.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200805123103.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200805125514.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200806071244.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200806072410.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200810074403.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200810080437.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200810080927.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200810081318.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200810082956.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200810083918.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200810085744.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200810094754.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/migrations/Version20200810120648.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/src/Entity/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Entity/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/src/Entity/Products.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Entity/Products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

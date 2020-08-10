@@ -91,14 +91,14 @@ VALUES (1, 1),
 
 
 INSERT INTO `products` (id, pro_name, pro_stock_ale, pro_unit_price, pro_unit_stock_phy, pro_unit_on_order,
-                        pro_discontinued, pro_note, pro_lib, pro_description)
-    VALUE (1, "poster Marvel", 25, 20, 50, 10, 2, 9, "posMar", "poster film Marvel A3"),
-    (2, "poster Valorant", 20, 30, 75, 20, 2, 8, "posVal", "poster jeu Valorant A3"),
-    (3, "poster Looney Tunes", 10, 15, 50, 5, 2, 6, "posLT", "poster cartoon Looney Tunes A4"),
-    (4, "poster Marvel", 15, 40, 20, 10, 2, 9, "posMar", "poster film Marvel A2"),
-    (7, "poster Valorant", 20, 25, 75, 25, 2, 8, "posVal", "poster jeu Valorant A3"),
-    (5, "poster Marvel", 10, 20, 50, 0, 2, 7, "posMar", "poster film Marvel A2"),
-    (6, "poster Marvel", 25, 20, 50, 30, 2, 8, "posMar", "poster film Marvel A3");
+                        pro_discontinued, pro_note, pro_lib, pro_description,material_id,format_id)
+    VALUE (1, "poster Marvel", 25, 20, 50, 10, 2, 9, "posMar", "poster film Marvel A3",1,2),
+    (2, "poster Valorant", 20, 30, 75, 20, 2, 8, "posVal", "poster jeu Valorant A3",1,1),
+    (3, "poster Looney Tunes", 10, 15, 50, 5, 2, 6, "posLT", "poster cartoon Looney Tunes A4",2,3),
+    (4, "poster Marvel", 15, 40, 20, 10, 2, 9, "posMar", "poster film Marvel A2",1,2),
+    (7, "poster Valorant", 20, 25, 75, 25, 2, 8, "posVal", "poster jeu Valorant A3",1,3),
+    (5, "poster Marvel", 10, 20, 50, 0, 2, 7, "posMar", "poster film Marvel A2",3,1),
+    (6, "poster Marvel", 25, 20, 50, 30, 2, 8, "posMar", "poster film Marvel A3",1,2);
 
 
 
@@ -133,12 +133,12 @@ INSERT INTO `products_theme` (products_id, theme_id)
     (7, 2);
 
 
-INSERT INTO `order` (id,order_date, order_date_shipping, order_type, order_shipping_cost)
-VALUES (1, "2020-02-15", "2020-02-27", 1, 20),
-       (2, "2020-03-27", "2020-04-5", 2, 5),
-       (3, "2020-01-01", "2020-01-12", 2, 7),
-       (4, "2020-06-07", "2020-06-18", 2, 5),
-       (5, "2020-03-10", "2020-03-14", 2, 3);
+INSERT INTO `order` (id,order_date, order_date_shipping, order_type, order_shipping_cost,orderdetail_id)
+VALUES (1, "2020-02-15", "2020-02-27", 1, 20,1),
+       (2, "2020-03-27", "2020-04-5", 2, 5,2),
+       (3, "2020-01-01", "2020-01-12", 2, 7,3),
+       (4, "2020-06-07", "2020-06-18", 2, 5,4),
+       (5, "2020-03-10", "2020-03-14", 2, 3,5);
 
 
 INSERT INTO `order_adress` (order_id, adress_id)
@@ -150,9 +150,12 @@ VALUES (1, 1),
        (5, 1);
 
 
-INSERT INTO `orders_details` (id,  orderdetails_unit_price, orderdetails_quantity, ordersdetails_discount,ordersdetails_tva,orders_id)
+INSERT INTO `orders_details` (id,  orderdetails_unit_price, orderdetails_quantity, ordersdetails_discount,ordersdetails_tva,products_id)
     VALUE   (1,  30, 10, 5,20,1),
-    (4,  30, 2, 20,20,1);
+    (4,  30, 2, 20,20,1),
+    (2,  30, 2, 20,20,1),
+    (3,  30, 2, 20,20,1),
+    (5,  30, 2, 20,20,1);
 
 INSERT INTO `orders_details` (id,  orderdetails_unit_price, orderdetails_quantity,ordersdetails_tva)
     VALUE   (6 ,20, 1,20),
