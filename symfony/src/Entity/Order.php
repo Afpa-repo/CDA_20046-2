@@ -46,12 +46,18 @@ class Order
      */
     private $adress;
 
+    /**
+     * @ORM\OneToMany(targetEntity=OrdersDetails::class, mappedBy="orders")
+     */
+    private $orders;
+
 
 
     public function __construct()
     {
         $this->adress = new ArrayCollection();
         $this->suppliers = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +135,37 @@ class Order
         if ($this->adress->contains($adress)) {
             $this->adress->removeElement($adress);
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrdersDetails[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(OrdersDetails $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setOrders($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(OrdersDetails $order): self
+    {
+        if ($this->orders->contains($order)) {
+            $this->orders->removeElement($order);
+            // set the owning side to null (unless already changed)
+            if ($order->getOrders() === $this) {
+                $order->setOrders(null);
+            }
+        }
+
         return $this;
     }
 

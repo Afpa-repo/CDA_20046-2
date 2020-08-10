@@ -133,12 +133,12 @@ INSERT INTO `products_theme` (products_id, theme_id)
     (7, 2);
 
 
-INSERT INTO `order` (id, orderdetail_id, order_date, order_date_shipping, order_type, order_shipping_cost)
-VALUES (1,1, "2020-02-15", "2020-02-27", 1, 20),
-       (2,2, "2020-03-27", "2020-04-5", 2, 5),
-       (3,3, "2020-01-01", "2020-01-12", 2, 7),
-       (4,4, "2020-06-07", "2020-06-18", 2, 5),
-       (5,5, "2020-03-10", "2020-03-14", 2, 3);
+INSERT INTO `order` (id,order_date, order_date_shipping, order_type, order_shipping_cost)
+VALUES (1, "2020-02-15", "2020-02-27", 1, 20),
+       (2, "2020-03-27", "2020-04-5", 2, 5),
+       (3, "2020-01-01", "2020-01-12", 2, 7),
+       (4, "2020-06-07", "2020-06-18", 2, 5),
+       (5, "2020-03-10", "2020-03-14", 2, 3);
 
 
 INSERT INTO `order_adress` (order_id, adress_id)
@@ -150,9 +150,9 @@ VALUES (1, 1),
        (5, 1);
 
 
-INSERT INTO `orders_details` (id,  orderdetails_unit_price, orderdetails_quantity, ordersdetails_discount,ordersdetails_tva)
-    VALUE   (1,  30, 10, 5,20),
-    (4,  30, 2, 20,20);
+INSERT INTO `orders_details` (id,  orderdetails_unit_price, orderdetails_quantity, ordersdetails_discount,ordersdetails_tva,orders_id)
+    VALUE   (1,  30, 10, 5,20,1),
+    (4,  30, 2, 20,20,1);
 
 INSERT INTO `orders_details` (id,  orderdetails_unit_price, orderdetails_quantity,ordersdetails_tva)
     VALUE   (6 ,20, 1,20),
