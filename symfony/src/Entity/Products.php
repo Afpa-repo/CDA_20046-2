@@ -87,6 +87,11 @@ class Products
      */
     private $themes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=OrdersDetails::class, mappedBy="product")
+     */
+    private $ordersDetails;
+
     public function __construct()
     {
 
@@ -94,6 +99,7 @@ class Products
 
         $this->orderDetails = new ArrayCollection();
         $this->themes = new ArrayCollection();
+        $this->ordersDetails = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -328,6 +334,37 @@ class Products
         if ($this->themes->contains($theme)) {
             $this->themes->removeElement($theme);
             $theme->removeProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrdersDetails[]
+     */
+    public function getOrdersDetails(): Collection
+    {
+        return $this->ordersDetails;
+    }
+
+    public function addOrdersDetail(OrdersDetails $ordersDetail): self
+    {
+        if (!$this->ordersDetails->contains($ordersDetail)) {
+            $this->ordersDetails[] = $ordersDetail;
+            $ordersDetail->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdersDetail(OrdersDetails $ordersDetail): self
+    {
+        if ($this->ordersDetails->contains($ordersDetail)) {
+            $this->ordersDetails->removeElement($ordersDetail);
+            // set the owning side to null (unless already changed)
+            if ($ordersDetail->getProduct() === $this) {
+                $ordersDetail->setProduct(null);
+            }
         }
 
         return $this;

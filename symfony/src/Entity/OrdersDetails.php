@@ -50,6 +50,12 @@ class OrdersDetails
      */
     private $orders;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=products::class, inversedBy="ordersDetails")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product;
+
 
     public function __construct()
     {
@@ -146,6 +152,18 @@ class OrdersDetails
     public function setOrders(?Order $orders): self
     {
         $this->orders = $orders;
+
+        return $this;
+    }
+
+    public function getProduct(): ?products
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?products $product): self
+    {
+        $this->product = $product;
 
         return $this;
     }
