@@ -1,10 +1,5 @@
 Accéder à vos branches :
 
-- git checkout Florian
-- git checkout Benjamin
-- git checkout Jeremy
+- git checkout Front
+- git checkout Back
 
-
-Branches HTML : 
-
-- git checkout HTML
