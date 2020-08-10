@@ -23,7 +23,8 @@ final class Version20200810085744 extends AbstractMigration
         $this->addSql('ALTER TABLE `order` DROP FOREIGN KEY FK_F529939817E8A46A');
         $this->addSql('DROP INDEX IDX_F529939817E8A46A ON `order`');
         $this->addSql('ALTER TABLE `order` DROP orderdetail_id');
-        $this->addSql('ALTER TABLE user ADD password VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE user ADD passw:wq:wq
+        ord VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -35,3 +36,4 @@ final class Version20200810085744 extends AbstractMigration
         $this->addSql('ALTER TABLE user DROP password');
     }
 }
+``

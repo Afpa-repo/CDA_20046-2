@@ -44,6 +44,12 @@ class OrdersDetails
      */
     private $products;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $orders;
+
 
     public function __construct()
     {
@@ -128,6 +134,18 @@ class OrdersDetails
             $this->products->removeElement($product);
             $product->removeOrderDetail($this);
         }
+
+        return $this;
+    }
+
+    public function getOrders(): ?Order
+    {
+        return $this->orders;
+    }
+
+    public function setOrders(?Order $orders): self
+    {
+        $this->orders = $orders;
 
         return $this;
     }
