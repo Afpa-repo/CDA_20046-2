@@ -46,10 +46,7 @@ class Order
      */
     private $adress;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=OrdersDetails::class, inversedBy="orders")
-     */
-    private $orderdetail;
+
 
     public function __construct()
     {
@@ -132,21 +129,7 @@ class Order
         if ($this->adress->contains($adress)) {
             $this->adress->removeElement($adress);
         }
-
         return $this;
     }
-
-    public function getOrderdetail(): ?ordersdetails
-    {
-        return $this->orderdetail;
-    }
-
-    public function setOrderdetail(?ordersdetails $orderdetail): self
-    {
-        $this->orderdetail = $orderdetail;
-
-        return $this;
-    }
-
 
 }

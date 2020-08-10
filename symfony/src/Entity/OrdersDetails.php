@@ -44,11 +44,6 @@ class OrdersDetails
      */
     private $products;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="orderdetail")
-     */
-    private $orders;
-
 
     public function __construct()
     {
@@ -132,37 +127,6 @@ class OrdersDetails
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
             $product->removeOrderDetail($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Order[]
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Order $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->setOrderdetail($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Order $order): self
-    {
-        if ($this->orders->contains($order)) {
-            $this->orders->removeElement($order);
-            // set the owning side to null (unless already changed)
-            if ($order->getOrderdetail() === $this) {
-                $order->setOrderdetail(null);
-            }
         }
 
         return $this;
