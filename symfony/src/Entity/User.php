@@ -165,7 +165,6 @@ class User implements UserInterface
         return $this;
     }
 
-
     public function getSalt()
     {
         return "";
@@ -173,13 +172,20 @@ class User implements UserInterface
 
     public function getUsername()
     {
-
+        return $this->getEmail();
     }
-
 
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getRoles()
+    {
+        if ($this->userRoleId =="1")
+            return ["ROLE_ADMIN"];
+        if ($this->userRoleId == "2")
+            return ["ROLE_CLIENT"];
     }
 
 
