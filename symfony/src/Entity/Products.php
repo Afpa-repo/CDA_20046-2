@@ -16,6 +16,8 @@ class Products
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Material::class, inversedBy="product")
+     * @ORM\ManyToOne(targetEntity=Format::class, inversedBy="product")
      */
     private $id;
 
@@ -65,34 +67,34 @@ class Products
     private $proUnitPrice;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Material::class, inversedBy="products")
-     */
-    private $material;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Format::class)
-     */
-    private $format;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Theme::class)
-     */
-
-    private $theme;
-
-    /**
      * @ORM\ManyToMany(targetEntity=OrdersDetails::class, inversedBy="products")
      */
     private $orderDetails;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=material::class, inversedBy="products")
+     */
+    private $material;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=format::class, inversedBy="products")
+     */
+    private $format;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Theme::class, mappedBy="product")
+     */
+    private $themes;
+
     public function __construct()
     {
-        $this->material = new ArrayCollection();
-        $this->format = new ArrayCollection();
-        $this->theme = new ArrayCollection();
-        $this->orderDetails = new ArrayCollection();
-    }
 
+        $this->format = new ArrayCollection();
+
+        $this->orderDetails = new ArrayCollection();
+        $this->themes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -208,32 +210,6 @@ class Products
     }
 
     /**
-     * @return Collection|Material[]
-     */
-    public function getMaterial(): Collection
-    {
-        return $this->material;
-    }
-
-    public function addMaterial(Material $material): self
-    {
-        if (!$this->material->contains($material)) {
-            $this->material[] = $material;
-        }
-
-        return $this;
-    }
-
-    public function removeMaterial(Material $material): self
-    {
-        if ($this->material->contains($material)) {
-            $this->material->removeElement($material);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Format[]
      */
     public function getFormat(): Collection
@@ -260,32 +236,6 @@ class Products
     }
 
     /**
-     * @return Collection|Theme[]
-     */
-    public function getTheme(): Collection
-    {
-        return $this->theme;
-    }
-
-    public function addTheme(Theme $theme): self
-    {
-        if (!$this->theme->contains($theme)) {
-            $this->theme[] = $theme;
-        }
-
-        return $this;
-    }
-
-    public function removeTheme(Theme $theme): self
-    {
-        if ($this->theme->contains($theme)) {
-            $this->theme->removeElement($theme);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|ordersDetails[]
      */
     public function getOrderDetails(): Collection
@@ -306,6 +256,78 @@ class Products
     {
         if ($this->orderDetails->contains($orderDetail)) {
             $this->orderDetails->removeElement($orderDetail);
+        }
+
+        return $this;
+    }
+
+    public function getMaterial(): ?material
+    {
+        return $this->material;
+    }
+
+    public function setMaterial(?material $material): self
+    {
+        $this->material = $material;
+
+        return $this;
+    }
+
+    public function setFormat(?format $format): self
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+
+    public function getProducts(): ?Format
+    {
+        return $this->id;
+    }
+
+    public function setProducts(?Format $products): self
+    {
+        $this->products = $products;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Material
+    {
+        return $this->id;
+    }
+
+    public function setProduct(?Material $product): self
+    {
+        $this->id = $product;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Theme[]
+     */
+    public function getThemes(): Collection
+    {
+        return $this->themes;
+    }
+
+    public function addTheme(Theme $theme): self
+    {
+        if (!$this->themes->contains($theme)) {
+            $this->themes[] = $theme;
+            $theme->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTheme(Theme $theme): self
+    {
+        if ($this->themes->contains($theme)) {
+            $this->themes->removeElement($theme);
+            $theme->removeProduct($this);
         }
 
         return $this;

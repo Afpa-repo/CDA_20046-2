@@ -59,6 +59,11 @@ class User
      */
     private $adress;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
     public function __construct()
     {
         $this->adress = new ArrayCollection();
@@ -176,6 +181,18 @@ class User
         if ($this->adress->contains($adress)) {
             $this->adress->removeElement($adress);
         }
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }

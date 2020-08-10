@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ThemeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,19 @@ class Theme
      */
     private $themeName;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=products::class, inversedBy="themes")
+     */
+    private $product;
+
+
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+        $this->product = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,4 +53,31 @@ class Theme
 
         return $this;
     }
+
+    /**
+     * @return Collection|products[]
+     */
+    public function getProduct(): Collection
+    {
+        return $this->product;
+    }
+
+    public function addProduct(products $product): self
+    {
+        if (!$this->product->contains($product)) {
+            $this->product[] = $product;
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(products $product): self
+    {
+        if ($this->product->contains($product)) {
+            $this->product->removeElement($product);
+        }
+
+        return $this;
+    }
+
 }
