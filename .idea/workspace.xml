@@ -9,7 +9,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/symfony/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -130,7 +130,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../exemple panier" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -141,11 +141,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596793321911</updated>
-      <workItem from="1596793322966" duration="1303000" />
+      <workItem from="1596793322966" duration="1902000" />
+      <workItem from="1597041905588" duration="471000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2240" y="308" key="FileChooserDialogImpl" timestamp="1597042378090">
+      <screen x="1920" y="-387" width="1080" height="1880" />
+    </state>
+    <state x="2240" y="308" key="FileChooserDialogImpl/0.0.1920.1040/1920.-387.1080.1880@1920.-387.1080.1880" timestamp="1597042378090" />
   </component>
 </project>
