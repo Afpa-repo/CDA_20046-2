@@ -19,18 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9078193d-1c39-4e7c-8ea7-13a8f913eff6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/image/joshua-sortino-71vAb1FXB6g-unsplash.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/fil-rouge.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fil-rouge.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bdd/insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/bdd/insert.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/OrdersDetails.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/OrdersDetails.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Products.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="9078193d-1c39-4e7c-8ea7-13a8f913eff6" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +37,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -157,6 +146,7 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1ffZhSC9QJHphAYuTgaDyVOn22o" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -165,7 +155,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../exemple panier/cours-symfony-session-panier" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -186,6 +176,7 @@
       <workItem from="1596611227738" duration="17384000" />
       <workItem from="1596696022782" duration="11884000" />
       <workItem from="1596782348461" duration="5132000" />
+      <workItem from="1597042878627" duration="2801000" />
     </task>
     <servers />
   </component>
@@ -213,10 +204,10 @@
       <screen x="1920" y="-387" width="1080" height="1880" />
     </state>
     <state x="2052" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.-387.1080.1880@1920.-387.1080.1880" timestamp="1596611340404" />
-    <state x="2240" y="308" key="FileChooserDialogImpl" timestamp="1596792183976">
+    <state x="2240" y="308" key="FileChooserDialogImpl" timestamp="1597043375031">
       <screen x="1920" y="-387" width="1080" height="1880" />
     </state>
-    <state x="2240" y="308" key="FileChooserDialogImpl/0.0.1920.1040/1920.-387.1080.1880@1920.-387.1080.1880" timestamp="1596792183976" />
+    <state x="2240" y="308" key="FileChooserDialogImpl/0.0.1920.1040/1920.-387.1080.1880@1920.-387.1080.1880" timestamp="1597043375031" />
     <state x="1961" y="198" key="SettingsEditor" timestamp="1596725817086">
       <screen x="1920" y="-387" width="1080" height="1880" />
     </state>
