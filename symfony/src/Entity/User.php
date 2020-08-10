@@ -1,0 +1,184 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=UserRepository::class)
+ */
+class User
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $userTitre;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $userRoleId;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $userLastName;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $userFirstName;
+
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $userPhone;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $userBirthday;
+
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $userGender;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Adress::class, inversedBy="users")
+     */
+    private $adress;
+
+    public function __construct()
+    {
+        $this->adress = new ArrayCollection();
+    }
+
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUserTitre(): ?string
+    {
+        return $this->userTitre;
+    }
+
+    public function setUserTitre(string $userTitre): self
+    {
+        $this->userTitre = $userTitre;
+
+        return $this;
+    }
+
+    public function getUserRoleId(): ?int
+    {
+        return $this->userRoleId;
+    }
+
+    public function setUserRoleId(int $userRoleId): self
+    {
+        $this->userRoleId = $userRoleId;
+
+        return $this;
+    }
+
+    public function getUserLastName(): ?string
+    {
+        return $this->userLastName;
+    }
+
+    public function setUserLastName(string $userLastName): self
+    {
+        $this->userLastName = $userLastName;
+
+        return $this;
+    }
+
+    public function getUserFirstName(): ?string
+    {
+        return $this->userFirstName;
+    }
+
+    public function setUserFirstName(string $userFirstName): self
+    {
+        $this->userFirstName = $userFirstName;
+
+        return $this;
+    }
+
+    public function getUserPhone(): ?string
+    {
+        return $this->userPhone;
+    }
+
+    public function setUserPhone(string $userPhone): self
+    {
+        $this->userPhone = $userPhone;
+
+        return $this;
+    }
+
+    public function getUserBirthday(): ?\DateTimeInterface
+    {
+        return $this->userBirthday;
+    }
+
+    public function setUserBirthday(?\DateTimeInterface $userBirthday): self
+    {
+        $this->userBirthday = $userBirthday;
+
+        return $this;
+    }
+
+    public function getUserGender(): ?string
+    {
+        return $this->userGender;
+    }
+
+    public function setUsergender(string $userGender): self
+    {
+        $this->userGender = $userGender;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|adress[]
+     */
+    public function getAdress(): Collection
+    {
+        return $this->adress;
+    }
+
+    public function addAdress(adress $adress): self
+    {
+        if (!$this->adress->contains($adress)) {
+            $this->adress[] = $adress;
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(adress $adress): self
+    {
+        if ($this->adress->contains($adress)) {
+            $this->adress->removeElement($adress);
+        }
+
+        return $this;
+    }
+
+
+}
