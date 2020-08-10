@@ -38,4 +38,12 @@ class Role
 
         return $this;
     }
+
+    public function getRoles()
+    {
+        if ($this->role =="admin")
+            return ["ROLE_ADMIN"];
+        if ($this->role == "client")
+            return ["ROLE_CLIENT"];
+    }
 }
