@@ -38,7 +38,7 @@ class OrderDetail
     private $orderdetailTva;
 
     /**
-     * @ORM\ManyToOne(targetEntity=product::class, inversedBy="orderDetails")
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="orderDetails")
      */
     private $product;
 

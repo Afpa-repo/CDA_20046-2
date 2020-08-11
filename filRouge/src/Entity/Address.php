@@ -60,17 +60,17 @@ class Address
     private $AddressComplement;
 
     /**
-     * @ORM\ManyToOne(targetEntity=suppliers::class, inversedBy="address")
+     * @ORM\ManyToOne(targetEntity=Suppliers::class, inversedBy="address")
      */
     private $supplier;
 
     /**
-     * @ORM\OneToMany(targetEntity=order::class, mappedBy="address")
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="address")
      */
     private $orders;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="address")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="address")
      */
     private $user;
 

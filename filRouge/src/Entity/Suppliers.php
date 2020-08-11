@@ -35,7 +35,7 @@ class Suppliers
     private $SuppliPhone;
 
     /**
-     * @ORM\OneToMany(targetEntity=order::class, mappedBy="suppliers")
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="suppliers")
      */
     private $orders;
 
@@ -50,7 +50,7 @@ class Suppliers
     private $Picture;
 
     /**
-     * @ORM\ManyToOne(targetEntity=picture::class, inversedBy="suppliers")
+     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="suppliers")
      */
     private $picture;
 

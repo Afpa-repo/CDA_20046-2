@@ -65,17 +65,17 @@ class Product
     private $proDescription;
 
     /**
-     * @ORM\ManyToOne(targetEntity=material::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Material::class, inversedBy="products")
      */
     private $material;
 
     /**
-     * @ORM\ManyToOne(targetEntity=format::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Format::class, inversedBy="products")
      */
     private $format;
 
     /**
-     * @ORM\ManyToMany(targetEntity=theme::class)
+     * @ORM\ManyToMany(targetEntity=Theme::class)
      */
     private $theme;
 
@@ -90,7 +90,7 @@ class Product
     private $Picture;
 
     /**
-     * @ORM\ManyToOne(targetEntity=picture::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="products")
      */
     private $picture;
 

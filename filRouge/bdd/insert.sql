@@ -15,16 +15,8 @@ VALUES (1, "papier"),
        (3, "métal"),
        (4, "verre");
 
-INSERT INTO `adress` (id, adress_type, adress_country, adress_district, adress_postal_code, adress_city,
-                      adress_num_street, adress_street, adress_complement)
-VALUES (12, 2, "Angleterre", "Grand Londres", "SW1A1AA", "Londres", "1", "Constitution Hill", "Buckingham Palace"),
-       (13, 2, "Angleterre", "Grand Londres", "SW1A1AA", "Londres", "1", "Constitution Hill", "Buckingham Palace"),
-       (16, 2, "Belgique", "Namur", "5570", "Honnay", "12", "Rue du couvent", "Keskispasse"),
-       (19, 2, "France", "Alsace", "67100", "Strasbourg", "18", "Rue de Bâle", "CEDEX 12"),
-       (20, 2, "Espagne", "Madrid", "28004", "Madrid", "78", "Calle de Sagasta", "Holaquetal");
-
-INSERT INTO `adress` (id, adress_type, adress_country, adress_district, adress_postal_code, adress_city,
-                      adress_num_street, adress_street)
+INSERT INTO `address` (id, address_type, address_country, address_district, address_postal_code, address_city,
+                      address_num_street, address_street)
 VALUES (1, 3, "Argentine", "Buenos Aires", "B1636FDA", "La Plata", "230", "Casilla de Correos"),
        (2, 1, "Australie", "Tasmanie", "7005", "Hobart", "104", "Todd Street"),
        (3, 3, "Italie", "Lombardie", "27049", "Stradella", "2", "Via Lanzone"),
@@ -49,8 +41,8 @@ VALUES (1,  "WoodenPC", "WoodenPC@pasfacile.com", "09.75.63.14.78"),
 
 
 
-INSERT INTO `user` (id, user_titre, user_role_id, user_last_name, user_first_name, user_phone, user_birthday,
-                    user_gender,email,password)
+INSERT INTO `user` (id, user_titre, role_id, user_last_name, user_first_name, user_phone, user_birthday,
+                    user_gender,user_email,user_password)
 VALUES (1, "client", 1, "Jean", "Bon", "06.15.62.75.95", "1999-08-04", "Homme","test@test.com","sgfjhsdgois"),
        (2, "client", 1, "Jason", "Tatame", "06.78.65.14.23", "1997-12-07", "Homme","test@test.com","sgfjhsdgois"),
        (3, "client", 1, "Clara", "Gartax", "06.98.45.85.96", "1967-04-11", "Femme","test@test.com","sgfjhsdgois"),
@@ -70,24 +62,6 @@ VALUES (1, "client", 1, "Jean", "Bon", "06.15.62.75.95", "1999-08-04", "Homme","
 
 
 
-INSERT INTO `user_adress` (user_id, adress_id)
-VALUES (1, 1),
-       (2, 2),
-       (3, 3),
-       (4, 4),
-       (5, 5),
-       (6, 6),
-       (7, 7),
-       (8, 8),
-       (9, 9),
-       (10, 10),
-       (11, 11),
-       (12, 12),
-       (13, 13),
-       (14, 14),
-       (15, 15),
-       (16, 16)
-
 
 
 INSERT INTO `products` (id, pro_name, pro_stock_ale, pro_unit_price, pro_unit_stock_phy, pro_unit_on_order,
@@ -102,7 +76,7 @@ INSERT INTO `products` (id, pro_name, pro_stock_ale, pro_unit_price, pro_unit_st
 
 
 
-INSERT INTO `theme_products` (products_id, theme_id)
+INSERT INTO `product_theme` (product_id, theme_id)
     VALUE
     (1, 1),
     (2, 2),

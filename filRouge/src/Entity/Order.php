@@ -41,7 +41,7 @@ class Order
     private $orderShippingCost;
 
     /**
-     * @ORM\OneToMany(targetEntity=orderdetail::class, mappedBy="orders")
+     * @ORM\OneToMany(targetEntity=OrderDetail::class, mappedBy="orders")
      */
     private $detail;
 

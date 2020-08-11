@@ -60,7 +60,7 @@ class User
     private $UserPassword;
 
     /**
-     * @ORM\OneToMany(targetEntity=order::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user")
      */
     private $orders;
 
@@ -75,7 +75,7 @@ class User
     private $role;
 
     /**
-     * @ORM\ManyToOne(targetEntity=picture::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="users")
      */
     private $picture;
 
