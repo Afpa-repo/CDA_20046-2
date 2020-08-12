@@ -75,7 +75,7 @@ class Product
     private $format;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Theme::class)
+     * @ORM\ManyToMany(targetEntity=Theme::class, mappedBy="product")
      */
     private $theme;
 
@@ -83,11 +83,6 @@ class Product
      * @ORM\OneToMany(targetEntity=OrderDetail::class, mappedBy="product")
      */
     private $orderDetails;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="product")
-     */
-    private $Picture;
 
     /**
      * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="products")

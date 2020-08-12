@@ -45,11 +45,6 @@ class Suppliers
     private $address;
 
     /**
-     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="suppliers")
-     */
-    private $Picture;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="suppliers")
      */
     private $picture;
