@@ -20,6 +20,11 @@ class User implements UserInterface
      */
     private $id;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 57ada0766f71e0c21a15940b8d8bdd6281b6408c
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
@@ -75,7 +80,10 @@ class User implements UserInterface
      */
     private $picture;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 57ada0766f71e0c21a15940b8d8bdd6281b6408c
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -87,7 +95,10 @@ class User implements UserInterface
         return $this->id;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 57ada0766f71e0c21a15940b8d8bdd6281b6408c
     public function getUserLastName(): ?string
     {
         return $this->userLastName;
