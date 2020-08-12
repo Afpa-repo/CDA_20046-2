@@ -74,10 +74,7 @@ class Product
      */
     private $format;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Theme::class, mappedBy="product")
-     */
-    private $theme;
+
 
     /**
      * @ORM\OneToMany(targetEntity=OrderDetail::class, mappedBy="product")
@@ -88,6 +85,11 @@ class Product
      * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="products")
      */
     private $picture;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Theme::class, inversedBy="products")
+     */
+    private $theme;
 
     public function __construct()
     {
@@ -233,31 +235,7 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|theme[]
-     */
-    public function getTheme(): Collection
-    {
-        return $this->theme;
-    }
 
-    public function addTheme(theme $theme): self
-    {
-        if (!$this->theme->contains($theme)) {
-            $this->theme[] = $theme;
-        }
-
-        return $this;
-    }
-
-    public function removeTheme(theme $theme): self
-    {
-        if ($this->theme->contains($theme)) {
-            $this->theme->removeElement($theme);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|OrderDetail[]
@@ -324,6 +302,32 @@ class Product
     public function setPicture(?picture $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Theme[]
+     */
+    public function getTheme(): Collection
+    {
+        return $this->theme;
+    }
+
+    public function addTheme(Theme $theme): self
+    {
+        if (!$this->theme->contains($theme)) {
+            $this->theme[] = $theme;
+        }
+
+        return $this;
+    }
+
+    public function removeTheme(Theme $theme): self
+    {
+        if ($this->theme->contains($theme)) {
+            $this->theme->removeElement($theme);
+        }
 
         return $this;
     }

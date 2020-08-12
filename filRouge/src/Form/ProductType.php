@@ -97,16 +97,17 @@ class ProductType extends AbstractType
                     'placeholder' => '',
                 ],
             ])
-//            ->add('theme', EntityType::class, [
-//                'class' => Theme::class,
-//                'label' => "Theme de l'affiche",
-//                'expanded'  => true,
-//                'multiple'  => true,
-//                'attr' => [
-//                    'placeholder' => '',
-//                ],
-//            ])
-            ->add('picture');
+            ->add('theme', EntityType::class, [
+                'class' => Theme::class,
+                'label' => "Theme de l'affiche",
+                'expanded'  => true,
+                'multiple'  => true,
+                'attr' => [
+                    'placeholder' => '',
+                ],
+            ])
+//            ->add('picture')
+;
     }
 
     public function configureOptions(OptionsResolver $resolver)
