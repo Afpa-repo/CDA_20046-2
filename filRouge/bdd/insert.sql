@@ -55,16 +55,16 @@ VALUES (1, "client", 1, "Jean", "Bon", "06.15.62.75.95", "1999-08-04", "Homme","
        (10, "commercial", 3, "Enzo", "Batelli", "06.78.65.23.23", "1987-07-26", "Homme","test@test.com","sgfjhsdgois"),
        (11, "commercial", 3, "Jean-Michel", "Apeuprès", "06.45.80.69.32", "1999-09-06", "Homme","test@test.com","sgfjhsdgois"),
        (12, "commercial", 3, "Giselle", "Lelustre", "06.00.23.58.58", "1981-12-04", "Femme","test@test.com","sgfjhsdgois"),
-       (13, "logisticien", 5, "Julien", "Emerite", "06.78.56.12.96", "1986-03-11", "Homme","test@test.com","sgfjhsdgois"),
-       (14, "logisticien", 5, "Marjorie", "Brie", "06.55.66.78.25", "1985-12-10", "Femme","test@test.com","sgfjhsdgois"),
-       (15, "logisticien", 5, "Audrey", "Carto", "06.56.21.40.80", "1972-02-02", "Femme","test@test.com","sgfjhsdgois"),
-       (16, "logisticien", 5, "Yohann", "Grif", "06.12.07.93.20", "1974-07-06", "Homme","test@test.com","sgfjhsdgois");
+       (13, "logisticien", 3, "Julien", "Emerite", "06.78.56.12.96", "1986-03-11", "Homme","test@test.com","sgfjhsdgois"),
+       (14, "logisticien", 3, "Marjorie", "Brie", "06.55.66.78.25", "1985-12-10", "Femme","test@test.com","sgfjhsdgois"),
+       (15, "logisticien", 3, "Audrey", "Carto", "06.56.21.40.80", "1972-02-02", "Femme","test@test.com","sgfjhsdgois"),
+       (16, "logisticien", 3, "Yohann", "Grif", "06.12.07.93.20", "1974-07-06", "Homme","test@test.com","sgfjhsdgois");
 
 
 
 
 
-INSERT INTO `products` (id, pro_name, pro_stock_ale, pro_unit_price, pro_unit_stock_phy, pro_unit_on_order,
+INSERT INTO `product` (id, pro_name, pro_stock_ale, pro_unit_price, pro_unit_stock_phy, pro_unit_on_order,
                         pro_discontinued, pro_note, pro_lib, pro_description,material_id,format_id)
     VALUE (1, "poster Marvel", 25, 20, 50, 10, 2, 9, "posMar", "poster film Marvel A3",1,2),
     (2, "poster Valorant", 20, 30, 75, 20, 2, 8, "posVal", "poster jeu Valorant A3",1,1),
@@ -87,12 +87,12 @@ INSERT INTO `product_theme` (product_id, theme_id)
     (7, 2);
 
 
-INSERT INTO `order` (id,order_date, order_date_shipping, order_type, order_shipping_cost,user_id)
-VALUES (1, "2020-02-15", "2020-02-27", 1, 20,1),
-       (2, "2020-03-27", "2020-04-5", 2, 5,2),
-       (3, "2020-01-01", "2020-01-12", 2, 7,3),
-       (4, "2020-06-07", "2020-06-18", 2, 5,4),
-       (5, "2020-03-10", "2020-03-14", 2, 3,4);
+INSERT INTO `order` (id,order_date, order_date_shipping, order_type, order_shipping_cost)
+VALUES (1, "2020-02-15", "2020-02-27", 1, 20),
+       (2, "2020-03-27", "2020-04-5", 2, 5),
+       (3, "2020-01-01", "2020-01-12", 2, 7),
+       (4, "2020-06-07", "2020-06-18", 2, 5),
+       (5, "2020-03-10", "2020-03-14", 2, 3);
 
 
 INSERT INTO `order_adress` (order_id, adress_id)
@@ -104,7 +104,7 @@ VALUES (1, 1),
        (5, 1);
 
 
-INSERT INTO `orders_details` (id,  orderdetails_unit_price, orderdetails_quantity, ordersdetails_discount,ordersdetails_tva,product_id,orders_id)
+INSERT INTO `order_detail` (id,  orderdetail_unit_price, orderdetail_quantity, orderdetail_discount,orderdetail_tva,product_id,orders_id)
     VALUE   (1,  30, 10, 5,20,1,1),
     (4,  30, 2, 20,20,1,2),
     (2,  30, 2, 20,20,1,3),
@@ -117,16 +117,5 @@ INSERT INTO `orders_details` (id,  orderdetails_unit_price, orderdetails_quantit
     (3,  20, 15,20),
     (5,  15, 1,20);
 
-INSERT INTO `products_orders_details` (orders_details_id, products_id)
-    VALUE   (1, 6),
-    (1, 4),
-    (1, 1),
-    (1, 2),
-    (2, 5),
-    (2, 2),
-    (2, 1),
-    (3, 1),
-    (3, 2),
-    (3, 6),
-    (5, 3);
+
 
