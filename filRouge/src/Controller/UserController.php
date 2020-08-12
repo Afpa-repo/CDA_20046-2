@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Role;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -26,9 +27,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
+     * @Route("/new/{role}", name="user_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param Role $role
+     * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Role $role): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -36,7 +40,9 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user->setRole($role);
             $entityManager->persist($user);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('user_index');

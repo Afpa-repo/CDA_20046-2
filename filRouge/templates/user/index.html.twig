@@ -7,24 +7,22 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>UserTitre</th>
-                <th>UserLastName</th>
-                <th>UserFirstName</th>
-                <th>UserPhone</th>
-                <th>UserBirthday</th>
-                <th>UserGender</th>
-                <th>UserEmail</th>
-                <th>UserPassword</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>UserLastName</th>
+            <th>UserFirstName</th>
+            <th>UserPhone</th>
+            <th>UserBirthday</th>
+            <th>UserGender</th>
+            <th>UserEmail</th>
+            <th>UserPassword</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
                 <td>{{ user.id }}</td>
-                <td>{{ user.userTitre }}</td>
                 <td>{{ user.userLastName }}</td>
                 <td>{{ user.userFirstName }}</td>
                 <td>{{ user.userPhone }}</td>
@@ -33,17 +31,18 @@
                 <td>{{ user.userEmail }}</td>
                 <td>{{ user.UserPassword }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">Détails</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">Aucunes données</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Create new</a>
+    {# URL POUR LE FORMULAIRE D'INCRIPTION UTILISATEUR #}
+    <a href="{{ path('user_new', {'id': 1}) }}">Create new</a>
 {% endblock %}

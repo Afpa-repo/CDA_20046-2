@@ -21,11 +21,6 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $userTitre;
-
-    /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $userLastName;
@@ -81,9 +76,6 @@ class User implements UserInterface
     private $picture;
 
 
-
-
-
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -95,17 +87,6 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getUserTitre(): ?string
-    {
-        return $this->userTitre;
-    }
-
-    public function setUserTitre(string $userTitre): self
-    {
-        $this->userTitre = $userTitre;
-
-        return $this;
-    }
 
     public function getUserLastName(): ?string
     {
@@ -194,9 +175,16 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->role;
-        $roles[] = ["ROLE_USER"];
+        if ($roles == "client") {
+            $roles[] = ["ROLE_USER"];
+        }
+        else  {
+            $roles[] = ["ROLE_ADMIN"];
+        }
         return array_unique($roles);
+
     }
+
 
     public function getSalt()
     {

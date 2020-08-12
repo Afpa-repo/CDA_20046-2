@@ -19,7 +19,6 @@ class UserFixture extends Fixture
 
            ->setUserFirstName("user$i")
            ->setUserLastName("user$i")
-           ->setUserTitre("lorem")
            ->setUserGender("nonbinaire")
            ->setUserPhone("blablabla")
            ->setUserPassword("lorem") ;
