@@ -20,10 +20,7 @@ class User implements UserInterface
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $userTitre;
+
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -80,10 +77,6 @@ class User implements UserInterface
      */
     private $picture;
 
-
-
-
-
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -93,18 +86,6 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUserTitre(): ?string
-    {
-        return $this->userTitre;
-    }
-
-    public function setUserTitre(string $userTitre): self
-    {
-        $this->userTitre = $userTitre;
-
-        return $this;
     }
 
     public function getUserLastName(): ?string
