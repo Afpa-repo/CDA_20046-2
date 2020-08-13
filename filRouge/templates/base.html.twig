@@ -67,13 +67,17 @@
                         </li>
 
 
-                        {% if is_granted('ROLE_MANAGER') %}
+                        {% if is_granted('ROLE_USER') %}
                         <li>
                             <a class="nav-link " href="{{ path('user_show', {'id': app.user }) }}" tabindex="-1" aria-disabled="true">
                                 <img src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
                         </li>
-                        {% endif %}
 
+                            <li>
+                                <a class="nav-link " href="{{ path('logout') }}" tabindex="-1" aria-disabled="true">
+                                    <img src="{{ asset("images/nav/logout-circle-line.png") }}" alt="user-icon"> </a>
+                            </li>
+                        {% endif %}
 
 
 
@@ -81,6 +85,12 @@
                             <a class="nav-link " href="{{ path('user_new', {'role':1} ) }}" tabindex="-1" aria-disabled="true">
                                 <img src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
                         </li>
+                        <li>
+                            <a class="nav-link " href="{{ path('login' ) }}" tabindex="-1" aria-disabled="true">
+                                <img src="{{ asset("images/nav/login-circle-line.png") }}" alt="user-icon"> </a>
+                        </li>
+
+
                     </ul>
                 </div>
             </nav>

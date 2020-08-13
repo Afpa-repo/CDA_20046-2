@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Role;
 use App\Entity\User;
+
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,8 +18,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
+
+    private $passwordEncoder;
+
     /**
-     * @Route("/{id}", name="user_index", methods={"GET"})
+     * @Route("/", name="user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -27,13 +31,10 @@ class UserController extends AbstractController
         ]);
     }
 
-    private $passwordEncoder;
-
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
     }
-
     /**
      * @Route("/new/{role}", name="user_new", methods={"GET","POST"})
      * @param Request $request
@@ -50,14 +51,11 @@ class UserController extends AbstractController
             $user->getPassword()
         ));
 
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $user->setRole($role);
             $entityManager->persist($user);
-
             $entityManager->flush();
-
             return $this->redirectToRoute('user_index');
         }
 
@@ -65,10 +63,11 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
+
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET", "POST"})
+     * @Route("/{id}", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response
     {
