@@ -7,7 +7,6 @@
     {# Navbar #}
 
 
-    < class="container-fluid">
     {# Header #}
     <div class="row">
         <div class="col-12 vh-50 mt-2 mb-2">
@@ -16,14 +15,13 @@
                                                         alt="header-bg"></a>
         </div>
     </div>
-
+    {# promotion #}
     <div class="row vh-50 ">
         <div class="col-4 bg-dark h-100">
             <a href="{{ path('product_index') }}"><img src="" alt=""></a>
-
         </div>
+        {# Cards #}
         <div class="col-8">
-
             <div class="row h-100">
                 <div class="col-5 bg-dark m-1">
                     <a href="{{ path('product_index') }}"><img src="{{ asset("index/abstrait@2x") }}" alt=""></a>
@@ -43,13 +41,13 @@
         </div>
     </div>
 
-    {# promotion #}
+    {# Promotion #}
     <div class="row vh-50">
         <div class="col-12 bg-dark m-1">
             <a href="{{ path('product_index') }}"><img src="" alt=""></a>
         </div>
     </div>
-    {# Categorie #}
+    {# Card Category #}
     <div class="row vh-50">
         <div class="col-2 bg-dark m-1 offset-2"><a href="{{ path('product_index') }}"><img src="" alt=""></a></div>
         <div class="col-2 bg-dark m-1"><a href="{{ path('product_index') }}"><img src="" alt=""></a></div>
@@ -67,11 +65,11 @@
     </div>
 
 
-        <div class="row">
+    <div class="row">
         <div class="col-2 offset-3 bg-dark "><a href="{{ path('product_index') }}"><img src="" alt=""></a></div>
         <div class="col-2 bg-dark m-1"><a href="{{ path('product_index') }}"><img src="" alt=""></a></div>
         <div class="col-2 bg-dark m-1"><a href="{{ path('product_index') }}"><img src="" alt=""></a></div>
-        </div>
+    </div>
 
 
 {% endblock %}
