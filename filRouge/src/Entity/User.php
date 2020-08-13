@@ -175,16 +175,15 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->role;
-        if ($roles == "client") {
+        if ($roles == "1") {
             $roles[] = ["ROLE_USER"];
         }
         else  {
-            $roles[] = ["ROLE_ADMIN"];
+            $roles = ["ROLE_ADMIN"];
         }
         return array_unique($roles);
 
     }
-
 
     public function getSalt()
     {
@@ -201,9 +200,15 @@ class User implements UserInterface
         // TODO: Implement eraseCredentials() method.
     }
 
-    public function getPassword()
+    public function getPassword() : ?string
     {
-        // TODO: Implement getPassword() method.
+        return (string)$this->UserPassword;
+    }
+
+    public function setPassword(string $password): self {
+        $this->UserPassword = $password;
+
+        return $this;
     }
 
     /**

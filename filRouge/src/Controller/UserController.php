@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/user")
@@ -17,13 +18,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/{id}", name="user_index", methods={"GET","POST"})
+     * @Route("/{id}", name="user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
+    }
+
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     /**
@@ -37,6 +45,11 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+        $user->setPassword($this->passwordEncoder->encodePassword(
+            $user,
+            $user->getPassword()
+        ));
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -52,11 +65,10 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
-
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET","POST"})
+     * @Route("/{id}", name="user_show", methods={"GET", "POST"})
      */
     public function show(User $user): Response
     {
