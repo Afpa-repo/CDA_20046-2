@@ -67,7 +67,7 @@
                                         src="{{ asset("images/nav/shopping-cart-line.png") }}" alt="cart-icon"></a>
                         </li>
                         <li>
-                            <a class="nav-link " href="{{ path('user_index') }}" tabindex="-1" aria-disabled="true">
+                            <a class="nav-link " href="{{ path('user_show', {'id': user.id}) }}" tabindex="-1" aria-disabled="true">
                                 <img src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
                         </li>
                     </ul>
