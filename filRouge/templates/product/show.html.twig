@@ -3,27 +3,44 @@
 {% block title %}Product{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>Product</h1>
 
+<div class="row">
+<div class="col">
+{# Emplacement photo #}
+<div class="card text-center col-6">
+  <div class="card-header">
+    Photo 01
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">Visuel Principal</h4>
+    <p class="card-text">Image en situation.</p>
+    <a href="#!" class="btn btn-dark">Link</a>
+  </div>
+</div>
+</div>
+
+<div class="col">
     <table class="table">
         <tbody>
-            <tr>
+            {# <tr>
                 <th>Id</th>
                 <td>{{ product.id }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>ProName</th>
                 <td>{{ product.proName }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>ProStockAle</th>
                 <td>{{ product.proStockAle }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>ProUnitPrice</th>
                 <td>{{ product.proUnitPrice }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>ProUnitStockPhy</th>
                 <td>{{ product.ProUnitStockPhy }}</td>
             </tr>
@@ -34,11 +51,25 @@
             <tr>
                 <th>ProDiscontinued</th>
                 <td>{{ product.proDiscontinued }}</td>
-            </tr>
+            </tr> #}
+
             <tr>
-                <th>ProNote</th>
-                <td>{{ product.proNote }}</td>
+                <th>Format</th>
+                    <td>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-outline-light">
+                            <input type="checkbox" checked="" autocomplete="off"> A3
+                        </label>
+                        <label class="btn btn-outline-light active">
+                            <input type="checkbox" autocomplete="off"> A2
+                        </label>
+                        <label class="btn btn-outline-light active">
+                            <input type="checkbox" autocomplete="off"> A1
+                        </label>
+                    </div>
+                    </td>
             </tr>
+
             <tr>
                 <th>ProLib</th>
                 <td>{{ product.proLib }}</td>
@@ -47,6 +78,11 @@
                 <th>ProDescription</th>
                 <td>{{ product.proDescription }}</td>
             </tr>
+            <tr>
+                <th>ProNote</th>
+                <td>{{ product.proNote }}</td>
+            </tr>
+
         </tbody>
     </table>
 
@@ -55,4 +91,8 @@
     <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
 
     {{ include('product/_delete_form.html.twig') }}
+    </div> 
+   </div> 
+</div>
+
 {% endblock %}
