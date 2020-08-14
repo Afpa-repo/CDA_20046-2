@@ -64,7 +64,7 @@
                 <td>
                     <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
                     <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
-                    <a href="#">ajouté au panier</a>
+                    <a href="{{ path('cart_add', {'id': product.id}) }}">ajouté au panier</a>
                 </td>
             </tr>
         {% else %}

@@ -62,8 +62,6 @@ VALUES (1, "client", 1, "Jean", "Bon", "06.15.62.75.95", "1999-08-04", "Homme","
 
 
 
-
-
 INSERT INTO `product` (id, pro_name, pro_stock_ale, pro_unit_price, pro_unit_stock_phy, pro_unit_on_order,
                         pro_discontinued, pro_note, pro_lib, pro_description,material_id,format_id)
     VALUE (1, "poster Marvel", 25, 20, 50, 10, 2, 9, "posMar", "poster film Marvel A3",1,2),
