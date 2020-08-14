@@ -175,8 +175,10 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->role;
-        if ($roles == "1") {
-            $roles[] = ["ROLE_USER"];
+        $role_id = $roles ->getID();
+
+        if ($role_id == "1") {
+            $roles = ["ROLE_USER"];
         }
         else  {
             $roles = ["ROLE_ADMIN"];

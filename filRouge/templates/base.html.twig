@@ -60,52 +60,50 @@
                     </ul>
 
                     <ul class="list-group list-group-horizontal list-unstyled mr-5 ">
+                        {# Recherche #}
                         <li>
                             <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"><img
                                         src="{{ asset("images/nav/search-line.png") }}" alt="search-icon"></a>
                         </li>
+                        {# Panier #}
                         <li>
                             <a class="nav-link" href="{{ path('cart') }}" tabindex="-1" aria-disabled="true"><img
                                         src="{{ asset("images/nav/shopping-cart-line.png") }}" alt="cart-icon"></a>
                         </li>
 
-
                         {% if is_granted('ROLE_USER') %}
+                            {# profil #}
                         <li>
-                            <a class="nav-link " href="{{ path('user_show', {'id': app.user }) }}" tabindex="-1" aria-disabled="true">
+                            <a class="nav-link " href="{{ path('user_show', {'id': app.user.id }) }}" tabindex="-1" aria-disabled="true">
                                 <img src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
                         </li>
 
+                            {# inscription #}
                             <li>
                                 <a class="nav-link " href="{{ path('logout') }}" tabindex="-1" aria-disabled="true">
                                     <img src="{{ asset("images/nav/logout-circle-line.png") }}" alt="user-icon"> </a>
                             </li>
-                        {% endif %}
 
 
-
+                        {% else %}
+                            {# inscription #}
                         <li>
                             <a class="nav-link " href="{{ path('user_new', {'role':1} ) }}" tabindex="-1" aria-disabled="true">
                                 <img src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
                         </li>
+                            {# login #}
                         <li>
                             <a class="nav-link " href="{{ path('login' ) }}" tabindex="-1" aria-disabled="true">
                                 <img src="{{ asset("images/nav/login-circle-line.png") }}" alt="user-icon"> </a>
                         </li>
 
+                        {% endif %}
 
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
-
-
-{# user/new/1 pour nouvelle utilisateur   #}
-
-{# user/id pour l'affichage profil#}
-
-
 
 {% endblock %}
 {% block body %}{% endblock %}
