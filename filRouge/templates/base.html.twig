@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
               crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap4-business-tycoon.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
 </head>
 <body class="container-fluid m-0 p-0">
@@ -14,45 +16,47 @@
 
 {% block nav %}
     <div class="row p-0 m-0">
-        <div class="col-12 p-1 m-0  position-relative">
+        <div class="col-12 p-1 m-0 position-relative">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4 p-1">
-                <a class="navbar-brand ml-5" href="{{ path('home') }}">Poster</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-4 p-1">
+                <a class="navbar-brand ml-5 text-light" href="{{ path('home') }}">Ink</a>
+                <button class="navbar-toggler text-light" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon text-light"></span>
                 </button>
 
                 <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Categorie
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu bg-dark text-light" aria-labelledby="navbarDropdown">
 
-                                <a class="dropdown-item" href="{{ path('product_index') }}">Format</a>
+                                <a class="dropdown-item text-light" href="{{ path('product_index') }}">Format</a>
 
-                                <a class="dropdown-item" href="{{ path('product_index') }}">Theme</a>
+                                <a class="dropdown-item text-light" href="{{ path('product_index') }}">Theme</a>
 
-                                <a class="dropdown-item" href="{{ path('product_index') }}">Materiaux</a>
+                                <a class="dropdown-item text-light" href="{{ path('product_index') }}">Materiaux</a>
                             </div>
                         </li>
 
+
+
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('product_index') }}">Product</a>
+                            <a class="nav-link text-light" href="{{ path('product_index') }}">Product</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('product_index') }}">Tendance</a>
+                            <a class="nav-link text-light" href="{{ path('product_index') }}">Tendance</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('product_index') }}">Vente privée</a>
+                            <a class="nav-link text-light" href="{{ path('product_index') }}">Vente privée</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                            <a class="nav-link text-light" href="{{ path('contact') }}">Contact</a>
                         </li>
                     </ul>
 
