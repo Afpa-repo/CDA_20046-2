@@ -98,6 +98,18 @@ class Product
         $this->Picture = new ArrayCollection();
     }
 
+    public function getProPicture(): ?object
+    {
+        return $this->proPicture;
+    }
+
+    public function setProPicture(object $proPicture): self
+    {
+        $this->proName = $proPicture;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

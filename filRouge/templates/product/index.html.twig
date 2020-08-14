@@ -3,8 +3,32 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
+
+        {# Navbar #}
+
+
+        {# Header #}
     <h1>Product index</h1>
 
+<div class="row p-0 m-0">
+    <div class="col-3">
+        <img class="img-fluid" src="{{ asset ("images/index/cat@2x.png") }}" alt=""></a>
+    </div>
+
+    
+        {#Promotion#}
+
+    <div class="col-9 bg-light">
+
+    </div>
+<div class="row p-0 m-0">
+    <div class="col-3">
+    <div>
+        <h2>TAGS</h2>
+        <textarea id="tags" name="tags"></textarea>
+    </div>
+    </div>
+    <div class="col-9">
     <table class="table">
         <thead>
             <tr>
@@ -24,6 +48,9 @@
         <tbody>
         {% for product in products %}
             <tr>
+            {# Ajouter images dans BDD}
+                {# <td>{{ product.proPicture }} #}
+                <td><img class="img-fluid" src="{{ asset ("images/index/catalogue@2x.png") }}" alt=""></a></td>
                 <td>{{ product.id }}</td>
                 <td>{{ product.proName }}</td>
                 <td>{{ product.proStockAle }}</td>
@@ -37,7 +64,7 @@
                 <td>
                     <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
                     <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
-{#                  <a href="{{ path('cart', {'id': product.id}) }}">ajouté au panier</a>#}
+                    <a href="#">ajouté au panier</a>
                 </td>
             </tr>
         {% else %}
@@ -47,6 +74,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+    </div>
+    
     <a href="{{ path('product_new') }}">Create new</a>
+    </div>
+</div>
 {% endblock %}
