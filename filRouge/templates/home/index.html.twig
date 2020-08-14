@@ -9,47 +9,63 @@
 
     {# Header #}
 
-    <div class="row p-0 m-0">
-        <div class="col-12 vh-50 mt-2 mb-2 m-0 p-0">
-            <a href="{{ path('product_index') }}"> <img class="img-fluid p-1"
-                                                        src="{{ asset('http://parksadventure.com/wp-content/uploads/2017/10/header-image-1-2.png') }}"
+    <div class="row vh-50 ">
+        <div class="col-12 p-1 ">
+            <a href="{{ path('product_index') }}"> <img class="img-fluid"
+                                                        src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}"
                                                         alt="header-bg"></a>
         </div>
     </div>
     {# promotion #}
-    <div class="row vh-50 p-1 m-0 mb-4 pt-0 ">
-        <div class="col-4 bg-dark h-200 mt-1">
-            <a href="{{ path('product_index') }}"><img src="" alt=""></a>
+
+    <div class="row vh-50 p-1 mb-1">
+        <div class="col-4 pl-1 pr-1 ">
+            <a href="{{ path('product_index') }}"><img class="img-fluid"
+                                                       src="{{ asset("images/index/daniel-j-schwarz-pfywsjCLzKQ-unsplash.jpg") }}"
+                                                       alt=""></a>
+
         </div>
         {# Cards #}
         <div class="col-8">
-            <div class="row p-0 h-100 pt-0">
-                <div class="col-5 bg-dark m-1">
-                    <a href="{{ path('product_index') }}"><img src="{{ asset("index/abstrait@2x") }}" alt=""></a>
+            <div class="row">
+                <div class="col-6 p-0 mb-1 pr-1">
+                    <a href="{{ path('product_index') }}"><img class="img-fluid"
+                                                               src="{{ asset("images/index/nature@2x.png") }}"
+                                                               alt=""></a>
+
                 </div>
-                <div class="col-5 bg-dark m-1">
-                    <a href="{{ path('product_index') }}"><img src="" alt=""></a>
+                <div class="col-6 p-0 pl-1  mb-1">
+                    <a href="{{ path('product_index') }}"><img class="img-fluid"
+                                                               src="{{ asset("images/index/nature@2x.png") }}"
+                                                               alt=""></a>
+
                 </div>
             </div>
             <div class="row">
-                <div class="col-5 bg-dark m-1 pr-n5">
-                    <a href="{{ path('product_index') }}"><img src="" alt=""></a>
+                <div class="col-8 p-0 pr-1 mb-1">
+                    <a href="{{ path('product_index') }}"><img class="img-fluid"
+                                                               src="{{ asset("images/index/promo@2x.png") }}"
+                                                               alt=""></a>
                 </div>
-                <div class="col-5 bg-dark m-1 ">
-                    <a href="{{ path('product_index') }}"><img src="" alt=""></a>
+                <div class="col-4 p-0">
+                    <a href="{{ path('product_index') }}"><img class="img-fluid"
+                                                               src="{{ asset("images/index/retro@2x.png") }}"
+                                                               alt=""></a>
                 </div>
             </div>
         </div>
     </div>
 
     {# Promotion #}
-    <div class="row m-0 p-1  vh-50">
-        <div class="col-12 bg-dark mt-1 mb-1 m-0 >
-            <a href="{{ path('product_index') }}"><img src="" alt=""></a>
-    </div>
+    <div class="row vh-50">
+        <div class="col-12 mt-1 mb-1 m-0 p-1">
+            <a href="{{ path('product_index') }}"><img class="img-fluid"
+                                                       src="{{ asset("images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg") }}"
+                                                       alt=""></a>
+        </div>
     </div>
     {# Card Category #}
-    <div class="row vh-50 p-0 m-0">
+    <div class="row vh-50">
         <div class="col-2 bg-dark m-1 offset-2"><a href="{{ path('product_index') }}"><img src="" alt=""></a></div>
         <div class="col-2 bg-dark m-1"><a href="{{ path('product_index') }}"><img src="" alt=""></a></div>
         <div class="col-2 bg-dark m-1"><a href="{{ path('product_index') }}"><img src="" alt=""></a></div>
