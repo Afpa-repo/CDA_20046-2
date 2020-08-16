@@ -4,53 +4,94 @@
 
 {% block body %}
 
-{% if items | length > 0 %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Produit</th>
-            <th>Prix</th>
-            <th>Quantity</th>
-            <th>Total</th>
-            <th></th>
-        </tr>
-        </thead>
-    <tbody>
-    
-    {% for item in items %}
-    <tr>
-        <td>{{ item.product.proName }}</td>
-        <td>{{ item.product.proUnitPrice }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>{{ item.product.proUnitPrice * item.quantity }}</td>
-        <td>
-            <a href="{{ path('cart_remove', {'id' : item.product.id}) }}" class="btn btn-danger btn-sm">
-                <span class="oi oi-trash"></span>
-            </a>
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-    <tfoot>
-    <tr>
+    {% if items | length > 0 %}
 
-        <td colspan="3"></td>
-        <td>Total : </td>
-        <td>{{ total }}</td>
-    </tr>
-    
-    </tfoot>
-    </table>
+
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-8 mt-4">
+
+        <div class="row">
+            <div class="col-3">
+                <h5>Votre panier</h5>
+           </div>
+            <div class="offset-8 col-1">
+                <h5>Prix</h5>
+           </div>
+        </div>
+
+
+        <table class="table">
+            <tbody>
+            {% for item in items %}
+                <tr>
+                    <td><img class="img-fluid" src="{{ asset ("images/index/retro.png") }}" alt="" width="150px"></td>
+
+
+
+                    <td>{{ item.product.proName }}</td>
+                    <td>{{ item.product.proUnitPrice }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td><h5>{{ item.product.proUnitPrice * item.quantity }} €</h5></td>
+                    {#<td>
+                        <a href="{{ path('cart_remove', {'id' : item.product.id}) }}" class="btn btn-danger btn-sm">
+                            <span class="oi oi-trash"></span>
+                        </a>
+                    </td>#}
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3"></td>
+                <td>Sous Total ({{ items|length }} articles)  :</td>
+                <td> {{ total }} € </td>
+            </tr>
+
+            </tfoot>
+        </table>
     {% else %}
-    
-    
-    
-    
-    {% endif %}
-    
-    
-    
 
+
+
+
+    {% endif %}
+
+    </div>
+
+    <div class="col-3 offset-1 mt-4">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card card-header text-center">
+                    <h5 class="card-title">Sous Total ({{ items|length }} articles : {{ total }} € )</h5>
+                    <a href="#" class="btn btn-dark btn-lg">Passer la commande</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="row mt-4">
+                    <div class="card card-body text-center">
+                        <h5 class="card-title">Suggestion :</h5>
+                        <img class="img-fluid" src="{{ asset ("images/index/catalogue@2x.png") }}" width="150px" alt="">
+                        <p>Nom du produit : </p>
+                        <p>prix : </p>
+                        <a href="#" class="btn btn-dark btn-sm">Ajouté au panier</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
 
 
 {% endblock %}
+
+
