@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ink{% endblock %}
+
+{% block body %}
+
+    {# Navbar #}
+
+
+    {# Header #}
+
+    <div class="row vh-50  ">
+        <div class="col-12 p-1 pb-0">
+            <a href="{{ path('product_index') }}"> <img class="img-fluid"
+                                                        src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}"
+                                                        alt="header-bg"></a>
+        </div>
+    </div>
+    {# promotion #}
+
+    <div class="row vh-50 pr-1 pt-5 pb-2">
+        <div class="col-4 pl-1 pr-2 pb-0 ">
+            <a href="{{ path('product_index') }}"><img class="img-fluid h-100 "
+                                                       src="{{ asset("images/index/zhuo-cheng-you-C3saHwqX1aA-unsplash.jpg") }}"
+                                                       alt=""></a>
+
+        </div>
+        {# Cards #}
+        <div class="col-8 mb-0 pb-0">
+            <div class="row h-50">
+                <div class="col-6 p-0 mb-1 pr-1">
+                    <a href="{{ path('product_index') }}"><img class="img-fluid"
+                                                               src="{{ asset("images/index/davisco-rhUU1pemhQ0-unsplash.jpg") }}"
+                                                               alt=""></a>
+
+                </div>
+                <div class="col-6 p-0 pl-1  mb-1">
+                    <a href="{{ path('product_index') }}"><img class="img-fluid h-100"
+                                                               src="{{ asset("images/index/moran-rbQ2oQIG6hQ-unsplash.jpg") }}"
+                                                               alt=""></a>
+
+                </div>
+            </div>
+            <div class="row pt-3 h-50">
+                <div class="col-8 p-0 pr-2">
+                    <a href="{{ path('product_index') }}"><img class="img-fluid h-100 shadow-sm"
+                                                               src="{{ asset("images/index/paysage@2x.png") }}"
+                                                               alt=""></a>
+                </div>
+                <div class="col-4 p-0">
+                    <a href="{{ path('product_index') }}"><img class="img-fluid h-100"
+                                                               src="{{ asset("images/index/kam-idris-YS_81Cj8kHY-unsplash.jpg") }}"
+                                                               alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Promotion #}
+
+    <div class="row pt-3 pb-3 ">
+        <div class="col-12">
+            <h1 class="h3 mb-0 text-center">Espace promotions</h1>
+        </div>
+    </div>
+
+    <div class="row vh-50 pt-2">
+        <div class="col-12 mt-1 mb-1 m-0 p-1">
+            <a href="{{ path('product_index') }}"><img class="img-fluid"
+                                                       src="{{ asset("images/index/promo@2x.png") }}"
+                                                       alt=""></a>
+        </div>
+    </div>
+    {# Card Category #}
+    <div class="row vh-50 d-flex justify-content-center pb-5 pt-5">
+        <div class="card col-2 pr-0 pl-0 mr-2" style="width: 18rem;">
+            <img class="card-img-top" src="{{ asset("images/index/nature@2x.png") }}" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text text-center">Paysage</p>
+            </div>
+        </div>
+        <div class="card col-2 pr-0 pl-0 mr-2 " style="width: 18rem;">
+            <img class="card-img-top" src="{{ asset("images/index/nature@2x.png") }}" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text text-center">Abstrait</p>
+            </div>
+        </div>
+        <div class="card col-2 pr-0 pl-0 mr-2" style="width: 18rem;">
+            <img class="card-img-top" src="{{ asset("images/index/nature@2x.png") }}" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text text-center">Nature</p>
+            </div>
+        </div>
+        <div class="card col-2 pr-0 pl-0 mr-2" style="width: 18rem;">
+            <img class="card-img-top" src="{{ asset("images/index/nature@2x.png") }}" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text text-center">Retro</p>
+            </div>
+        </div>
+    </div>
+
+    {# Personnalisation #}
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h3 text-center">Créez vos posters personnalisés en quelques clics</h1>
+        </div>
+    </div>
+
+
+
+    <div class="row vh-50 d-flex justify-content-center pt-5">
+        <div class="card col-2 pr-0 pl-0 mr-2" style="width: 18rem;">
+            <img class="card-img-top" src="{{ asset("images/index/topkeks.png") }}" alt="Card image cap">
+            <div class="card-body shadow-sm">
+                <p class="card-text text-center">Paysage</p>
+            </div>
+        </div>
+        <div class="card col-2 pr-0 pl-0 mr-2 " style="width: 18rem;">
+            <img class="card-img-top" src="{{ asset("images/index/topkeks.png") }}" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text text-center">Abstrait</p>
+            </div>
+        </div>
+        <div class="card col-2 pr-0 pl-0 mr-2" style="width: 18rem;">
+            <img class="card-img-top" src="{{ asset("images/index/topkeks.png") }}" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text text-center">Nature</p>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+{% endblock %}
