@@ -61,7 +61,7 @@ class ProductController extends AbstractController
      */
     public function show(int $id, Product $product,ProductRepository $productRepository): Response
     {
-/*        dd($productRepository->find($id)->getstock()->getUnitPrice())*/
+     /* dd($productRepository->find($id)->getStock()->getUnitPrice()); */
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
