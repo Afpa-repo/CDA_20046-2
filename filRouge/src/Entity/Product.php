@@ -74,8 +74,6 @@ class Product
      */
     private $format;
 
-
-
     /**
      * @ORM\OneToMany(targetEntity=OrderDetail::class, mappedBy="product")
      */

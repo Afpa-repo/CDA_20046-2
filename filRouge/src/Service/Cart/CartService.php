@@ -60,7 +60,7 @@ class CartService
     {
         $total = 0;
         foreach ($this->getFullCart() as $item) {
-            $total += $item['product']->getproUnitPrice() * $item['quantity'];
+            $total += $item['product']->getProUnitPrice() * $item['quantity'];
         }
         return $total;
     }
