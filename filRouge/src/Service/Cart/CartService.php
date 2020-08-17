@@ -3,7 +3,9 @@
 namespace App\Service\Cart;
 
 
+use App\Repository\OrderDetailRepository;
 use App\Repository\ProductRepository;
+use App\Repository\StockRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
@@ -11,11 +13,18 @@ class CartService
 {
     protected $session;
     protected $productRepository;
+    protected $stockRepository;
 
-    public function __construct(SessionInterface $session, ProductRepository $productRepository)
+    /**
+     * @param SessionInterface $session
+     * @param ProductRepository $productRepository
+     * @param StockRepository $stockRepository
+     */
+    public function __construct(SessionInterface $session, ProductRepository $productRepository,StockRepository $stockRepository)
     {
         $this->session = $session;
         $this->productRepository = $productRepository;
+        $this->stockRepository=$stockRepository;
     }
 
     public function add(int $id)
@@ -60,7 +69,8 @@ class CartService
     {
         $total = 0;
         foreach ($this->getFullCart() as $item) {
-            $total += $item['product']->getproUnitPrice() * $item['quantity'];
+
+            $total += $item['product']->getstock()->getUnitPrice() * $item['quantity'];
         }
         return $total;
     }
