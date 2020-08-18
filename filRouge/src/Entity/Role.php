@@ -44,7 +44,7 @@ class Role
         return $this->role;
     }
 
-    public function setRole(string $role): string
+    public function setRole(string $role): self
     {
         $this->role = $role;
 
