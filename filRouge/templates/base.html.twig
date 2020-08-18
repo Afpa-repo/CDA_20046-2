@@ -11,109 +11,217 @@
               crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/bootstrap4-business-tycoon.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     {% endblock %}
 </head>
-<body class="container-fluid full-height">
+<body>
+<div class="container-fluid">
 
 
-{% block nav %}
+    {% block nav %}
 
 
 
-    <div class="row bg-dark p-0 mb-0 px-1">
-        <div class="col-12 position-relative">
-                    <a class="text-decoration-none h1 text-light titre d-flex justify-content-center" href="/">INK</a>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center d-flex justify-content-center">
+        <div class="row bg-dark ">
+            <div class="col-12 ">
+                <a class="text-decoration-none h1 text-light titre d-flex justify-content-center" href="/">INK</a>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center d-flex justify-content-center">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="collapse navbar-collapse ml-5"
+                                 id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link text-nav dropdown-toggle text-light" href="#"
+                                           id="navbarDropdown"
+                                           role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Categorie
+                                        </a>
+                                        <div class="dropdown-menu text-nav bg-dark text-light"
+                                             aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item text-light"
+                                               href="{{ path('product_index') }}">Format</a>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="collapse navbar-collapse ml-5"
-                             id="navbarSupportedContent">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link text-nav dropdown-toggle text-light" href="#" id="navbarDropdown"
-                                       role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Categorie
-                                    </a>
-                                    <div class="dropdown-menu text-nav bg-dark text-light" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item text-light"
-                                           href="{{ path('product_index') }}">Format</a>
+                                            <a class="dropdown-item text-nav text-light"
+                                               href="{{ path('product_index') }}">Theme</a>
 
-                                        <a class="dropdown-item text-nav text-light" href="{{ path('product_index') }}">Theme</a>
+                                            <a class="dropdown-item text-nav text-light"
+                                               href="{{ path('product_index') }}">Materiaux</a>
+                                        </div>
+                                    </li>
 
-                                        <a class="dropdown-item text-nav text-light"
-                                           href="{{ path('product_index') }}">Materiaux</a>
-                                    </div>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-nav text-light"
+                                           href="{{ path('product_index') }}">Product</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-nav text-light"
+                                           href="{{ path('product_index') }}">Tendance</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-nav text-light" href="{{ path('product_index') }}">Vente
+                                            privée</a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link text-nav text-light" href="{{ path('product_index') }}">Product</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-nav text-light" href="{{ path('product_index') }}">Tendance</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-nav text-light" href="{{ path('product_index') }}">Vente privée</a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-nav text-light" href="{{ path('contact') }}">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                                <li class="nav-item">
-                                    <a class="nav-link text-nav text-light" href="{{ path('contact') }}">Contact</a>
-                                </li>
-                            </ul>
                         </div>
+                    </div>
+                </nav>
 
+
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-center">
+                    <ul class="list-group list-group-horizontal list-unstyled ">
+
+                        {# Panier #}
+                        <li>
+                            <a class="nav-link" href="{{ path('cart') }}" tabindex="-1" aria-disabled="true"><img
+                                        class="lil-img"
+                                        src="{{ asset("images/nav/shopping-cart-line.png") }}" alt="cart-icon"></a>
+                        </li>
+
+                        {% if is_granted('ROLE_USER') %}
+                            {# profil #}
+                            <li>
+                                <a class="nav-link " href="{{ path('user_show', {'id': app.user.id }) }}" tabindex="-1"
+                                   aria-disabled="true">
+                                    <img class="lil-img" src="{{ asset("images/nav/user-line.png") }}" alt="user-icon">
+                                </a>
+                            </li>
+
+                            {# inscription #}
+                            <li>
+                                <a class="nav-link " href="{{ path('logout') }}" tabindex="-1" aria-disabled="true">
+                                    <img class="lil-img" src="{{ asset("images/nav/logout-circle-line.png") }}"
+                                         alt="user-icon"> </a>
+                            </li>
+
+
+
+                        {% else %}
+                            {# inscription #}
+                            <li>
+                                <a class="nav-link " href="{{ path('user_new', {'role':1} ) }}" tabindex="-1"
+                                   aria-disabled="true">
+                                    <img class="lil-img" src="{{ asset("images/nav/user-line.png") }}" alt="user-icon">
+                                </a>
+                            </li>
+                            {# login #}
+                            <li>
+                                <a class="nav-link " href="{{ path('login' ) }}" tabindex="-1" aria-disabled="true">
+                                    <img class="lil-img" src="{{ asset("images/nav/login-circle-line.png") }}"
+                                         alt="user-icon"> </a>
+                            </li>
+
+
+                        {% endif %}
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    {% endblock %}
+    {% block body %}{% endblock %}
+
+    {% block footer %}
+</div>
+<div class="container-fluid p-0 m-0">
+    <footer>
+        <div class="bg-dark mt-3 pt-5 w-100">
+            <div class="container">
+
+                <div class="row text-light align-items-start">
+                    <div class="col">
+                        <a class="text-uppercase text-justify">news</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase text-justify">sport</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase text-justify">retro</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase text-justify">science</a>
                     </div>
                 </div>
-            </nav>
+
+                <div class="row text-light">
+                    <div class="col">
+                        <a class="text-uppercase">animaux</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase">culture</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase">voitures</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase">nourritures</a>
+                    </div>
+                </div>
+
+                <div class="row text-light">
+                    <div class="col">
+                        <a class="text-uppercase">nature</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase">mangas</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase">films</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase">jeux</a>
+                    </div>
+                </div>
+
+                <div class="row text-light">
+                    <div class="col">
+                        <a class="text-uppercase">peinture</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase">contemporain</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase">musique</a>
+                    </div>
+                    <div class="col">
+                        <a class="text-uppercase">abstrait</a>
+                    </div>
+                </div>
+            </div>
 
 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-center">
-                <ul class="list-group list-group-horizontal list-unstyled ">
+            <div class="d-flex">
+                <div class="mr-auto p-2">
+                    <p class="mb-0 text-light">@COPYRIGHT</p>
+                </div>
 
-                    {# Panier #}
-                    <li>
-                        <a class="nav-link" href="{{ path('cart') }}" tabindex="-1" aria-disabled="true"><img class="lil-img"
-                                    src="{{ asset("images/nav/shopping-cart-line.png") }}" alt="cart-icon"></a>
-                    </li>
+                <div class="p-2">
+                    <a><img alt="fb" src="{{ asset("images/footer/facebook-fill.png") }}"></a>
+                </div>
 
-                    {% if is_granted('ROLE_USER') %}
-                        {# profil #}
-                        <li>
-                            <a class="nav-link " href="{{ path('user_show', {'id': app.user.id }) }}" tabindex="-1"
-                               aria-disabled="true">
-                                <img class="lil-img" src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
-                        </li>
+                <div class="p-2">
+                    <a><img alt="twitter" src="{{ asset("images/footer/twitter-fill.png") }}"></a>
+                </div>
 
-                        {# inscription #}
-                        <li>
-                            <a class="nav-link " href="{{ path('logout') }}" tabindex="-1" aria-disabled="true">
-                                <img class="lil-img" src="{{ asset("images/nav/logout-circle-line.png") }}" alt="user-icon"> </a>
-                        </li>
+                <div class="p-2">
+                    <a><img alt="insta" src="{{ asset("images/footer/instagram-line.png") }}"></a>
+                </div>
+            </div>
 
-
-                    {% else %}
-                        {# inscription #}
-                        <li>
-                            <a class="nav-link " href="{{ path('user_new', {'role':1} ) }}" tabindex="-1"
-                               aria-disabled="true">
-                                <img class="lil-img" src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
-                        </li>
-                        {# login #}
-                        <li>
-                            <a class="nav-link " href="{{ path('login' ) }}" tabindex="-1" aria-disabled="true">
-                                <img class="lil-img" src="{{ asset("images/nav/login-circle-line.png") }}" alt="user-icon"> </a>
-                        </li>
-
-                    {% endif %}
-
-                </ul>
-            </nav>
         </div>
-    </div>
+    </footer>
+</div>
+
 
 {% endblock %}
-{% block body %}{% endblock %}
 
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

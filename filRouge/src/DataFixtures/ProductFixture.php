@@ -68,11 +68,7 @@ class ProductFixture extends Fixture
             $product->setProNote($i + 1);
             $product->setProLib("Libellé n°$i");
             $product->setProDescription("<h3>Description du produit n°$i</h3><p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque, accusantium modi perspiciatis enim ex quos deleniti veniam quae laboriosam quia numquam placeat quo saepe officia qui repellendus corporis non excepturi.
-                Delectus excepturi vel obcaecati corrupti ab dignissimos? Dicta soluta nihil dolorem, quia esse animi accusantium provident vero, sunt assumenda exercitationem doloribus vel illo fugiat voluptatibus eos! Minima maiores earum sapiente.
-                Sit nobis odio similique quasi cupiditate architecto assumenda, aspernatur necessitatibus inventore corporis earum officiis perspiciatis excepturi non soluta neque illum beatae! Nulla, aperiam dolorem fugit impedit deleniti quod. Est, tempora!
-                Veniam earum minus, nulla eligendi est magni quas delectus quibusdam exercitationem amet molestiae laudantium id iste ipsam neque commodi! Facere tempora, quod odit incidunt quo magnam totam aperiam dolor velit.
-                Cum corporis odio aspernatur suscipit corrupti maxime! Voluptate recusandae vel, consequuntur similique accusantium quidem animi ratione quas repellat enim vitae numquam quisquam maxime sit officia est sed nemo, facere dolor!
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
             </p>");
             $product->setPicture($picture);
             $product->setTheme($theme);
