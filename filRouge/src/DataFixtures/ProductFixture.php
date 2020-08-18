@@ -10,6 +10,7 @@ use App\Entity\Product;
 use App\Entity\Role;
 use App\Entity\Stock;
 use App\Entity\Suppliers;
+use App\Entity\Tag;
 use App\Entity\Theme;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -31,6 +32,9 @@ class ProductFixture extends Fixture
             $address = new Address();
             $supplier = new Suppliers();
             $user = new User();
+            $tag = new Tag();
+
+            $tag->setName("tag n°$i");
 
             $address->setAddressType("$i");
             $address->setAddressCountry("France $i");
@@ -90,6 +94,7 @@ class ProductFixture extends Fixture
             $user->setUserEmail("Beuhtatoss$i@gmail.pom");
             $user->setUserPassword(password_hash("motdepasse", PASSWORD_DEFAULT));
 
+            $manager->persist($tag);
             $manager->persist($address);
             $manager->persist($role);
             $manager->persist($theme);
