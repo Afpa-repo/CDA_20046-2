@@ -7,6 +7,7 @@ use App\Entity\Format;
 use App\Entity\Material;
 use App\Entity\Picture;
 use App\Entity\Product;
+use App\Entity\ProductDetail;
 use App\Entity\Role;
 use App\Entity\Stock;
 use App\Entity\Suppliers;
@@ -24,9 +25,9 @@ class ProductFixture extends Fixture
         for ($i = 1; $i <= 10; $i++) {
             $product = new Product();
             $stock = new Stock();
-            $format = new Format();
-            $material = new Material();
-            $picture = new Picture();
+            $productdetail = new ProductDetail();
+
+               $picture = new Picture();
             $role = new Role();
             $theme = new Theme();
             $address = new Address();
@@ -49,22 +50,24 @@ class ProductFixture extends Fixture
 
             $role->setRole("role n°$i");
 
-            $format->setFormatName("A$i");
+            $productdetail->setFormatName("A$i");
+            $productdetail->setFormatId("$i");
+            $productdetail->setMaterialName("Matos n°$i");
+            $productdetail->setMaterialid("$i");
 
-            $material->setMaterialName("Matos n°$i");
 
-            $stock->setFormat($format);
-            $stock->setMaterial($material);
-            $stock->setUnitPrice(rand(0, 100));
+            $productdetail->setUnitPrice(rand(0, 100));
             $stock->setUnitStock(rand(0, 100));
             $stock->setUnitOnOrder(rand(0, 100));
             $stock->setDiscontinued(rand(0, 1));
             $stock->setFlag(rand(0, 1));
+            $stock->setProductDetail($productdetail);
 
             $picture->setExtension("jpg");
             $picture->setLink("http://placeimg.com/640/360/any");
 
             $product->setProName("produit n°$i");
+            $product->setProductDetail($productdetail);
             $product->setProNote($i + 1);
             $product->setProLib("Libellé n°$i");
             $product->setProDescription("<h3>Description du produit n°$i</h3><p>
@@ -94,8 +97,7 @@ class ProductFixture extends Fixture
             $manager->persist($address);
             $manager->persist($role);
             $manager->persist($theme);
-            $manager->persist($format);
-            $manager->persist($material);
+            $manager->persist($productdetail);
             $manager->persist($stock);
             $manager->persist($picture);
             $manager->persist($product);

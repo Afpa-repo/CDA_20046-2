@@ -20,23 +20,6 @@ class Stock
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Material::class, inversedBy="stocks")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $material;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Format::class, inversedBy="stocks")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $format;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $unit_price;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $unit_stock;
@@ -61,51 +44,20 @@ class Stock
      */
     private $orderDetails;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=ProductDetail::class, inversedBy="stocks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $productDetail;
+
     public function __construct()
     {
-        $this->products = new ArrayCollection();
-        $this->orderDetails = new ArrayCollection();
+     $this->orderDetails = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMaterial(): ?Material
-    {
-        return $this->material;
-    }
-
-    public function setMaterial(?Material $material): self
-    {
-        $this->material = $material;
-
-        return $this;
-    }
-
-    public function getFormat(): ?Format
-    {
-        return $this->format;
-    }
-
-    public function setFormat(?Format $format): self
-    {
-        $this->format = $format;
-
-        return $this;
-    }
-
-    public function getUnitPrice(): ?int
-    {
-        return $this->unit_price;
-    }
-
-    public function setUnitPrice(int $unit_price): self
-    {
-        $this->unit_price = $unit_price;
-
-        return $this;
     }
 
     public function getUnitStock(): ?int
@@ -183,6 +135,18 @@ class Stock
                 $orderDetail->setStock(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProductDetail(): ?ProductDetail
+    {
+        return $this->productDetail;
+    }
+
+    public function setProductDetail(?ProductDetail $productDetail): self
+    {
+        $this->productDetail = $productDetail;
 
         return $this;
     }

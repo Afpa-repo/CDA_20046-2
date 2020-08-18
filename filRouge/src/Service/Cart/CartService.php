@@ -85,7 +85,8 @@ class CartService
         $total = 0;
         /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
         foreach ($this->getFullCart() as $item) {
-            $total += $item['product']->getstock()->getUnitPrice() * $item['quantity'];
+
+            $total += $item['product']->getproductDetail()->getUnitPrice() * $item['quantity'];
         }
         return $total;
     }
