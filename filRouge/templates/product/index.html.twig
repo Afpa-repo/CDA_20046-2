@@ -12,63 +12,127 @@
 
 <div class="row p-0 m-0">
     <div class="col-3">
-        <img class="img-fluid" src="{{ asset ("images/index/cat@2x.png") }}" alt=""></a>
+    <!-- Vertical navbar -->
+<div class="vertical-nav bg-white" id="sidebar">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center"><img class="img-fluid w-10"
+                                                        src="{{ asset('images/index/ink-drop.png') }}"
+                                                        alt="">
+      <div class="media-body">
+        <h4 class="m-0">Keskispasse ?</h4>
+        <p class="font-weight-light text-muted mb-0"></p>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Choisissez un filtre</p>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic bg-light">
+                <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                Thèmes
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic">
+                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                Format
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic">
+                <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
+                Matériau
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic">
+                <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+                Gallery
+            </a>
+    </li>
+  </ul>
+
+  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic">
+                <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
+                Area charts
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic">
+                <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
+                Bar charts
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic">
+                <i class="fa fa-pie-chart mr-3 text-primary fa-fw"></i>
+                Pie charts
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic">
+                <i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>
+                Line charts
+            </a>
+    </li>
+  </ul>
+</div>
+        {# <img class="img-fluid w-100" src="{{ asset ("images/index/cat@2x.png") }}" alt=""></a> #}
     </div>
 
-    
         {#Promotion#}
-
-    <div class="col-9 bg-light">
-
+    <div class="col-9">
+    <a href="{{ path('product_index') }}"> <img class="img-fluid h-75 w-100"
+                                                        src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}"
+                                                        alt=""></a>
     </div>
+</div>
+
+        {#Tags#}
 <div class="row p-0 m-0">
     <div class="col-3">
-    <div>
         <h2>TAGS</h2>
         <textarea id="tags" name="tags"></textarea>
     </div>
-    </div>
-    <div class="col-9">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>ProName</th>
-                <th>ProStockAle</th>
-                                <th>ProNote</th>
-                <th>ProLib</th>
-                <th>ProDescription</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+
+        <div class="col-9">
+            <div class="row p-0 m-0">
         {% for product in products %}
-            <tr>
-            {# Ajouter images dans BDD}
-                {# <td>{{ product.proPicture }} #}
-                <td><img class="img-fluid" src="{{ asset ("images/index/catalogue@2x.png") }}" alt=""></a></td>
-                <td>{{ product.id }}</td>
-                <td>{{ product.proName }}</td>
 
-                <td>{{ product.proNote }}</td>
-                <td>{{ product.proLib }}</td>
-                <td>{{ product.proDescription }}</td>
-                <td>
-                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
-
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
+          
+                <div class="col-4 text-center">
+                    <img class="img-fluid w-60 mt-4" src="{{ asset ("images/index/catalogue@2x.png") }}" alt="">
+                    <p>
+                        <h3><b>{{ product.proName }}</b></h3>
+                    </p>
+                    <p>
+                        <h6>{{ product.proDescription }}</h6>
+                    </p>
+                    <p>
+                        <h6 class="text-danger"><b>À partir de</b></h6>
+                        <h6 class="text-danger">{{ product.proNote }}€</h6>
+                    </p>
+                        <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-primary">Détails</a>
+                        <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-dark">Modifier</a>
+                     
+        {# {% else %} 
+               actions : <td colspan="11">no records found</td> #}
+                                    
+                </div>
+            
         {% endfor %}
-        </tbody>
-    </table>
-    </div>
-    
-    <a href="{{ path('product_new') }}">Create new</a>
-    </div>
+            </div>
+        </div>
 </div>
+<div class="row">
+    <div class="col-12 text-right">
+        <a href="{{ path('product_new') }}" class="btn btn-success" >Create new</a>
+    </div>
+</div>  
 {% endblock %}
