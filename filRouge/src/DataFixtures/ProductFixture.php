@@ -60,7 +60,6 @@ class ProductFixture extends Fixture
             $picture->setExtension("jpg");
             $picture->setLink("http://placeimg.com/640/360/any");
 
-            $product->setStock($stock);
             $product->setProName("produit n°$i");
             $product->setProNote($i + 1);
             $product->setProLib("Libellé n°$i");
@@ -72,6 +71,7 @@ class ProductFixture extends Fixture
                 Cum corporis odio aspernatur suscipit corrupti maxime! Voluptate recusandae vel, consequuntur similique accusantium quidem animi ratione quas repellat enim vitae numquam quisquam maxime sit officia est sed nemo, facere dolor!
             </p>");
             $product->setPicture($picture);
+            $product->setTheme($theme);
 
             $supplier->setAdress($address);
             $supplier->setSuppliCompanyName("Beuhnana n°$i");
@@ -80,6 +80,7 @@ class ProductFixture extends Fixture
             $supplier->setPicture($picture);
 
             $user->setPicture($picture);
+            $user->setRole($role);
             $user->setAdress($address);
             $user->setUserLastName("Nom $i");
             $user->setUserFirstName("Prénom $i");
