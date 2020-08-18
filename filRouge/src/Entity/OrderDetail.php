@@ -53,6 +53,12 @@ class OrderDetail
      */
     private $supplier;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Stock::class, inversedBy="orderDetails")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $stock;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -138,6 +144,18 @@ class OrderDetail
     public function setSupplier(?Suppliers $supplier): self
     {
         $this->supplier = $supplier;
+
+        return $this;
+    }
+
+    public function getStock(): ?Stock
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?Stock $stock): self
+    {
+        $this->stock = $stock;
 
         return $this;
     }

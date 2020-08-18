@@ -25,7 +25,7 @@ class Theme
     private $themeName;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="theme")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="theme")
      */
     private $products;
 
@@ -63,7 +63,7 @@ class Theme
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->addTheme($this);
+            $product->setTheme($this);
         }
 
         return $this;
@@ -73,7 +73,10 @@ class Theme
     {
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
-            $product->removeTheme($this);
+            // set the owning side to null (unless already changed)
+            if ($product->getTheme() === $this) {
+                $product->setTheme(null);
+            }
         }
 
         return $this;

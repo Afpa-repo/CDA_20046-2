@@ -57,13 +57,14 @@ class Stock
     private $flag;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="stock")
+     * @ORM\OneToMany(targetEntity=OrderDetail::class, mappedBy="stock")
      */
-    private $products;
+    private $orderDetails;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->orderDetails = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -156,30 +157,30 @@ class Stock
     }
 
     /**
-     * @return Collection|Product[]
+     * @return Collection|OrderDetail[]
      */
-    public function getProducts(): Collection
+    public function getOrderDetails(): Collection
     {
-        return $this->products;
+        return $this->orderDetails;
     }
 
-    public function addProduct(Product $product): self
+    public function addOrderDetail(OrderDetail $orderDetail): self
     {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->setStock($this);
+        if (!$this->orderDetails->contains($orderDetail)) {
+            $this->orderDetails[] = $orderDetail;
+            $orderDetail->setStock($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Product $product): self
+    public function removeOrderDetail(OrderDetail $orderDetail): self
     {
-        if ($this->products->contains($product)) {
-            $this->products->removeElement($product);
+        if ($this->orderDetails->contains($orderDetail)) {
+            $this->orderDetails->removeElement($orderDetail);
             // set the owning side to null (unless already changed)
-            if ($product->getStock() === $this) {
-                $product->setStock(null);
+            if ($orderDetail->getStock() === $this) {
+                $orderDetail->setStock(null);
             }
         }
 
