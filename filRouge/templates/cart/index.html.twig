@@ -32,26 +32,25 @@
                         </div>
                         <div class="col-1 offset-7"><h5>{{ item.product.stock.unitPrice }} €</h5>
                         </div>
-
-
                         <div class="row mt-5 pt-4">
-                            <div class="col-2" >
-                            <select>
-                                <option> Qté: {{ item.quantity }}</option>
-                                {% for i in 1..10 %}
-                                    {% if item.quantity != i %}
-                                        <option value="{{ i }}"> Qté: {{ i }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
+                            <div class="col-2">
+                                <select>
+                                    <option> Qté: {{ item.quantity }}</option>
+                                    {% for i in 1..10 %}
+                                        {% if item.quantity != i %}
+                                            <option value="{{ i }}"> Qté: {{ i }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <div class="col-2">  <a href="{{ path('cart_remove', {'id' : item.product.id}) }}" class="small">
+                            <div class="col-2"><a href="{{ path('cart_remove', {'id' : item.product.id}) }}"
+                                                  class="small">
                                     Supprimer
                                 </a></div>
-                            <div class="col-3"> <a href="#" class="small">
+                            <div class="col-3"><a href="#" class="small">
                                     Mettre de coté
                                 </a></div>
-                            <div class="col-5"> <a href="#" class="small">
+                            <div class="col-5"><a href="#" class="small">
                                     Voir plus de produits similaires
                                 </a></div>
 
@@ -73,7 +72,6 @@
             </div>
 
         </div>
-
 
         <p class="small">Le prix et la disponibilité des articles sur Link sont sujets à changement. Le panier est un
             lieu temporaire où est stockée une liste de vos articles et où se reflète le prix le plus récent de chaque
@@ -97,7 +95,12 @@
 
                 <div class="card card-header text-center">
                     <h5 class="card-title">Sous Total ({{ items|length }} articles : {{ total }} € )</h5>
-                    <a href="#" class="btn btn-dark btn-lg">Passer la commande</a>
+
+                    {% if is_granted('ROLE_USER') %}
+                    <a href="{{ path('order_submit') }}" class="btn btn-dark btn-lg">Passer la commande</a>
+                    {% else %}
+                        <a href="{{ path('login') }}" class="btn btn-dark btn-lg">Passer la commande</a>
+                        {% endif %}
                 </div>
 
             </div>

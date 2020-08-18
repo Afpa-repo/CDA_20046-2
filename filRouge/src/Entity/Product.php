@@ -45,25 +45,19 @@ class Product
     private $orderDetails;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Theme::class, inversedBy="products")
-     */
-    private $theme;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Stock::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $stock;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $picture;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Theme::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $theme;
+
     public function __construct()
     {
-        $this->theme = new ArrayCollection();
         $this->orderDetails = new ArrayCollection();
     }
 
@@ -151,44 +145,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|Theme[]
-     */
-    public function getTheme(): Collection
-    {
-        return $this->theme;
-    }
-
-    public function addTheme(Theme $theme): self
-    {
-        if (!$this->theme->contains($theme)) {
-            $this->theme[] = $theme;
-        }
-
-        return $this;
-    }
-
-    public function removeTheme(Theme $theme): self
-    {
-        if ($this->theme->contains($theme)) {
-            $this->theme->removeElement($theme);
-        }
-
-        return $this;
-    }
-
-    public function getStock(): ?Stock
-    {
-        return $this->stock;
-    }
-
-    public function setStock(?Stock $stock): self
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-
     public function getPicture(): ?Picture
     {
         return $this->picture;
@@ -197,6 +153,18 @@ class Product
     public function setPicture(?Picture $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getTheme(): ?Theme
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(?Theme $theme): self
+    {
+        $this->theme = $theme;
 
         return $this;
     }

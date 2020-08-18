@@ -1,4 +1,41 @@
+.titre {
+    transition : 0.5s;
+}
+
+.titre:hover {
+    color : #48d3e3;
+}
+
 .dropdown-item:hover {
     background-color: #0b1a31;
     display: inline-block; /* For added support */
 }
+
+.fit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.text-nav {
+    transition : 0.5s;
+}
+
+.text-nav:hover {
+    color: #48d3e3;
+}
+
+.lil-img {
+    background: #0b1a31;
+}
+.lil-img  {
+    opacity: 1;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+.lil-img:hover {
+    opacity: .5;
+}
+
+

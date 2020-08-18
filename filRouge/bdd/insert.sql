@@ -71,6 +71,10 @@ INSERT INTO `product` (id, pro_name, pro_stock_ale, pro_unit_price, pro_unit_sto
     (7, "poster Valorant", 20, 25, 75, 25, 2, 8, "posVal", "poster jeu Valorant A3",1,3),
     (5, "poster Marvel", 10, 20, 50, 0, 2, 7, "posMar", "poster film Marvel A2",3,1),
     (6, "poster Marvel", 25, 20, 50, 30, 2, 8, "posMar", "poster film Marvel A3",1,2);
+    (7, "poster Marvel", 25, 20, 50, 30, 2, 8, "posMar", "poster film Marvel A3",1,2);
+    (8, "poster Marvel", 25, 20, 50, 30, 2, 8, "posMar", "poster film Marvel A3",1,2);
+    (9, "poster Marvel", 25, 20, 50, 30, 2, 8, "posMar", "poster film Marvel A3",1,2);
+    (10, "poster Marvel", 25, 20, 50, 30, 2, 8, "posMar", "poster film Marvel A3",1,2);
 
 
 
