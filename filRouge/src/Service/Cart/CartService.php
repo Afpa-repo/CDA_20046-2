@@ -4,6 +4,7 @@ namespace App\Service\Cart;
 
 
 use App\Repository\ProductRepository;
+use App\Repository\StockRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
@@ -11,16 +12,20 @@ class CartService
 {
     protected $session;
     protected $productRepository;
+    protected $stockRepository;
 
     /**
      *
      * @param SessionInterface $session
      * @param ProductRepository $productRepository
+     * @param StockRepository $stockRepository
      */
-    public function __construct(SessionInterface $session, ProductRepository $productRepository)
+    public function __construct(SessionInterface $session, ProductRepository $productRepository, StockRepository $stockRepository)
     {
         $this->session = $session;
         $this->productRepository = $productRepository;
+        $this->stockRepository = $stockRepository;
+
     }
 
     /**
@@ -29,7 +34,7 @@ class CartService
      */
     public function add(int $id)
     {
-      /*  definition du panier. Soit une variable 'panier' soit un tableau null*/
+        /*  definition du panier. Soit une variable 'panier' soit un tableau null*/
         $panier = $this->session->get('panier', []);
 
         if (!empty($panier[$id])) {
@@ -70,6 +75,12 @@ class CartService
         foreach ($panier as $id => $quantity) {
             $panierWithData[] = [
                 'product' => $this->productRepository->find($id),
+
+                /*
+                $formatmaterialID = La valeur que retourne le ajax a Dan
+                  'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
+
+                'unitprice' => $this->stockRepository->find(1)->getUnitPrice(),
                 'quantity' => $quantity,
             ];
         }
@@ -85,7 +96,7 @@ class CartService
         $total = 0;
         /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
         foreach ($this->getFullCart() as $item) {
-            $total += $item['product']->getstock()->getUnitPrice() * $item['quantity'];
+            $total += $item['unitprice'] * $item['quantity'];
         }
         return $total;
     }

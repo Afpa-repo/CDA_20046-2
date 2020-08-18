@@ -5,7 +5,8 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
-use App\Repository\OrderDetailRepository;
+use App\Repository\StockRepository;
+use App\Service\filter\FilterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,15 +17,26 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProductController extends AbstractController
 {
+
+
     /**
      * @Route("/", name="product_index", methods={"GET"})
      * @param ProductRepository $productRepository
+     * @param StockRepository $stockRepository
      * @return Response
      */
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository, StockRepository $stockRepository): Response
     {
+        $unitPrice = $stockRepository->findall();
+        foreach ($unitPrice as $key => $item) {
+            $unitPrice[$key] = [$item->getUnitPrice()];
+            asort($unitPrice);
+        }
+
+
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
+            'minprice' => $unitPrice[0][0]
         ]);
     }
 
@@ -57,16 +69,14 @@ class ProductController extends AbstractController
      * @Route("/{id}", name="product_show", methods={"GET"})
      * @param int $id
      * @param Product $product
-     * @param ProductRepository $productRepository
+     * @param StockRepository $stockRepository
      * @return Response
      */
-    public function show(int $id, Product $product,OrderDetailRepository $orderdetailrepository): Response
+    public function show(int $id, Product $product, StockRepository $stockRepository): Response
     {
-
-        // dd($orderdetailrepository->find($id)->getstock()->getUnitPrice());
-            return $this->render('product/show.html.twig', [
+        return $this->render('product/show.html.twig', [
             'product' => $product,
-            'price' => $orderdetailrepository->find($id)->getstock()->getUnitPrice()
+            'defaultprice' => $stockRepository->find(1)->getUnitPrice()
         ]);
     }
 
@@ -101,7 +111,7 @@ class ProductController extends AbstractController
      */
     public function delete(Request $request, Product $product): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($product);
             $entityManager->flush();
