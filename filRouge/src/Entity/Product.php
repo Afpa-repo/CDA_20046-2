@@ -61,12 +61,6 @@ class Product
      */
     private $tags;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=ProductDetail::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $productDetail;
-
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -205,18 +199,6 @@ class Product
             $this->tags->removeElement($tag);
             $tag->removeProduct($this);
         }
-
-        return $this;
-    }
-
-    public function getProductDetail(): ?ProductDetail
-    {
-        return $this->productDetail;
-    }
-
-    public function setProductDetail(?ProductDetail $productDetail): self
-    {
-        $this->productDetail = $productDetail;
 
         return $this;
     }

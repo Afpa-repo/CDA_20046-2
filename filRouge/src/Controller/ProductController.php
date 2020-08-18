@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
-use App\Repository\ProductDetailRepository;
 use App\Repository\ProductRepository;
+use App\Repository\OrderDetailRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,12 +60,13 @@ class ProductController extends AbstractController
      * @param ProductRepository $productRepository
      * @return Response
      */
-    public function show(int $id, Product $product,ProductRepository $productRepository): Response
+    public function show(int $id, Product $product,OrderDetailRepository $orderdetailrepository): Response
     {
 
+        // dd($orderdetailrepository->find($id)->getstock()->getUnitPrice());
             return $this->render('product/show.html.twig', [
             'product' => $product,
-            'price' => $productRepository->find($id)->getProductDetail()->getUnitPrice()
+            'price' => $orderdetailrepository->find($id)->getstock()->getUnitPrice()
         ]);
     }
 
