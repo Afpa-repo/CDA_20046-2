@@ -4,23 +4,27 @@ namespace App\Service\Cart;
 
 
 use App\Repository\ProductRepository;
+use App\Repository\StockRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 
 class CartService
 {
     protected $session;
     protected $productRepository;
+    protected $stockRepository;
 
     /**
      *
      * @param SessionInterface $session
      * @param ProductRepository $productRepository
      */
-    public function __construct(SessionInterface $session, ProductRepository $productRepository)
+    public function __construct(SessionInterface $session, ProductRepository $productRepository,StockRepository $stockRepository)
     {
         $this->session = $session;
         $this->productRepository = $productRepository;
+        $this->stockRepository=$stockRepository;
     }
 
     /**
@@ -85,6 +89,10 @@ class CartService
         $total = 0;
         /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
         foreach ($this->getFullCart() as $item) {
+
+
+            dd($this->productRepository->find(1));
+
 
             $total += $item['product']->getproductDetail()->getUnitPrice() * $item['quantity'];
         }
