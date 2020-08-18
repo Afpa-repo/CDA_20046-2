@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -11,16 +13,16 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
 </head>
-<body class="container-fluid ">
+<body class="container-fluid full-height">
 
 
 {% block nav %}
 
 
 
-    <div class="row bg-dark p-1 mb-0 pr-0 ">
+    <div class="row bg-dark p-0 mb-0 px-1">
         <div class="col-12 position-relative">
-                    <p class="h1 text-light titre text-center">INK</p>
+                    <a class="text-decoration-none h1 text-light titre d-flex justify-content-center" href="/">INK</a>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center d-flex justify-content-center">
 
                 <div class="row">
@@ -29,34 +31,34 @@
                              id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown"
+                                    <a class="nav-link text-nav dropdown-toggle text-light" href="#" id="navbarDropdown"
                                        role="button"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Categorie
                                     </a>
-                                    <div class="dropdown-menu bg-dark text-light" aria-labelledby="navbarDropdown">
+                                    <div class="dropdown-menu text-nav bg-dark text-light" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item text-light"
                                            href="{{ path('product_index') }}">Format</a>
 
-                                        <a class="dropdown-item text-light" href="{{ path('product_index') }}">Theme</a>
+                                        <a class="dropdown-item text-nav text-light" href="{{ path('product_index') }}">Theme</a>
 
-                                        <a class="dropdown-item text-light"
+                                        <a class="dropdown-item text-nav text-light"
                                            href="{{ path('product_index') }}">Materiaux</a>
                                     </div>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ path('product_index') }}">Product</a>
+                                    <a class="nav-link text-nav text-light" href="{{ path('product_index') }}">Product</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ path('product_index') }}">Tendance</a>
+                                    <a class="nav-link text-nav text-light" href="{{ path('product_index') }}">Tendance</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ path('product_index') }}">Vente privée</a>
+                                    <a class="nav-link text-nav text-light" href="{{ path('product_index') }}">Vente privée</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ path('contact') }}">Contact</a>
+                                    <a class="nav-link text-nav text-light" href="{{ path('contact') }}">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -71,7 +73,7 @@
 
                     {# Panier #}
                     <li>
-                        <a class="nav-link" href="{{ path('cart') }}" tabindex="-1" aria-disabled="true"><img
+                        <a class="nav-link" href="{{ path('cart') }}" tabindex="-1" aria-disabled="true"><img class="lil-img"
                                     src="{{ asset("images/nav/shopping-cart-line.png") }}" alt="cart-icon"></a>
                     </li>
 
@@ -80,13 +82,13 @@
                         <li>
                             <a class="nav-link " href="{{ path('user_show', {'id': app.user.id }) }}" tabindex="-1"
                                aria-disabled="true">
-                                <img src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
+                                <img class="lil-img" src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
                         </li>
 
                         {# inscription #}
                         <li>
                             <a class="nav-link " href="{{ path('logout') }}" tabindex="-1" aria-disabled="true">
-                                <img src="{{ asset("images/nav/logout-circle-line.png") }}" alt="user-icon"> </a>
+                                <img class="lil-img" src="{{ asset("images/nav/logout-circle-line.png") }}" alt="user-icon"> </a>
                         </li>
 
 
@@ -95,20 +97,19 @@
                         <li>
                             <a class="nav-link " href="{{ path('user_new', {'role':1} ) }}" tabindex="-1"
                                aria-disabled="true">
-                                <img src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
+                                <img class="lil-img" src="{{ asset("images/nav/user-line.png") }}" alt="user-icon"> </a>
                         </li>
                         {# login #}
                         <li>
                             <a class="nav-link " href="{{ path('login' ) }}" tabindex="-1" aria-disabled="true">
-                                <img src="{{ asset("images/nav/login-circle-line.png") }}" alt="user-icon"> </a>
+                                <img class="lil-img" src="{{ asset("images/nav/login-circle-line.png") }}" alt="user-icon"> </a>
                         </li>
 
                     {% endif %}
 
                 </ul>
+            </nav>
         </div>
-        </nav>
-    </div>
     </div>
 
 {% endblock %}
