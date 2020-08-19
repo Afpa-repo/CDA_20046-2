@@ -80,7 +80,7 @@ class CartService
                 $formatmaterialID = La valeur que retourne le ajax a Dan
                   'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
 
-                'unitprice' => $this->stockRepository->find(1)->getUnitPrice(),
+                'stock' => $this->stockRepository->find(1),
                 'quantity' => $quantity,
             ];
         }

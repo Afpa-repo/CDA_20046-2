@@ -49,11 +49,17 @@ class Suppliers
      */
     private $picture;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Material::class, mappedBy="supplier")
+     */
+    private $materials;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
         $this->address = new ArrayCollection();
         $this->orderDetails = new ArrayCollection();
+        $this->materials = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,6 +154,37 @@ class Suppliers
     public function setPicture(?Picture $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Material[]
+     */
+    public function getMaterials(): Collection
+    {
+        return $this->materials;
+    }
+
+    public function addMaterial(Material $material): self
+    {
+        if (!$this->materials->contains($material)) {
+            $this->materials[] = $material;
+            $material->setSupplier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaterial(Material $material): self
+    {
+        if ($this->materials->contains($material)) {
+            $this->materials->removeElement($material);
+            // set the owning side to null (unless already changed)
+            if ($material->getSupplier() === $this) {
+                $material->setSupplier(null);
+            }
+        }
 
         return $this;
     }

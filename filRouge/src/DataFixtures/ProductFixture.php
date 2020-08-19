@@ -79,6 +79,8 @@ class ProductFixture extends Fixture
             $supplier->setSuppliPhone("666-666-6$i");
             $supplier->setPicture($picture);
 
+            $material->setSupplier($supplier);
+
             $user->setPicture($picture);
             $user->setRole($role);
             $user->setAdress($address);

@@ -29,6 +29,12 @@ class Material
      */
     private $stocks;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Suppliers::class, inversedBy="materials")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $supplier;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -79,6 +85,18 @@ class Material
                 $stock->setMaterial(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSupplier(): ?Suppliers
+    {
+        return $this->supplier;
+    }
+
+    public function setSupplier(?Suppliers $supplier): self
+    {
+        $this->supplier = $supplier;
 
         return $this;
     }
