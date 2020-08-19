@@ -63,8 +63,7 @@ class Stock
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
-        $this->orderDetails = new ArrayCollection();
+       $this->orderDetails = new ArrayCollection();
     }
 
     public function getId(): ?int
