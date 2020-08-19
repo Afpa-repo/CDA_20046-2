@@ -107,17 +107,7 @@ class ProductType extends AbstractType
                     'placeholder' => '',
                 ],
             ])
-            ->add('picture', FileType::class, [
-                'label' => 'Photo du produit',
-                'mapped' => false,
-                'constraints' => [
-                    new Image([
-                        'maxSize' => '2000k',
-
-                        'mimeTypesMessage' => "Veuillez insérer un format d'image correct"
-                    ])
-                ]
-            ])
+//            ->add('picture')
 ;
     }
 

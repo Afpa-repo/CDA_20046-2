@@ -6,9 +6,13 @@ use App\Repository\PictureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Vich\UploaderBundle\Entity\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PictureRepository::class)
+ * @Vich\Uploadable
  */
 class Picture
 {
@@ -44,6 +48,25 @@ class Picture
      */
     private $products;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="images", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var DateTime
+     */
+
+    private $updatedAt;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -67,6 +90,31 @@ class Picture
         $this->extension = $extension;
 
         return $this;
+    }
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        if ($image)
+        {
+            $this->updateAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile(): File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage(string $image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage(): string
+    {
+        return $this->image;
     }
 
     /**
