@@ -18,7 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
 
-
     /**
      * @Route("/", name="product_index", methods={"GET"})
      * @param ProductRepository $productRepository
@@ -119,4 +118,5 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('product_index');
     }
+
 }
