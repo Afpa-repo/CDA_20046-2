@@ -32,11 +32,11 @@ class ProductController extends AbstractController
             $unitPrice[$key] = [$item->getUnitPrice()];
             asort($unitPrice);
         }
-
+        $firstrow = array_shift($unitPrice);
 
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
-            'minprice' => $unitPrice[0][0]
+            'minprice' => $firstrow[0]
         ]);
     }
 
