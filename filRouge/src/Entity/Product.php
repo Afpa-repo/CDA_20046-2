@@ -202,4 +202,9 @@ class Product
 
         return $this;
     }
+<<<<<<< HEAD
 }
+=======
+
+}
+>>>>>>> 287ffa81b6214761dfc0ba48b017b58f61cddfbe

@@ -101,4 +101,14 @@ class CartService
         return $total;
     }
 
+//    /**
+//     *
+//     *
+//     */
+//    public function CartNotification() {
+//        $twig = new \Twig\Environment($loader);
+//        $twig->addGlobal('text', new Text());
+//    }
+
+
 }

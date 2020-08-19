@@ -94,6 +94,7 @@
             <a class="btn btn-outline-light" href="{{ path('product_index') }}">Retour à la liste</a>
             {# <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a> #}
             <a class="btn btn-danger" href="{{ path('cart_add', {'id': product.id}) }}">Ajouter au panier</a>
+            {# <a class="btn btn-danger" href="{{ path('cart_add', {'id': product.id,'stockid' : stock.id}) }}">Ajouter au panier</a> #}
 
             {# {{ include('product/_delete_form.html.twig') }} #}
     {# </div>  #}
@@ -122,11 +123,40 @@
         </div>
     </div>
 
-
+{# Description produit #}
     <div class="row col-12 mt-2">
         <div class="col col-4 p-0">
             <p class="font-weight-bold mt-2">Description du produit</p>
             <p>{{ product.proDescription }}</p>
+        </div>
+    </div>
+
+{# Infos complémentaires #}
+    <div class="row col-12 mt-2">
+        <div class="col col-4 p-0 border-right text-center">
+            <p><i class="ris ri-truck-line ri-2x"></i></p>
+            <p class="font-weight-bold mt-2" data-container="body" data-toggle="popover" data-placement="bottom"
+                data-title = "Délais de livraison"
+                data-html="true"
+                data-content="<b>Ink.com.</b> s'engage à vous livrer en 3 à 5 jours ouvrés. Une livraison express en 24h est disponible, moyennant un somme forfaitaire de 390€. La livraison est offerte dès 20 articles commandés.Une date de livraison garantie vous sera indiquée lors du passage de la commande.">Livraison gratuite
+            </p>
+        </div>
+        <div class="col col-4 p-0 text-center">
+            <p><i class="ris ri-refresh-line ri-2x"></i></p>
+            <p class="font-weight-bold mt-2" data-container="body" data-toggle="popover" data-placement="bottom"
+                data-title = "Vous avez changé d’avis ?"
+                data-html="true"
+                data-content="Pour toute commande effectuée sur <b>Ink.com</b> vous avez 15 jours à partir de la date de réception de votre commande pour changer d'avis. Puis 15 jours à partir de la date de rétractation pour nous retourner votre article, gratuitement en contactant nos services.">Satisfait ou remboursé
+            </p>
+        </div>
+        <div class="col col-4 p-0 border-left text-center">
+            <p><i class="ris ri-lock-2-line ri-2x"></i></p>
+            <p class="font-weight-bold mt-2" data-container="body" data-toggle="popover" data-placement="bottom"
+                data-title = "Paiement 100% sécurisé"
+                data-html="true"
+                data-content="Pour chaque commande, vous pouvez utiliser votre Carte Bleue, Visa, ou Mastercard en toute sécurité, grâce au système de protection et de cryptage SSL fourni par la banque d'Azerbaïdjan. La facture est disponible aussitôt la facturation de vos articles effectuée, sur votre compte <b>Ink.com.</b>">Paiement sécurisé
+            </p>
+        </div>
     </div>
 
 {# Carrousel #}
@@ -161,7 +191,8 @@
   </a>
   <a class="carousel-control-next" href="#carousel" data-slide="next">
     <span class="carousel-control-next-icon"></span>
-  </a>  #}
+  </a>  
+  </div>#}
 </div>
 
 {% endblock %}

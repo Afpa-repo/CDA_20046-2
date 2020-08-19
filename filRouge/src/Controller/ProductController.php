@@ -11,13 +11,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/product")
  */
 class ProductController extends AbstractController
 {
-
 
     /**
      * @Route("/", name="product_index", methods={"GET"})
@@ -39,6 +39,22 @@ class ProductController extends AbstractController
             'minprice' => $firstrow[0]
         ]);
     }
+
+    // public function paginate(Request $request, PaginatorInterface $paginator) // Nous ajoutons les paramètres requis
+    // {
+    //     // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
+    //     $donnees = $this->getDoctrine()->getRepository(Product::class)->findBy([],['created_at' => 'desc']);
+
+    //     $products = $paginator->paginate(
+    //         $donnees, // Requête contenant les données à paginer (ici nos articles)
+    //         $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+    //         6 // Nombre de résultats par page
+    //     );
+        
+    //     return $this->render('product/index.html.twig', [
+    //         'product' => $products,
+    //     ]);
+    // }
 
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
@@ -119,4 +135,5 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('product_index');
     }
+
 }
