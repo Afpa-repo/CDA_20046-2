@@ -15,6 +15,7 @@
 
 
     {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ form_row(form.picture2) }}
 
     <a class="btn btn-dark"  href="{{  path('user_show', {'id': user.id}) }}">Retour au profil</a>
 

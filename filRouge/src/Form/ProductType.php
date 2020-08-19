@@ -8,6 +8,7 @@ use App\Entity\Product;
 use App\Entity\Theme;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -106,7 +107,17 @@ class ProductType extends AbstractType
                     'placeholder' => '',
                 ],
             ])
-//            ->add('picture')
+            ->add('picture', FileType::class, [
+                'label' => 'Photo du produit',
+                'mapped' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '2000k',
+
+                        'mimeTypesMessage' => "Veuillez insérer un format d'image correct"
+                    ])
+                ]
+            ])
 ;
     }
 
