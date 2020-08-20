@@ -30,34 +30,38 @@ class CartService
 
     /**
      * Ajout d'un profuit au panier
-     * @param int $id
+     * @param int $idproduct
+     * @param int $idstock
+     * @param int $qte
      */
-    public function add(int $id)
+    public function add(int $idproduct, int $idstock, int $qte)
     {
         /*  definition du panier. Soit une variable 'panier' soit un tableau null*/
         $panier = $this->session->get('panier', []);
 
-        if (!empty($panier[$id])) {
-            $panier[$id]++;
+        if (!empty($panier[$idproduct][$idstock])) {
+            $panier[$idproduct][$idstock] += $qte;
         } else {
-            $panier[$id] = 1;
+            $panier[$idproduct][$idstock] = $qte;
         }
 
         /* transmision du tableau $panier dans la variable 'panier" */
         $this->session->set('panier', $panier);
+
     }
 
     /**
      * Suppresion de l'article du panier
-     * @param int $id
+     * @param int $idproduct
+     * @param int $idstock
      */
-    public function remove(int $id)
+    public function remove(int $idproduct, int $idstock)
     {
         $panier = $this->session->get('panier', []);
 
         /* si c'est different de vide on unset la valeur */
-        if (!empty($panier[$id])) {
-            unset($panier[$id]);
+        if (!empty($panier[$idproduct][$idstock])) {
+            unset($panier[$idproduct][$idstock]);
         }
         $this->session->set('panier', $panier);
     }
@@ -72,16 +76,20 @@ class CartService
         $panierWithData = [];
 
         /* boucle sur la panier et attribut un tableau des valeur du produit et sa quantité */
-        foreach ($panier as $id => $quantity) {
-            $panierWithData = [
-                'product' => $this->productRepository->find($id),
-                /*
-                $formatmaterialID = La valeur que retourne le ajax a Dan
-                  'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
+        foreach ($panier as $idproduct => $item) {
+            foreach ($item as $idstock => $qte) {
 
-                'stock' => $this->stockRepository->find(1),
-                'quantity' => $quantity,
-            ];
+                $panierWithData[] = [
+                    'product' =>  $this->productRepository->find($idproduct),
+                    /*
+                    $formatmaterialID = La valeur que retourne le ajax a Dan
+                      'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
+
+                    'stock' => $this->stockRepository->find($idstock),
+                    'quantity' => $qte,
+                    /*'user'=> */
+                ];
+            }
         }
         return (object) $panierWithData;
     }
@@ -89,27 +97,16 @@ class CartService
     /**
      * Calcul du prix total du panier
      * @return float
-     */
+    */
     public function total(): float
     {
         $total = 0;
         /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
-        foreach ($this as $item) {
-            $total += $this->getFullCart()->stock->getUnitPrice() * $this->getFullCart()->quantity[1];
+        foreach ($this->getFullCart() as $item) {
+            $total += $item['stock']->getUnitPrice() * $item['quantity'];
         }
         return $total;
     }
-
-
-
-//    /**
-//     *
-//     *
-//     */
-//    public function CartNotification() {
-//        $twig = new \Twig\Environment($loader);
-//        $twig->addGlobal('text', new Text());
-//    }
 
 
 }

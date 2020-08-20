@@ -152,13 +152,13 @@
             <a class="btn btn-outline-light" href="{{ path('product_index') }}">Retour à la liste</a>
             {# <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a> #}
 
-<<<<<<< HEAD
+
             {# {{ path('cart_add', {'idproduct': product.id, 'idstock' : idstock , "qte" : qte }) }} #}
 
-            <input type="button" class="btn btn-danger" id="btn" href="{{ path('cart_add', {'id': product.id}) }}" value="Ajouter au panier"></input>
-=======
+{#            <input type="button" class="btn btn-danger" id="btn" href="{{ path('cart_add', {'id': product.id}) }}" value="Ajouter au panier"></input>#}
+
             <a class="btn btn-danger" href="{{ path('cart_add', {'idproduct': 4, 'idstock' : 1 , "qte" : 2 }) }}">Ajouter au panier</a>
->>>>>>> 87e3d26a74b3dec27e6bf55ede27060d70a3f23d
+
             {# <a class="btn btn-danger" href="{{ path('cart_add', {'id': product.id,'stockid' : stock.id}) }}">Ajouter au panier</a> #}
 
             {# {{ include('product/_delete_form.html.twig') }} #}
