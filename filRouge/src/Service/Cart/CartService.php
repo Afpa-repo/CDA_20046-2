@@ -33,46 +33,31 @@ class CartService
      * @param int $idstock
      * @param int $qte
      */
-    public function add(int $idproduct,int $idstock, int $qte )
+    public function add(int $idproduct, int $idstock, int $qte)
     {
 
-    /*  definition du panier. Soit une variable 'panier' soit un tableau null*/
+        /*  definition du panier. Soit une variable 'panier' soit un tableau null*/
         $panier = $this->session->get('panier', []);
 
 
-
-        $panier[$idproduct][$idstock] = $qte;
-
-//        if (!empty($panier[$idproduct][$idstock])) {
-//            $panier[$idproduct][$idstock] += $qte;
-           dd($panier);
+//        dd($panier);
+//        foreach ($panier as $idproduct => $item) {//
+//            foreach ($item as $idstock => $qte) {
+        //  }
 //        }
-//        else {
-//           $panier[$idproduct][$idstock] = $qte;
-//            dd($panier);
-//      }
-
+        if (!empty($panier[$idproduct][$idstock])) {
+            $panier[$idproduct][$idstock] += $qte;
+        } else {
+            $panier[$idproduct][$idstock] = $qte;
+        }
+//
 
 
         /* transmision du tableau $panier dans la variable 'panier" */
-        $this->session->set('panier', $panier[$idproduct][$idstock]);
-        dd($panier);
-    }
-
-    /**
-     * Suppresion de l'article du panier
-     * @param int $idproduct
-     * @param int $idstock
-     */
-    public function remove(int $idproduct,int $idstock)
-    {
-        $panier = $this->session->get('panier', []);
-
-        /* si c'est different de vide on unset la valeur */
-        if (!empty($panier[$idproduct][$idstock])) {
-            unset($panier[$idproduct][$idstock]);
-        }
         $this->session->set('panier', $panier);
+
+//        dd($panier);
+
     }
 
     /**
@@ -83,24 +68,42 @@ class CartService
     {
         $panier = $this->session->get('panier', []);
 
-
         $panierWithData = [];
-
         /* boucle sur la panier et attribut un tableau des valeur du produit et sa quantité */
-        foreach ($panier as $id => $quantity) {
-            $panierWithData[] = [
-                'product' => $this->productRepository->find($id),
 
-                /*
-                $formatmaterialID = La valeur que retourne le ajax a Dan
-                  'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
 
-                'stock' => $this->stockRepository->find(1),
-                'quantity' => $quantity,
+        foreach ($panier as $idproduct => $item) {
+            foreach ($item as $idstock => $qte) {
+                $panierWithData[] = [
+                    'product' => $this->productRepository->find($idproduct),
+
+                    /*
+                    $formatmaterialID = La valeur que retourne le ajax a Dan
+                      'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
+
+                    'stock' => $this->stockRepository->find($idstock),
+                    'quantity' => $qte,
 //              'userid' => ,
-            ];
+                ];
+            }
         }
         return $panierWithData;
+    }
+
+    /**
+     * Suppresion de l'article du panier
+     * @param int $idproduct
+     * @param int $idstock
+     */
+    public function remove(int $idproduct, int $idstock)
+    {
+        $panier = $this->session->get('panier', []);
+
+        /* si c'est different de vide on unset la valeur */
+        if (!empty($panier[$idproduct][$idstock])) {
+            unset($panier[$idproduct][$idstock]);
+        }
+        $this->session->set('panier', $panier);
     }
 
     /**
