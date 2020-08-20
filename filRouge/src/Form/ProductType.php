@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Regex;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductType extends AbstractType
 {
@@ -107,7 +108,9 @@ class ProductType extends AbstractType
                     'placeholder' => '',
                 ],
             ])
-//            ->add('picture')
+            ->add('imageFile', VichImageType::class, [
+
+            ]
 ;
     }
 
