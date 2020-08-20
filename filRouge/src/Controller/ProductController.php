@@ -24,7 +24,7 @@ class ProductController extends AbstractController
      * @param StockRepository $stockRepository
      * @return Response
      */
-    public function index(ProductRepository $productRepository, StockRepository $stockRepository): Response
+    public function index(Request $request, ProductRepository $productRepository, PaginatorInterface $paginator, StockRepository $stockRepository): Response
     {
         $unitPrice = $stockRepository->findall();
         foreach ($unitPrice as $key => $item) {
@@ -32,28 +32,42 @@ class ProductController extends AbstractController
             asort($unitPrice);
         }
         $firstrow = array_shift($unitPrice);
+        // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
 
+        $query  = $this->getDoctrine()->getRepository(Product::class)->findAll();
+        $product  = $paginator->paginate(
+            $query, // Requête contenant les données à paginer (ici nos produits)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            4 // Nombre de résultats par page
+        );
+        // dd($pagination);
         return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findAll(),
+            // 'products' => $productRepository->findAll(),
+            'product' => $product,
             'minprice' => $firstrow[0]
         ]);
     }
 
-    // public function paginate(Request $request, PaginatorInterface $paginator) // Nous ajoutons les paramètres requis
-    // {
-    //     // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
-    //     $donnees = $this->getDoctrine()->getRepository(Product::class)->findBy([],['created_at' => 'desc']);
 
-    //     $products = $paginator->paginate(
-    //         $donnees, // Requête contenant les données à paginer (ici nos articles)
-    //         $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-    //         6 // Nombre de résultats par page
-    //     );
-        
-    //     return $this->render('product/index.html.twig', [
-    //         'product' => $products,
-    //     ]);
-    // }
+
+    /**
+     * 
+     */
+    public function paginate(Request $request, PaginatorInterface $paginator) // Nous ajoutons les paramètres requis
+    {
+        // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
+        $query  = $this->getDoctrine()->getRepository(Product::class)->findAll();
+
+        $pagination  = $paginator->paginate(
+            $query, // Requête contenant les données à paginer (ici nos produits)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            4 // Nombre de résultats par page
+        );
+        dd($pagination);
+        return $this->render('product/index.html.twig', [
+            'pagination' => $pagination,
+        ]);
+    }
 
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
@@ -137,5 +151,4 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('product_index');
     }
-
 }
