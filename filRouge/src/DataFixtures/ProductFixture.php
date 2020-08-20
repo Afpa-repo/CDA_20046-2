@@ -26,7 +26,7 @@ class ProductFixture extends Fixture
             $stock = new Stock();
             $format = new Format();
             $material = new Material();
-            $picture = new Picture();
+            $image = new Picture();
             $role = new Role();
             $theme = new Theme();
             $address = new Address();
@@ -61,8 +61,10 @@ class ProductFixture extends Fixture
             $stock->setDiscontinued(rand(0, 1));
             $stock->setFlag(rand(0, 1));
 
-            $picture->setExtension("jpg");
-            $picture->setLink("http://placeimg.com/640/360/any");
+            $image->setExtension("jpg");
+            $image->setLink("http://placeimg.com/640/360/any");
+            $image->setImage("$i.jpg");
+            $image->setupdatedAt(new \DateTime());
 
             $product->setProName("produit n°$i");
             $product->setProNote($i + 1);
@@ -70,18 +72,19 @@ class ProductFixture extends Fixture
             $product->setProDescription("<h3>Description du produit n°$i</h3><p>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
             </p>");
-            $product->setPicture($picture);
+            $product->setPicture($image);
             $product->setTheme($theme);
+
 
             $supplier->setAdress($address);
             $supplier->setSuppliCompanyName("Beuhnana n°$i");
             $supplier->setSuppliMail("Beuhnana$i@gmail.pom");
             $supplier->setSuppliPhone("666-666-6$i");
-            $supplier->setPicture($picture);
+            $supplier->setPicture($image);
 
             $material->setSupplier($supplier);
 
-            $user->setPicture($picture);
+            $user->setPicture($image);
             $user->setRole($role);
             $user->setAdress($address);
             $user->setUserLastName("Nom $i");
@@ -99,7 +102,7 @@ class ProductFixture extends Fixture
             $manager->persist($format);
             $manager->persist($material);
             $manager->persist($stock);
-            $manager->persist($picture);
+            $manager->persist($image);
             $manager->persist($product);
             $manager->persist($supplier);
             $manager->persist($user);
