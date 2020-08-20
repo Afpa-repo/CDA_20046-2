@@ -25,85 +25,65 @@ class CartService
         $this->session = $session;
         $this->productRepository = $productRepository;
         $this->stockRepository = $stockRepository;
+
     }
 
     /**
-     * Ajout d'un produit au panier
-     * @param int $idproduct
-     * @param int $idstock
-     * @param int $qte
+     * Ajout d'un profuit au panier
+     * @param int $id
      */
-    public function add(int $idproduct, int $idstock, int $qte)
+    public function add(int $id)
     {
-
         /*  definition du panier. Soit une variable 'panier' soit un tableau null*/
         $panier = $this->session->get('panier', []);
 
-
-//        dd($panier);
-//        foreach ($panier as $idproduct => $item) {//
-//            foreach ($item as $idstock => $qte) {
-        //  }
-//        }
-        if (!empty($panier[$idproduct][$idstock])) {
-            $panier[$idproduct][$idstock] += $qte;
+        if (!empty($panier[$id])) {
+            $panier[$id]++;
         } else {
-            $panier[$idproduct][$idstock] = $qte;
+            $panier[$id] = 1;
         }
-//
-
 
         /* transmision du tableau $panier dans la variable 'panier" */
         $this->session->set('panier', $panier);
-
-//        dd($panier);
-
-    }
-
-    /**
-     * Recuperation du panier complet
-     * @return array
-     */
-    public function getFullCart(): array
-    {
-        $panier = $this->session->get('panier', []);
-
-        $panierWithData = [];
-        /* boucle sur la panier et attribut un tableau des valeur du produit et sa quantité */
-
-
-        foreach ($panier as $idproduct => $item) {
-            foreach ($item as $idstock => $qte) {
-                $panierWithData[] = [
-                    'product' => $this->productRepository->find($idproduct),
-
-                    /*
-                    $formatmaterialID = La valeur que retourne le ajax a Dan
-                      'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
-
-                    'stock' => $this->stockRepository->find($idstock),
-                    'quantity' => $qte,
-//              'userid' => ,
-                ];
-            }
-        }
-        return $panierWithData;
     }
 
     /**
      * Suppresion de l'article du panier
-     * @param int $idproduct
-     * @param int $idstock
+     * @param int $id
      */
-    public function remove(int $idproduct, int $idstock)
+    public function remove(int $id)
     {
         $panier = $this->session->get('panier', []);
 
         /* si c'est different de vide on unset la valeur */
-        if (!empty($panier[$idproduct][$idstock])) {
-            unset($panier[$idproduct][$idstock]);
+        if (!empty($panier[$id])) {
+            unset($panier[$id]);
         }
         $this->session->set('panier', $panier);
+    }
+
+    /**
+     * Recuperation du panier complet
+     * @return object
+     */
+    public function getFullCart(): object
+    {
+        $panier = $this->session->get('panier', []);
+        $panierWithData = [];
+
+        /* boucle sur la panier et attribut un tableau des valeur du produit et sa quantité */
+        foreach ($panier as $id => $quantity) {
+            $panierWithData = [
+                'product' => $this->productRepository->find($id),
+                /*
+                $formatmaterialID = La valeur que retourne le ajax a Dan
+                  'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
+
+                'stock' => $this->stockRepository->find(1),
+                'quantity' => $quantity,
+            ];
+        }
+        return (object) $panierWithData;
     }
 
     /**
@@ -114,11 +94,22 @@ class CartService
     {
         $total = 0;
         /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
-        foreach ($this->getFullCart() as $item) {
-            $total += $item['stock']->getUnitPrice() * $item['quantity'];
+        foreach ($this as $item) {
+            $total += $this->getFullCart()->stock->getUnitPrice() * $this->getFullCart()->quantity[1];
         }
         return $total;
     }
+
+
+
+//    /**
+//     *
+//     *
+//     */
+//    public function CartNotification() {
+//        $twig = new \Twig\Environment($loader);
+//        $twig->addGlobal('text', new Text());
+//    }
 
 
 }
