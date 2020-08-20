@@ -81,6 +81,8 @@ class ProductController extends AbstractController
         ]);
     }
 
+
+// Association prix
     /**
      * @Route("/{id}", name="product_show", methods={"GET"})
      * @param int $id
@@ -90,11 +92,43 @@ class ProductController extends AbstractController
      */
     public function show(int $id, Product $product, StockRepository $stockRepository): Response
     {
+
+        $stockRepository = $stockRepository->findall();
+
+        // $unitPrice = $stockRepository->find(1)->getUnitPrice();
+        foreach ($stockRepository as $item) {
+            //  dd($item);
+            $materialid= $item->getmaterial()->getid();
+            $formatid= $item->getformat()->getid();
+
+// $radio1_value
+// $radio2_value
+
+
+//             if($materialid = $radio1_value && $formatId = $radio2_value ) {
+
+    //     if ($formulaire->isSubmitted()) {
+    //     return $this->redirectToRoute('product_index');
+    // }
+
+
+//             }
+//             // $materialId[$key] = [$item1->getMaterialId()];
+//             // $formatId[$key] = [$item2->getFormatId()];
+            
+        }
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            'defaultprice' => $stockRepository->find(1)->getUnitPrice()
+            'defaultprice' =>1,
+            // 'idstock' => $combo->getUnitPrice()
+
+                // 'idstock'=> $idstock,
+                // 'qte'=> $qte
         ]);
     }
+
+
 
     /**
      * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
