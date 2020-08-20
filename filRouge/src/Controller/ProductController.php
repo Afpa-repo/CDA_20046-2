@@ -6,7 +6,6 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\Repository\StockRepository;
-use App\Service\filter\FilterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -90,9 +89,12 @@ class ProductController extends AbstractController
      */
     public function show(int $id, Product $product, StockRepository $stockRepository): Response
     {
+
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            'defaultprice' => $stockRepository->find(1)->getUnitPrice()
+            'defaultprice' => $stockRepository->find(1)->getUnitPrice(),
+            'stock' => $stockRepository->findAll()
         ]);
     }
 

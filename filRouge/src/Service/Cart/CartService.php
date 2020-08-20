@@ -25,39 +25,52 @@ class CartService
         $this->session = $session;
         $this->productRepository = $productRepository;
         $this->stockRepository = $stockRepository;
-
     }
 
     /**
-     * Ajout d'un profuit au panier
-     * @param int $id
+     * Ajout d'un produit au panier
+     * @param int $idproduct
+     * @param int $idstock
+     * @param int $qte
      */
-    public function add(int $id)
+    public function add(int $idproduct,int $idstock, int $qte )
     {
-        /*  definition du panier. Soit une variable 'panier' soit un tableau null*/
+
+    /*  definition du panier. Soit une variable 'panier' soit un tableau null*/
         $panier = $this->session->get('panier', []);
 
-        if (!empty($panier[$id])) {
-            $panier[$id]++;
-        } else {
-            $panier[$id] = 1;
-        }
+
+
+        $panier[$idproduct][$idstock] = $qte;
+
+//        if (!empty($panier[$idproduct][$idstock])) {
+//            $panier[$idproduct][$idstock] += $qte;
+           dd($panier);
+//        }
+//        else {
+//           $panier[$idproduct][$idstock] = $qte;
+//            dd($panier);
+//      }
+
+
 
         /* transmision du tableau $panier dans la variable 'panier" */
-        $this->session->set('panier', $panier);
+        $this->session->set('panier', $panier[$idproduct][$idstock]);
+        dd($panier);
     }
 
     /**
      * Suppresion de l'article du panier
-     * @param int $id
+     * @param int $idproduct
+     * @param int $idstock
      */
-    public function remove(int $id)
+    public function remove(int $idproduct,int $idstock)
     {
         $panier = $this->session->get('panier', []);
 
         /* si c'est different de vide on unset la valeur */
-        if (!empty($panier[$id])) {
-            unset($panier[$id]);
+        if (!empty($panier[$idproduct][$idstock])) {
+            unset($panier[$idproduct][$idstock]);
         }
         $this->session->set('panier', $panier);
     }
@@ -69,6 +82,8 @@ class CartService
     public function getFullCart(): array
     {
         $panier = $this->session->get('panier', []);
+
+
         $panierWithData = [];
 
         /* boucle sur la panier et attribut un tableau des valeur du produit et sa quantité */
@@ -82,6 +97,7 @@ class CartService
 
                 'stock' => $this->stockRepository->find(1),
                 'quantity' => $quantity,
+//              'userid' => ,
             ];
         }
         return $panierWithData;
@@ -96,19 +112,10 @@ class CartService
         $total = 0;
         /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
         foreach ($this->getFullCart() as $item) {
-            $total += $item['unitprice'] * $item['quantity'];
+            $total += $item['stock']->getUnitPrice() * $item['quantity'];
         }
         return $total;
     }
-
-//    /**
-//     *
-//     *
-//     */
-//    public function CartNotification() {
-//        $twig = new \Twig\Environment($loader);
-//        $twig->addGlobal('text', new Text());
-//    }
 
 
 }
