@@ -108,8 +108,7 @@ class ProductType extends AbstractType
                     'placeholder' => '',
                 ],
             ])
-            ->add('imageFile', VichImageType::class)
-            
+
 ;
     }
 
