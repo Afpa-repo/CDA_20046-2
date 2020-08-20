@@ -109,6 +109,7 @@ class ProductType extends AbstractType
                 ],
             ])
             ->add('imageFile', VichImageType::class)
+            
 ;
     }
 
