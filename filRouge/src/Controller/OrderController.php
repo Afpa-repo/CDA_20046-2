@@ -28,9 +28,12 @@ class OrderController extends AbstractController
      */
     public function submit(CartService $cartService)
     {
+
         $cartService = $cartService->getFullCart();
 
-        dd($cartService[0]["stock"]->getMaterial());
+
+            dd($cartService[0]);
+
         $date = new \DateTime();
         $dateShipping = $date->add(new \DateInterval('P3D'));
 
@@ -40,7 +43,7 @@ class OrderController extends AbstractController
         $order->setAddress(new Address(1));
         $order->setOrderDate($date);
         $order->setOrderDateShipping($dateShipping);
-        $order->setOrderType("Envoyée !");
+        $order->setOrderType(1);
         $order->setOrderShippingCost(rand(0,100));
 
         for($i=0;$i<=sizeOf($cartService);$i++) {
@@ -52,6 +55,7 @@ class OrderController extends AbstractController
                 $orderDetail->setProduct($cartService[$i]["product"]->getId($j));
                 $orderDetail->setOrders($order);
                 $orderDetail->setSupplier($cartService[$i]["stock"]->getMaterial()->getSupplier());
+                $orderDetail->setStock($cartService[$i]->getStock());
 
             }
         }
