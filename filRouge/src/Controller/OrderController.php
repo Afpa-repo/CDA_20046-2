@@ -3,16 +3,29 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Material;
 use App\Entity\Order;
 use App\Entity\OrderDetail;
+use App\Entity\Product;
+use App\Entity\Stock;
 use App\Entity\User;
+use App\Repository\ProductRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\Cart\CartService;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class OrderController extends AbstractController
 {
+    protected $productRepository;
+    protected $userRepository;
+
+    public function __construct(ProductRepository $productRepository, UserRepository $userRepository)
+    {
+        $this->productRepository = $productRepository;
+        $this->userRepository = $userRepository;
+    }
     /**
      * @Route("/order", name="order")
      */
@@ -23,40 +36,60 @@ class OrderController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/order/submit", name="order_submit")
-     */
-    public function submit(CartService $cartService)
+    
+    public function load(EntityManagerInterface $manager, CartService $cartService) 
     {
+
         $cartService = $cartService->getFullCart();
 
-        dd($cartService[0]["stock"]->getMaterial());
+        dd($cartService->product);
+
+
         $date = new \DateTime();
         $dateShipping = $date->add(new \DateInterval('P3D'));
 
         $order = new Order();
+        $user = $this->userRepository->find(1);
 
-        $order->setUser(new User(1));
-        $order->setAddress(new Address(1));
+        $order->setUser($user);
+        $order->setAddress($user->getAdress());
         $order->setOrderDate($date);
         $order->setOrderDateShipping($dateShipping);
-        $order->setOrderType("Envoyée !");
-        $order->setOrderShippingCost(rand(0,100));
+        $order->setOrderType(1);
+        $order->setOrderShippingCost(rand(0, 100));
 
-        for($i=0;$i<=sizeOf($cartService);$i++) {
+        foreach($cartService->product as $key) {
 
-            for($j=0;$j<=sizeOf($cartService[$i]["product"]);$j++) {
 
-                $orderDetail = new OrderDetail();
+                $orderDetail = new OrderDetail($key);
 
-                $orderDetail->setProduct($cartService[$i]["product"]->getId($j));
+                $orderDetail->setProduct($cartService->product);
+
                 $orderDetail->setOrders($order);
-                $orderDetail->setSupplier($cartService[$i]["stock"]->getMaterial()->getSupplier());
+                $orderDetail->setSupplier($cartService->stock->getMaterial()->getSupplier());
+                $orderDetail->setStock($cartService->stock);
+                $orderDetail->setOrderdetailUnitPrice($cartService->stock->getUnitPrice());
+                $orderDetail->setOrderdetailQuantity($cartService->quantity[1]);
+                $orderDetail->setOrderdetailDiscount(rand(1, 10) / 10);
+                $orderDetail->setOrderdetailTva(rand(0,100));
 
-            }
+                $manager->persist($orderDetail);
         }
-        
-        
+
+        $manager->persist($order);
+
+        $manager->flush();
+
+    }
+
+    /**
+     * @Route("/order/submit", name="order_submit")
+     */
+    public function submit(EntityManagerInterface $manager, CartService $cartService)
+    {
+
+
+        $this->load($manager, $cartService);
 
 
         return $this->render('order/index.html.twig', [

@@ -64,18 +64,17 @@ class CartService
 
     /**
      * Recuperation du panier complet
-     * @return array
+     * @return object
      */
-    public function getFullCart(): array
+    public function getFullCart(): object
     {
         $panier = $this->session->get('panier', []);
         $panierWithData = [];
 
         /* boucle sur la panier et attribut un tableau des valeur du produit et sa quantité */
         foreach ($panier as $id => $quantity) {
-            $panierWithData[] = [
+            $panierWithData = [
                 'product' => $this->productRepository->find($id),
-
                 /*
                 $formatmaterialID = La valeur que retourne le ajax a Dan
                   'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
@@ -84,7 +83,7 @@ class CartService
                 'quantity' => $quantity,
             ];
         }
-        return $panierWithData;
+        return (object) $panierWithData;
     }
 
     /**
@@ -95,8 +94,8 @@ class CartService
     {
         $total = 0;
         /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
-        foreach ($this->getFullCart() as $item) {
-            $total += $item['unitprice'] * $item['quantity'];
+        foreach ($this as $item) {
+            $total += $this->getFullCart()->stock->getUnitPrice() * $this->getFullCart()->quantity[1];
         }
         return $total;
     }
