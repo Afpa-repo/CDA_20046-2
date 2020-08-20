@@ -4,9 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Data\SearchData;
+use App\Form\SearchForm;
 use App\Repository\ProductRepository;
 use App\Repository\StockRepository;
-use App\Service\filter\FilterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +26,7 @@ class ProductController extends AbstractController
      * @param StockRepository $stockRepository
      * @return Response
      */
-    public function index(ProductRepository $productRepository, StockRepository $stockRepository): Response
+    public function index(Request $request, ProductRepository $productRepository, PaginatorInterface $paginator, StockRepository $stockRepository): Response
     {
         $unitPrice = $stockRepository->findall();
         foreach ($unitPrice as $key => $item) {
@@ -33,28 +34,30 @@ class ProductController extends AbstractController
             asort($unitPrice);
         }
         $firstrow = array_shift($unitPrice);
+        
+
+        $query = $this->getDoctrine()->getRepository(Product::class)->findAll();
+        $product = $paginator->paginate(
+            $query, // Requête contenant les données à paginer (ici nos produits)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+
+
+        $data = new SearchData();
+        $data->page = $request->get('page', 1);
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+        $products = $productRepository->findSearch($data);
 
         return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findAll(),
-            'minprice' => $firstrow[0]
+       
+            'product' => $product,
+            'minprice' => $firstrow[0],
+            'products' => $products,
+            'form' => $form->createView()
         ]);
     }
-
-    // public function paginate(Request $request, PaginatorInterface $paginator) // Nous ajoutons les paramètres requis
-    // {
-    //     // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
-    //     $donnees = $this->getDoctrine()->getRepository(Product::class)->findBy([],['created_at' => 'desc']);
-
-    //     $products = $paginator->paginate(
-    //         $donnees, // Requête contenant les données à paginer (ici nos articles)
-    //         $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-    //         6 // Nombre de résultats par page
-    //     );
-        
-    //     return $this->render('product/index.html.twig', [
-    //         'product' => $products,
-    //     ]);
-    // }
 
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
@@ -93,6 +96,7 @@ class ProductController extends AbstractController
     public function show(int $id, Product $product, StockRepository $stockRepository): Response
     {
 
+<<<<<<< HEAD
         $stockRepository = $stockRepository->findall();
 
         // $unitPrice = $stockRepository->find(1)->getUnitPrice();
@@ -125,6 +129,13 @@ class ProductController extends AbstractController
 
                 // 'idstock'=> $idstock,
                 // 'qte'=> $qte
+=======
+
+        return $this->render('product/show.html.twig', [
+            'product' => $product,
+            'defaultprice' => $stockRepository->find(1)->getUnitPrice(),
+            'stock' => $stockRepository->findAll()
+>>>>>>> 87e3d26a74b3dec27e6bf55ede27060d70a3f23d
         ]);
     }
 
@@ -169,5 +180,6 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('product_index');
     }
+
 
 }

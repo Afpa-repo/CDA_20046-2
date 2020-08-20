@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\StockRepository;
 use App\Service\Cart\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,22 +19,24 @@ class CartController extends AbstractController
     public function index(CartService $cartService)
     {
         return $this->render('cart/index.html.twig', [
-            'controller_name' => 'CartController',
             'items' => $cartService->getFullCart(),
             'total' => $cartService->total(),
-            'CartNotification'=>sizeof($cartService->getFullCart())
+            //'CartNotification'=>sizeof($cartService->getFullCart())
         ]);
     }
 
     /**
-     * @Route("/cart/add/{id}", name="cart_add")
-     * @param $id
+     * @Route("/cart/add/{idproduct}/{idstock}/{qte}", name="cart_add")
+     * @param int $idproduct
+     * @param int $idstock
+     * @param int $qte
+     * @param StockRepository $stockRepository
      * @param CartService $cartService
      * @return RedirectResponse
      */
-    public function add($id, CartService $cartService)
+    public function add(int $idproduct,int $idstock,int $qte,StockRepository $stockRepository, CartService $cartService)
     {
-        $cartService->add($id);
+        $cartService->add($idproduct,$idstock,$qte);
         return $this->redirectToRoute("cart");
     }
 

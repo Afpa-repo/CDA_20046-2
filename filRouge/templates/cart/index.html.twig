@@ -31,7 +31,7 @@
                         <div class="row h-100">
                             <div class="col-4"><h4>{{ item.product.proName }}</h4>
                             </div>
-                            <div class="col-1 offset-7"><h5>{{ item.unitprice }} €</h5>
+                            <div class="col-1 offset-7"><h5>{{ item.stock.unitprice }} €</h5>
                             </div>
                             <div class="row mt-5 pt-4">
                                 <div class="col-2">
@@ -136,7 +136,7 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
-                                        <div class="col-5 offset-2"><a href="{{ path('cart_add',{'id':1}) }}"
+                                        <div class="col-5 offset-2"><a href="{{ path('cart_add',{'idproduct': 1 , 'idstock' : 1 , "qte" : 2 })  }}"
                                                                        class="small">
                                                 Ajouté au panier
                                             </a></div>
