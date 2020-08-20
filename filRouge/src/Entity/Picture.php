@@ -49,7 +49,7 @@ class Picture
     private $products;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $image;
@@ -62,7 +62,7 @@ class Picture
 
     /**
      * @ORM\Column(type="datetime")
-     * @var DateTime
+     * @var \DateTime
      */
 
     private $updatedAt;
@@ -92,17 +92,17 @@ class Picture
         return $this;
     }
 
-    public function setImageFile(File $image = null)
+    public function setImageFile(?File $imageFile = null): void
     {
-        $this->imageFile = $image;
+        $this->imageFile = $imageFile;
 
-        if ($image)
+        if ($imageFile)
         {
-            $this->updateAt = new \DateTime('now');
+            $this->updatedAt = new \DateTime('now');
         }
     }
 
-    public function getImageFile(): File
+    public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
@@ -115,6 +115,22 @@ class Picture
     public function getImage(): string
     {
         return $this->image;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
     }
 
     /**
