@@ -209,6 +209,13 @@
       <path value="$PROJECT_DIR$/filRouge/vendor/symfony/browser-kit" />
       <path value="$PROJECT_DIR$/filRouge/vendor/symfony/asset" />
       <path value="$PROJECT_DIR$/filRouge/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/filRouge/vendor/easycorp/easyadmin-bundle" />
+      <path value="$PROJECT_DIR$/filRouge/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/filRouge/vendor/knplabs/knp-paginator-bundle" />
+      <path value="$PROJECT_DIR$/filRouge/vendor/knplabs/knp-components" />
+      <path value="$PROJECT_DIR$/filRouge/vendor/vich/uploader-bundle" />
+      <path value="$PROJECT_DIR$/filRouge/vendor/jms/metadata" />
+      <path value="$PROJECT_DIR$/filRouge/vendor/symfony/polyfill-uuid" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
