@@ -21,7 +21,7 @@ class ProductFixture extends Fixture
     public function load(ObjectManager $manager)
     {
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             $product = new Product();
             $stock = new Stock();
             $format = new Format();
