@@ -8,6 +8,8 @@ use App\Data\SearchData;
 use App\Form\SearchForm;
 use App\Repository\ProductRepository;
 use App\Repository\StockRepository;
+use App\Repository\FormatRepository;
+use App\Repository\MaterialRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,37 +95,48 @@ class ProductController extends AbstractController
      * @param StockRepository $stockRepository
      * @return Response
      */
-    public function show(int $id, Product $product, StockRepository $stockRepository): Response
+    public function show(int $id, Product $product, StockRepository $stockRepository, FormatRepository $formatRepository, MaterialRepository $materialRepository): Response
     {
 
-        $stockRepository = $stockRepository->findall();
+            // $stockRepository = $stockRepository->findall();
 
-        // $unitPrice = $stockRepository->find(1)->getUnitPrice();
-        foreach ($stockRepository as $item) {
+            // $unitPrice = $stockRepository->find(1)->getUnitPrice();
+            // foreach ($stockRepository as $item) {
             //  dd($item);
-            $materialid= $item->getmaterial()->getid();
-            $formatid= $item->getformat()->getid();
+            // $materialid= $item->getmaterial()->getid();
+            // $formatid= $item->getformat()->getid();}
 
-// $radio1_value
-// $radio2_value
+            // $radio1_value
+            // $radio2_value
 
+            //             if($materialid = $radio1_value && $formatId = $radio2_value ) {
 
-//             if($materialid = $radio1_value && $formatId = $radio2_value ) {
+                //     if ($formulaire->isSubmitted()) {
+                //     return $this->redirectToRoute('product_index');
+                // }
 
-    //     if ($formulaire->isSubmitted()) {
-    //     return $this->redirectToRoute('product_index');
-    // }
-
-
-//             }
-//             // $materialId[$key] = [$item1->getMaterialId()];
-//             // $formatId[$key] = [$item2->getFormatId()];
+            //             }
+            //             // $materialId[$key] = [$item1->getMaterialId()];
+            //             // $formatId[$key] = [$item2->getFormatId()];
             
-        }
+$unitPrice = $stockRepository->findall();
+$formats = $formatRepository->findall();
+$materials = $materialRepository->findall();
+$stocks = $stockRepository->findall();
+
+foreach ($unitPrice as $key => $item) {
+    $unitPrice[$key] = [$item->getUnitPrice()];
+    asort($unitPrice);
+}
+$firstrow = array_shift($unitPrice);
+
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            'defaultprice' =>1,
+            'defaultprice' =>$firstrow[0],
+            'formats' => $formats,
+            'materials' => $materials,
+            'stocks' => $stocks,
             // 'idstock' => $combo->getUnitPrice()
 
                 // 'idstock'=> $idstock,
