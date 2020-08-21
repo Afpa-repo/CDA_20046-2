@@ -35,12 +35,8 @@ class CartService
      */
     public function add(int $idproduct, int $idstock, int $qte)
     {
-
         /*  definition du panier. Soit une variable 'panier' soit un tableau null*/
         $panier = $this->session->get('panier', []);
-
-
-
 
         if (!empty($panier[$idproduct][$idstock])) {
             $panier[$idproduct][$idstock] += $qte;
@@ -65,10 +61,10 @@ class CartService
         /* boucle sur la panier et attribut un tableau des valeur du produit et sa quantité */
 
 
-        foreach ($panier as $idproduct => $item) {
-            foreach ($item as $idstock => $qte) {
-
-                $panierWithData = [
+        foreach ($panier as $idproduct => $item) {        
+             foreach ($item as $idstock => $qte) {
+             
+                $panierWithData[] = [
                     'product' => $this->productRepository->find($idproduct),
 
                     /*
@@ -81,7 +77,6 @@ class CartService
                 ];
             }
         }
-dd($panierWithData);
         return (object) $panierWithData;
     }
 
