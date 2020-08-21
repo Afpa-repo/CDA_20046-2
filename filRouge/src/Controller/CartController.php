@@ -20,7 +20,7 @@ class CartController extends AbstractController
     {
         return $this->render('cart/index.html.twig', [
             'items' => $cartService->getFullCart(),
-            'total' => $cartService->total(),
+            //'total' => $cartService->total(),
             //'CartNotification'=>sizeof($cartService->getFullCart())
         ]);
     }

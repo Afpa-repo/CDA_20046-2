@@ -40,13 +40,13 @@ class OrderController extends AbstractController
     public function load(EntityManagerInterface $manager, CartService $cartService) 
     {
 
-        $cartService = $cartService->getFullCart();
+        $cartService = $cartService;
 
-        dd($cartService->product);
+        //dd();
 
 
         $date = new \DateTime();
-        $dateShipping = $date->add(new \DateInterval('P3D'));
+        $dateShipping = $date->add(new \DateInterval('P1Y'));
 
         $order = new Order();
         $user = $this->userRepository->find(1);
@@ -58,9 +58,8 @@ class OrderController extends AbstractController
         $order->setOrderType(1);
         $order->setOrderShippingCost(rand(0, 100));
 
-        foreach($cartService->product as $key) {
-
-
+        dd($cartService);
+        foreach($cartService as $key) {
                 $orderDetail = new OrderDetail($key);
 
                 $orderDetail->setProduct($cartService->product);
@@ -69,7 +68,7 @@ class OrderController extends AbstractController
                 $orderDetail->setSupplier($cartService->stock->getMaterial()->getSupplier());
                 $orderDetail->setStock($cartService->stock);
                 $orderDetail->setOrderdetailUnitPrice($cartService->stock->getUnitPrice());
-                $orderDetail->setOrderdetailQuantity($cartService->quantity[1]);
+                $orderDetail->setOrderdetailQuantity($cartService->quantity);
                 $orderDetail->setOrderdetailDiscount(rand(1, 10) / 10);
                 $orderDetail->setOrderdetailTva(rand(0,100));
 
