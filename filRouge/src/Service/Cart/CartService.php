@@ -66,7 +66,6 @@ class CartService
              
                 $panierWithData[] = [
                     'product' => $this->productRepository->find($idproduct),
-
                     /*
                     $formatmaterialID = La valeur que retourne le ajax a Dan
                       'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
@@ -100,15 +99,18 @@ class CartService
      * Calcul du prix total du panier
      * @return float
      */
-    // public function total(): float
-    // {
-    //     $total = 0;
-    //     /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
-    //     foreach ($this as $item) {
-    //         //$total += $item['stock']->stock->getUnitPrice() * $this->getFullCart()->quantity;
-    //     }
-    //     return $total;
-    // }
+
+
+
+     public function total(): float
+     {
+         $total = 0;
+         /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
+         foreach ($this->getFullCart() as $item) {
+             $total += $item['stock']->getUnitPrice() * $item['quantity'];
+         }
+         return $total;
+     }
 
 
 

@@ -7,6 +7,7 @@
     {% if items | length > 0 %}
 
 
+
 <div class="container-fluid">
     <div class="row ">
         <div class="col-8 mt-4">
@@ -22,14 +23,16 @@
             </div>
 
             {# Boucle pour display la liste des articles dans le panier #}
+            {{ dump (items) }}
 
             {% for item in items %}
+
                 <div class="row border-bottom mt-3">
                     <div class="col-2">
                         <img class="img-fluid" src="{{ asset ("images/index/retro.png") }}" alt="" width="150px"></div>
                     <div class="col-10">
                         <div class="row h-100">
-                            <div class="col-4"><h4>{{ item.product.proName }}</h4>
+                            <div class="col-4"><h4>{{ item.proName }}</h4>
                             </div>
                             <div class="col-1 offset-7"><h5>{{ item.stock.unitprice }} €</h5>
                             </div>
@@ -37,16 +40,16 @@
                                 <div class="col-2">
 
                                     {# Select quantity / Boucle #}
-                                    <select id="quantityCart">
-                                        <option> Qté: {{ item.quantity }}</option>
-                                        {% for i in 1..10 %}
-                                            {% if item.quantity != i %}
-                                                <option value="{{ i }}"> Qté: {{ i }}</option>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </select>
+{#                                    <select id="quantityCart">#}
+{#                                        <option> Qté: {{ quantity }}</option>#}
+{#                                      {% for i in 1..10 %}#}
+{#                                           {% if quantity != i %}#}
+{#                                                <option value="{{ i }}"> Qté: {{ i }}</option>#}
+{#                                            {% endif %}#}
+{#                                        {% endfor %}#}
+{#                                    </select>#}
                                 </div>
-                                <div class="col-2"><a href="{{ path('cart_remove', {'idproduct': 1 , 'idstock' : 1  }) }}"
+                                <div class="col-2"><a href="{{ path('cart_remove', {'idproduct': item.id , 'idstock' : 1  }) }}"
                                                       class="small">
                                         Supprimer
                                     </a></div>
@@ -69,7 +72,7 @@
                     <p> Sous Total ({{ items|length }} articles) :</p>
                 </div>
                 <div class="col-1">
-                    <h4> €</h4>
+                    <h4>{{ total }} €</h4>
                 </div>
             </div>
 
@@ -158,7 +161,7 @@
                         <div class="col-12 p-0">
 
                             <div class="card card-header text-center">
-                                <h5 class="card-title">Sous Total ({{ items|length }} articles : €
+                                <h5 class="card-title">Sous Total ({{ items|length }} articles : {{ total }} €
                                     )</h5>
 
                                 {% if is_granted('ROLE_USER') %}

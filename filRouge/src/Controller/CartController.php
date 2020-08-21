@@ -16,13 +16,25 @@ class CartController extends AbstractController
      * @param CartService $cartService
      * @return Response
      */
-    public function index(CartService $cartService)
+    public function index( CartService $cartService,StockRepository $stockRepository)
     {
 
-        return $this->render('cart/index.html.twig', [
-            'items' => $cartService->getFullCart(),
 
-            //'total' => $cartService->total(),
+   foreach ($cartService->getFullCart() as $key=>$value){
+            $itemResult [] = $value['product'];
+            $stockResult[] = $value['stock'];
+            $qte[] = $value['quantity'];
+
+        }
+dd($qte);
+
+
+        return $this->render('cart/index.html.twig', [
+            'items' => $itemResult,
+//            'stock' => $stockResult,
+//            'quantity' => $stockResult,
+
+            'total' => $cartService->total(),
             //'CartNotification'=>sizeof($cartService->getFullCart())
 
         ]);
@@ -44,14 +56,15 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/remove/{id}",name ="cart_remove")
-     * @param $id
+     * @Route("/cart/remove/{idproduct}/{idstock}",name ="cart_remove")
+     * @param int $idproduct
+     * @param int $idstock
      * @param CartService $cartService
      * @return RedirectResponse
      */
-    public function remove($id, CartService $cartService)
+    public function remove(int $idproduct,int $idstock, CartService $cartService)
     {
-        $cartService->remove($id);
+        $cartService->remove($idproduct,$idstock);
 
         return $this->redirectToRoute("cart");
     }
