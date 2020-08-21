@@ -61,9 +61,9 @@ class CartService
         /* boucle sur la panier et attribut un tableau des valeur du produit et sa quantité */
 
 
-        foreach ($panier as $idproduct => $item) {        
-             foreach ($item as $idstock => $qte) {
-             
+        foreach ($panier as $idproduct => $item) {
+            foreach ($item as $idstock => $qte) {
+
                 $panierWithData[] = [
                     'product' => $this->productRepository->find($idproduct),
                     /*
@@ -76,7 +76,7 @@ class CartService
                 ];
             }
         }
-        return (object) $panierWithData;
+        return (object)$panierWithData;
     }
 
     /**
@@ -100,18 +100,26 @@ class CartService
      * @return float
      */
 
+    public function total(): float
+    {
+        $total = 0;
+        /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
+        foreach ($this->getFullCart() as $item) {
+            $total += $item['stock']->getUnitPrice() * $item['quantity'];
+        }
+        return $total;
+    }
 
+    public function update(int $idproduct, int $idstock, int $qte)
+    {
+        $panier = $this->session->get('panier', []);
 
-     public function total(): float
-     {
-         $total = 0;
-         /* Boucle chaque element du panier, recupere le prix grace a la liaison product/Stock  * quantité */
-         foreach ($this->getFullCart() as $item) {
-             $total += $item['stock']->getUnitPrice() * $item['quantity'];
-         }
-         return $total;
-     }
+        if (!empty($panier[$idproduct][$idstock])) {
+            $panier[$idproduct][$idstock] = $qte;
+        }
 
-
+        /* transmision du tableau $panier dans la variable 'panier" */
+        $this->session->set('panier', $panier);
+    }
 
 }

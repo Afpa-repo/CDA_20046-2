@@ -26,7 +26,6 @@ class CartController extends AbstractController
             $qte[] = $value['quantity'];
 
         }
-dd($qte);
 
 
         return $this->render('cart/index.html.twig', [
@@ -68,6 +67,9 @@ dd($qte);
 
         return $this->redirectToRoute("cart");
     }
+
+
+//    public function
 
 
 }

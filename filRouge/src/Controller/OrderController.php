@@ -38,8 +38,10 @@ class OrderController extends AbstractController
     public function load(EntityManagerInterface $manager, CartService  $cartService)
     {
 
-$cartService = $cartService->getFullCart();
 
+
+$cartService = $cartService->getFullCart();
+dd($cartService);
         $date = new \DateTime();
         $dateShipping = $date->add(new \DateInterval('P1Y'));
 
@@ -56,7 +58,6 @@ $cartService = $cartService->getFullCart();
         foreach($cartService as $key => $value) {
             
                 $orderDetail = new OrderDetail($key);
-
 
         //dd($value["stock"]);
                 $orderDetail->setProduct($value["product"]);
