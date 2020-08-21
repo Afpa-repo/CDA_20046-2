@@ -74,64 +74,66 @@
             </div>
         </div>
 
-
-    <div class="col-8">
+<form method="post" class="formulaire">
+    <div class="form-group col-8">
         <div class="row">
             <div class="col-9">
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ product.proName }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{defaultprice }} €</td>
-            </tr>
-            <tr>
-                <th>Format</th>
-                    <td>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-outline-light active">
-                            <input type="radio" name="format" id="radio-format-1" autocomplete="off" checked=""> A3
-                        </label>
-                        <label class="btn btn-outline-light">
-                            <input type="radio" name="format" id="radio-format-2" autocomplete="off"> A2
-                        </label>
-                        <label class="btn btn-outline-light">
-                            <input type="radio" name="format" id="radio-format-2" autocomplete="off"> A1
-                        </label>
-                        </div>
-                    </td>
-            </tr>
+                <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ product.proName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix</th>
 
-            <tr>
-                <th>Libellé</th>
-                <td>{{ product.proLib }}</td>
-            </tr>
-            <tr>
-                <th>Support</th>
-                    <td>
-                       <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-outline-light active">
-                            <input type="radio" name="materiaux" id="radio-materiaux-1" autocomplete="off" checked=""> Papier
+                    </tr>
+                    <tr>
+                        <th>Format</th>
+                        <td>
+                            {# <td>{{defaultprice }} €  {% if app.request.method == POST and </td> #}
+                        <div class="form-checkformat btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="form-check-label btn btn-outline-light active">
+                            <input class="form-check-input" type="radio" name="format" id="radio-format-1" value="A3" autocomplete="off" checked=""> A3
                         </label>
-                        <label class="btn btn-outline-light">
-                            <input type="radio" name="materiaux" id="radio-materiaux-2" autocomplete="off"> Toile
+                            <label class="form-check-label btn btn-outline-light">
+                            <input class="form-check-input" type="radio" name="format" id="radio-format-2" value="A2" autocomplete="off"> A2
                         </label>
-                        <label class="btn btn-outline-light">
-                            <input type="radio" name="materiaux" id="radio-materiaux-2" autocomplete="off"> Bois
+                            <label class="form-check-label btn btn-outline-light">
+                            <input class="form-check-input" type="radio" name="format" id="radio-format-3" value="A1" autocomplete="off"> A1
                         </label>
-                        <label class="btn btn-outline-light">
-                            <input type="radio" name="materiaux" id="radio-materiaux-2" autocomplete="off"> Métal
+                        {# <input type="button" id="btn" value="Show Selected Value"> #}
+                        </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Libellé</th>
+                        <td>{{ product.proLib }}</td>
+                    </tr>
+                    <tr>
+                        <th>Support</th>
+                        <td>
+                       <div class="form-checkmat btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="form-check-label btn btn-outline-light active">
+                            <input class="form-check-input" type="radio" name="materiaux" id="radio-materiaux-1" value="Papier" autocomplete="off" checked=""> Papier
+                        </label>
+                            <label class="form-check-label btn btn-outline-light">
+                            <input class="form-check-input" type="radio" name="materiaux" id="radio-materiaux-2" value="Toile" autocomplete="off"> Toile
+                        </label>
+                            <label class="btn btn-outline-light">
+                            <input class="form-check-input" type="radio" name="materiaux" id="radio-materiaux-3" value="Bois" autocomplete="off"> Bois
+                        </label>
+                            <label class="form-check-label btn btn-outline-light">
+                            <input class="form-check-input" type="radio" name="materiaux" id="radio-materiaux-4" value="Métal" autocomplete="off"> Métal
                         </label>
                             {# <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
                             <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
                             <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
                             <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem"> #}
-                    </td>
-            </tr>
-            <tr>
+                        </td>
+                    </tr>
+                <tr>
                 <th>Evaluation</th>
                 <td>{{ product.proNote }}
                 {# <i class="ri-star-line"></i></td> #}
@@ -140,22 +142,33 @@
             <tr>
                 <th>Quantité</th>
                 <td>
-                    <input type="number" value="1" min="0" max="100" step="1" class="border border-light rounded-0 p-1"/>
+                    <label for="quantitySelect">
+                    <input class="form-checkqte-input border border-light rounded-0 p-1" type="number" id="quantite" value="1" min="0" max="100" step="1"/>
+                    </label>
                 </td>
             </tr>
         </tbody>
-    </table>
+        </table>
             <a class="btn btn-outline-light" href="{{ path('product_index') }}">Retour à la liste</a>
             {# <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a> #}
 
+
+            {# {{ path('cart_add', {'idproduct': product.id, 'idstock' : idstock , "qte" : qte }) }} #}
+
+{#            <input type="button" class="btn btn-danger" id="btn" href="{{ path('cart_add', {'id': product.id}) }}" value="Ajouter au panier"></input>#}
+
             <a class="btn btn-danger" href="{{ path('cart_add', {'idproduct': 4, 'idstock' : 1 , "qte" : 2 }) }}">Ajouter au panier</a>
+
             {# <a class="btn btn-danger" href="{{ path('cart_add', {'id': product.id,'stockid' : stock.id}) }}">Ajouter au panier</a> #}
 
             {# {{ include('product/_delete_form.html.twig') }} #}
-    {# </div>  #}
+            {# </div>  #}
+            </div>
+        </div>
     </div>
-    </div>
-   </div>
+</form>
+
+   {# Autres vues #}
     <div class="row col-12 mt-2">
         <div class="card text-center col-2 mr-2">
             <div class="card-header">
@@ -178,6 +191,7 @@
             </div>
         </div>
     </div>
+
 
 {# Description produit #}
     <div class="row col-12 mt-2">
@@ -250,5 +264,24 @@
   </a>  
   </div>#}
 </div>
-
+    <script>
+        const btn = document.querySelector('#btn'); 
+            btn.onclick = function () {
+                let value=[]  //créa tableau
+                    const rbs1 = document.querySelectorAll('input[name="format"]');  //décla constante
+                    const rbs2 = document.querySelectorAll('input[name="materiaux"]');
+                    const rbs3 = document.getElementById("quantite").value;
+                        let tab=[rbs1,rbs2] //mise en tableau
+                        for (const rbs of tab) { //lecture
+                            for (const rb of rbs) {//renommage
+                                if (rb.checked) {
+                                value.push(rb.value);
+                                break;
+                        }
+                            }
+                                }
+                                alert(value + rbs3);
+                                window.location.replace("../cart/add/" +value[1]+ "/" +value[0]+ "/" +rbs3)
+            };
+    </script>
 {% endblock %}

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Data\SearchData;
+use App\Form\SearchForm;
 use App\Repository\ProductRepository;
 use App\Repository\StockRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,40 +34,28 @@ class ProductController extends AbstractController
             asort($unitPrice);
         }
         $firstrow = array_shift($unitPrice);
-        // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
+        
 
-        $query  = $this->getDoctrine()->getRepository(Product::class)->findAll();
-        $product  = $paginator->paginate(
+        $query = $this->getDoctrine()->getRepository(Product::class)->findAll();
+        $product = $paginator->paginate(
             $query, // Requête contenant les données à paginer (ici nos produits)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            4 // Nombre de résultats par page
+            6 // Nombre de résultats par page
         );
-        // dd($pagination);
+
+
+        $data = new SearchData();
+        $data->page = $request->get('page', 1);
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+        $products = $productRepository->findSearch($data);
+
         return $this->render('product/index.html.twig', [
-            // 'products' => $productRepository->findAll(),
+       
             'product' => $product,
-            'minprice' => $firstrow[0]
-        ]);
-    }
-
-
-
-    /**
-     * 
-     */
-    public function paginate(Request $request, PaginatorInterface $paginator) // Nous ajoutons les paramètres requis
-    {
-        // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
-        $query  = $this->getDoctrine()->getRepository(Product::class)->findAll();
-
-        $pagination  = $paginator->paginate(
-            $query, // Requête contenant les données à paginer (ici nos produits)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            4 // Nombre de résultats par page
-        );
-        dd($pagination);
-        return $this->render('product/index.html.twig', [
-            'pagination' => $pagination,
+            'minprice' => $firstrow[0],
+            'products' => $products,
+            'form' => $form->createView()
         ]);
     }
 
@@ -94,6 +84,8 @@ class ProductController extends AbstractController
         ]);
     }
 
+
+// Association prix
     /**
      * @Route("/{id}", name="product_show", methods={"GET"})
      * @param int $id
@@ -104,13 +96,43 @@ class ProductController extends AbstractController
     public function show(int $id, Product $product, StockRepository $stockRepository): Response
     {
 
+        $stockRepository = $stockRepository->findall();
+
+        // $unitPrice = $stockRepository->find(1)->getUnitPrice();
+        foreach ($stockRepository as $item) {
+            //  dd($item);
+            $materialid= $item->getmaterial()->getid();
+            $formatid= $item->getformat()->getid();
+
+// $radio1_value
+// $radio2_value
+
+
+//             if($materialid = $radio1_value && $formatId = $radio2_value ) {
+
+    //     if ($formulaire->isSubmitted()) {
+    //     return $this->redirectToRoute('product_index');
+    // }
+
+
+//             }
+//             // $materialId[$key] = [$item1->getMaterialId()];
+//             // $formatId[$key] = [$item2->getFormatId()];
+            
+        }
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            'defaultprice' => $stockRepository->find(1)->getUnitPrice(),
-            'stock' => $stockRepository->findAll()
+            'defaultprice' =>1,
+            // 'idstock' => $combo->getUnitPrice()
+
+                // 'idstock'=> $idstock,
+                // 'qte'=> $qte
+
         ]);
     }
+
+
 
     /**
      * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
@@ -151,4 +173,6 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('product_index');
     }
+
+
 }
