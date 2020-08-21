@@ -3,29 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Address;
-use App\Entity\Material;
 use App\Entity\Order;
 use App\Entity\OrderDetail;
-use App\Entity\Product;
-use App\Entity\Stock;
 use App\Entity\User;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\Cart\CartService;
-use Doctrine\ORM\EntityManagerInterface;
+
 
 class OrderController extends AbstractController
 {
-    protected $productRepository;
-    protected $userRepository;
-
-    public function __construct(ProductRepository $productRepository, UserRepository $userRepository)
-    {
-        $this->productRepository = $productRepository;
-        $this->userRepository = $userRepository;
-    }
     /**
      * @Route("/order", name="order")
      */
@@ -36,20 +27,22 @@ class OrderController extends AbstractController
         ]);
     }
 
-    
-    public function load(EntityManagerInterface $manager, CartService $cartService) 
+    protected $productRepository;
+    protected $userRepository;
+
+    public function __construct(ProductRepository $productRepository, UserRepository $userRepository)
     {
-
-        $cartService = $cartService;
-
-        //dd();
-
+        $this->productRepository = $productRepository;
+        $this->userRepository = $userRepository;
+    }
+    public function load(EntityManagerInterface $manager, CartService  $cartService)
+    {
 
         $date = new \DateTime();
         $dateShipping = $date->add(new \DateInterval('P1Y'));
 
         $order = new Order();
-        $user = $this->userRepository->find(1);
+        $user =$this->userRepository->find(1);
 
         $order->setUser($user);
         $order->setAddress($user->getAdress());
@@ -62,7 +55,6 @@ class OrderController extends AbstractController
         foreach($cartService as $key) {
                 $orderDetail = new OrderDetail($key);
 
-                $orderDetail->setProduct($cartService->product);
 
                 $orderDetail->setOrders($order);
                 $orderDetail->setSupplier($cartService->stock->getMaterial()->getSupplier());
@@ -72,27 +64,33 @@ class OrderController extends AbstractController
                 $orderDetail->setOrderdetailDiscount(rand(1, 10) / 10);
                 $orderDetail->setOrderdetailTva(rand(0,100));
 
-                $manager->persist($orderDetail);
-        }
-
-        $manager->persist($order);
-
-        $manager->flush();
-
-    }
-
-    /**
-     * @Route("/order/submit", name="order_submit")
-     */
-    public function submit(EntityManagerInterface $manager, CartService $cartService)
-    {
+            }
 
 
-        $this->load($manager, $cartService);
+$manager->persist($order);
+
+$manager->flush();
+
+}
+
+/**
+ * @Route("/order/submit", name="order_submit")
+ * @param EntityManagerInterface $manager
+ * @param CartService $cartService
+ * @return Response
+ */
+public
+function submit(EntityManagerInterface $manager, CartService $cartService)
+{
 
 
-        return $this->render('order/index.html.twig', [
-            'controller_name' => 'OrderController',
-        ]);
-    }
+
+
+    $this->load($manager, $cartService);
+
+
+    return $this->render('order/index.html.twig', [
+        'controller_name' => 'OrderController',
+    ]);
+}
 }
