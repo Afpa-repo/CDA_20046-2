@@ -6,6 +6,7 @@ use App\Repository\StockRepository;
 use App\Service\Cart\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,25 +17,16 @@ class CartController extends AbstractController
      * @param CartService $cartService
      * @return Response
      */
-    public function index( CartService $cartService,StockRepository $stockRepository)
+    public function index(CartService $cartService, StockRepository $stockRepository)
     {
-
-
-   foreach ($cartService->getFullCart() as $key=>$value){
-            $itemResult [] = $value['product'];
-            $stockResult[] = $value['stock'];
-            $qte[] = $value['quantity'];
-
+        foreach ($cartService->getFullCart() as  $items) {
+           $item[] = $items;
         }
 
-
         return $this->render('cart/index.html.twig', [
-            'items' => $itemResult,
-//            'stock' => $stockResult,
-//            'quantity' => $stockResult,
-
+            'items' => $item,
             'total' => $cartService->total(),
-            //'CartNotification'=>sizeof($cartService->getFullCart())
+            'CartNotification'=>sizeof($item)
 
         ]);
     }
@@ -48,9 +40,9 @@ class CartController extends AbstractController
      * @param CartService $cartService
      * @return RedirectResponse
      */
-    public function add(int $idproduct,int $idstock,int $qte,StockRepository $stockRepository, CartService $cartService)
+    public function add(int $idproduct, int $idstock, int $qte, StockRepository $stockRepository, CartService $cartService)
     {
-        $cartService->add($idproduct,$idstock,$qte);
+        $cartService->add($idproduct, $idstock, $qte);
         return $this->redirectToRoute("cart");
     }
 
@@ -61,15 +53,45 @@ class CartController extends AbstractController
      * @param CartService $cartService
      * @return RedirectResponse
      */
-    public function remove(int $idproduct,int $idstock, CartService $cartService)
+    public function remove(int $idproduct, int $idstock, CartService $cartService)
     {
-        $cartService->remove($idproduct,$idstock);
+        $cartService->remove($idproduct, $idstock);
 
         return $this->redirectToRoute("cart");
     }
 
+    /**
+     * @Route("/cart/update/{idproduct}/{idstock}/{qte}", name="cart_update")
+     * @param int $idproduct
+     * @param int $idstock
+     * @param int $qte
+     * @param CartService $cartService
+     * @return RedirectResponse
+     */
+    public function update(int $idproduct, int $idstock, int $qte, CartService $cartService,Request $request)
+    {
+/*
+        $cart = new Cart();
+        $form = $this->createForm(TaskType::class, $task);
 
-//    public function
+        if ($request->isMethod('POST')) {
+            $form->submit($request->request->get($form->getName()));
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                // perform some action...
+
+                return $this->redirectToRoute('task_success');
+            }
+
+
+
+*/
+
+
+
+        $cartService->update($idproduct, $idstock, $qte);
+        return $this->redirectToRoute("cart");
+    }
 
 
 }
