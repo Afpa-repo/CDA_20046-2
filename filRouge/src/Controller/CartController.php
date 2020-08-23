@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Repository\StockRepository;
 use App\Service\Cart\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,19 +17,36 @@ class CartController extends AbstractController
     /**
      * @Route("/cart", name="cart")
      * @param CartService $cartService
+     * @param Request $request
      * @return Response
      */
-    public function index(CartService $cartService, StockRepository $stockRepository)
+    public function index(CartService $cartService, Request $request)
     {
-        foreach ($cartService->getFullCart() as  $items) {
-           $item[] = $items;
+        $defaultData = ['message' => 'Type your message here'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('quantity', NumberType::class)
+            ->add('save', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
         }
+
+
+
+            foreach ($cartService->getFullCart() as $items) {
+                $item[] = $items;
+            }
+
 
         return $this->render('cart/index.html.twig', [
             'items' => $item,
             'total' => $cartService->total(),
-            'CartNotification'=>sizeof($item)
-
+            'CartNotification' => sizeof($item),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -68,27 +87,8 @@ class CartController extends AbstractController
      * @param CartService $cartService
      * @return RedirectResponse
      */
-    public function update(int $idproduct, int $idstock, int $qte, CartService $cartService,Request $request)
+    public function update(int $idproduct, int $idstock, int $qte, CartService $cartService)
     {
-/*
-        $cart = new Cart();
-        $form = $this->createForm(TaskType::class, $task);
-
-        if ($request->isMethod('POST')) {
-            $form->submit($request->request->get($form->getName()));
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                // perform some action...
-
-                return $this->redirectToRoute('task_success');
-            }
-
-
-
-*/
-
-
-
         $cartService->update($idproduct, $idstock, $qte);
         return $this->redirectToRoute("cart");
     }
