@@ -22,24 +22,25 @@ class CartController extends AbstractController
      */
     public function index(CartService $cartService, Request $request)
     {
-        $defaultData = ['message' => 'Type your message here'];
-        $form = $this->createFormBuilder($defaultData)
+
+        $form = $this->createFormBuilder()
             ->add('quantity', NumberType::class)
-            ->add('save', SubmitType::class)
+            ->add('update', SubmitType::class)
             ->getForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $data = $form->getData();
+            $quantity = $data['quantity'];
 
+            return $this->redirect($this->generateUrl('cart_update', array('idproduct' => 1,
+                'idstock' => 1, 'qte' => $quantity)));
         }
 
-
-
-            foreach ($cartService->getFullCart() as $items) {
-                $item[] = $items;
-            }
+        $item = [];
+        foreach ($cartService->getFullCart() as $items) {
+            $item[] = $items;
+        }
 
 
         return $this->render('cart/index.html.twig', [

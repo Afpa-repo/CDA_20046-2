@@ -21,7 +21,6 @@
 
             {# Boucle pour display la liste des articles dans le panier #}
             {% for i in 0..items|length-1 %}
-
                 <div class="row border-bottom mt-3">
                     <div class="col-2">
                         <img class="img-fluid" src="{{ asset ("images/index/retro.png") }}" alt="" width="150px">
@@ -34,21 +33,15 @@
                             </div>
                             <div class="col-2"><h5>{{ items[i].stock.format.formatName }} </h5>
                             </div>
-                            <div class="col-1 "><h5>{{ items[i].stock.unitprice }} €</h5>
+                            <div class="col-2"><h5>{{ items[i].quantity }} </h5>
+                            </div>
+                            <div class="col-1 offset-1"><h5>{{ items[i].stock.unitprice }} €</h5>
 
                             </div>
                             <div class="row mt-5 pt-4">
                                 <div class="col-2">
-
-                                    {# Select quantity / Boucle #}
-                                    <form action="">
-                                        <label for="quantityCart"></label>{#<input id="quantityCart" type="number"
-                                                                                 class="form-control form-control-sm"
-                                                                                 value="{{ items[i].quantity }}">#}
-
-
                                         {{ form(form) }}
-                                    </form>
+
                                 </div>
 
 

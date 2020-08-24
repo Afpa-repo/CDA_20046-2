@@ -60,7 +60,6 @@ class CartService
         $panierWithData = [];
         /* boucle sur la panier et attribut un tableau des valeur du produit et sa quantité */
 
-
         foreach ($panier as $idproduct => $item) {
             foreach ($item as $idstock => $qte) {
 
@@ -69,7 +68,6 @@ class CartService
                     /*
                     $formatmaterialID = La valeur que retourne le ajax a Dan
                       'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
-
                     'stock' => $this->stockRepository->find($idstock),
                     'quantity' => $qte,
 //              'userid' => ,
