@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Picture;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Data\SearchData;
@@ -11,6 +12,7 @@ use App\Repository\StockRepository;
 use App\Repository\FormatRepository;
 use App\Repository\MaterialRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,13 +40,6 @@ class ProductController extends AbstractController
         $firstrow = array_shift($unitPrice);
         
 
-        $query = $this->getDoctrine()->getRepository(Product::class)->findAll();
-        $product = $paginator->paginate(
-            $query, // Requête contenant les données à paginer (ici nos produits)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            6 // Nombre de résultats par page
-        );
-
 
         $data = new SearchData();
         $data->page = $request->get('page', 1);
@@ -52,9 +47,15 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
 
-        return $this->render('product/index.html.twig', [
-       
-            'product' => $product,
+
+        $query = $this->getDoctrine()->getRepository(Product::class)->findAll();
+        $products = $paginator->paginate(
+            $query, // Requête contenant les données à paginer (ici nos produits)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+        return $this->render('product/index.html.twig', [       
+
             'minprice' => $firstrow[0],
             'products' => $products,
             'form' => $form->createView()
@@ -73,6 +74,26 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Récupération des img transmises
+            $images = $form->get('picture')->getData();
+
+            // Boucle sur les images
+            foreach($images as $image) {
+                // Génération d'un nouveau nom de fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                // On stocke l'image dans la bdd (son nom)
+                $img = new Picture();
+                $img->setName($fichier);
+                $product->addPicture($img);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
@@ -224,5 +245,29 @@ public function ajax($format, $matos, StockRepository $stockRepository){
         return $this->redirectToRoute('product_index');
     }
 
+    /**
+     * @Route("/delete/picture/{id}", name="picture_prod_delete", methods={"DELETE"})
+     */
+    public function deletePicture(Picture $picture, Request $request) {
+        $data = json_decode($request->getContent(), true);
+
+        // On vérifie si le token est valide
+        if($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])){
+            // On va chercher l'image là où elle est stockée
+            $name = $picture->getName();
+            // On supprime le fichier
+            unlink($this->getParameter('images_directory').'/'.$name);
+
+            // On supprime l'entrée de la base
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($picture);
+            $em->flush();
+
+            // On répond en json
+            return new JsonResponse(['success' => 1]);
+        }else {
+            return new JsonResponse(['error' => 'Token invalide'], 400);
+        }
+    }
 
 }

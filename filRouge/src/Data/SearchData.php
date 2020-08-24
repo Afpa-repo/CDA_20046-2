@@ -14,22 +14,12 @@ class SearchData
     /**
      * @var string
      */
-    public $q = '';
+    public $recherche = '';
 
     /**
      * @var Theme[]
      */
-    public $categories = [];
-
-    /**
-     * @var null|integer
-     */
-    public $max;
-
-    /**
-     * @var null|integer
-     */
-    public $min;
+    public $themes = [];
 
     /**
      * @var boolean

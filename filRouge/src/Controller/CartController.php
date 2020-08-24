@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\StockRepository;
 use App\Service\Cart\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -22,31 +23,39 @@ class CartController extends AbstractController
      */
     public function index(CartService $cartService, Request $request)
     {
-        $defaultData = ['message' => 'Type your message here'];
-        $form = $this->createFormBuilder($defaultData)
-            ->add('quantity', NumberType::class)
-            ->add('save', SubmitType::class)
-            ->getForm();
-        $form->handleRequest($request);
+        $renderform = [];
+        $item = [];
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        foreach ($cartService->getFullCart() as $key => $items) {
 
-            $data = $form->getData();
+            $item[] = $items;
 
-        }
+            $stockid[$key] =  $items['stock']->getid();
+            $idproduct[$key] =$items['product']->getid();
 
+            $form[$key] = $this->createFormBuilder()
+                ->add('quantity', NumberType::class)
+                ->add('update', SubmitType::class)
+                ->getForm();
 
+            $form[$key]->handleRequest($request);
 
-            foreach ($cartService->getFullCart() as $items) {
-                $item[] = $items;
+            $renderform[$key] = $form[$key]->createView();
+
+            if ($form[$key]->isSubmitted() && $form[$key]->isValid()) {
+                $data = $form[$key]->getData();
+                $quantity[$key] = $data['quantity'];
+
+                return $this->redirect($this->generateUrl('cart_update', array('idproduct' => $idproduct[$key],
+                    'idstock' => $stockid[$key], 'qte' => $quantity[$key])));
             }
-
+        }
 
         return $this->render('cart/index.html.twig', [
             'items' => $item,
             'total' => $cartService->total(),
             'CartNotification' => sizeof($item),
-            'form' => $form->createView(),
+            'form' => $renderform
         ]);
     }
 
@@ -55,11 +64,10 @@ class CartController extends AbstractController
      * @param int $idproduct
      * @param int $idstock
      * @param int $qte
-     * @param StockRepository $stockRepository
      * @param CartService $cartService
      * @return RedirectResponse
      */
-    public function add(int $idproduct, int $idstock, int $qte, StockRepository $stockRepository, CartService $cartService)
+    public function add(int $idproduct, int $idstock, int $qte, CartService $cartService)
     {
         $cartService->add($idproduct, $idstock, $qte);
         return $this->redirectToRoute("cart");

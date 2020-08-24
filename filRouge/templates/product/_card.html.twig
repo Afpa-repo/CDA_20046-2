@@ -1,18 +1,20 @@
-<div
-	class="card">
-	<img class="img-fluid w-60 mt-4" src="{{ asset ("images/index/catalogue@2x.png") }}" alt="">
-	<div
-		class="card-body">
-		<h5 class="card-title">{{ product.ProName}}</h5>
-		<div class="card-title">
-			{# {{ product.ProPrice }} #}
+<div class="card">
+	<img class="img-fluid w-60 mt-4" src="{{ asset ("https://picsum.photos/436/430") }}" alt="">
+	<div class="card-body">
+		<h5 class="card-title">{{ product.ProName }}</h5>
+		<div class="card-title">{# {{ product.unit_price }} #}
 			{# {% if product.promo %} #}
-        {# {% if product.promo %}
-				<div class="text text-warning"> Promo !</div>
-		{% endif %} #}
+			{# {% if product.promo %}
+																																																	<div class="text text-warning"> Promo !</div>
+																																															{% endif %} #}
+		</div>
+		<p class="text text-muted">{{ product.ProDescription|striptags }}</p>
+		<p class="text-danger">
+			<b>À partir de ... €</b>
+		</p>
+		<a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-primary">Détails</a>
+
+		<p class="text-muted text-primary text-italic mt-3">#{{ product.theme.themeName }}</p>
+
 	</div>
-	<p class="text text-muted">{{ product.ProDescription|striptags }}</p>
 </div>
-{% for c in product.theme %}
-	<em class="text-muted text-primary"></em>
-{% endfor %}</div></div></div>

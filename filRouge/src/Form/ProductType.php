@@ -32,36 +32,7 @@ class ProductType extends AbstractType
                     ]),
                 ]
             ])
-            ->add('proStockAle' , TextType::class, [
-                'label' => 'Alerte Stock',
-                'attr' => [
-                    'placeholder' => '',
-                ],
-            ])
-            ->add('proUnitPrice' , TextType::class, [
-                'label' => 'Prix unitaire',
-                'attr' => [
-                    'placeholder' => '',
-                ],
-            ])
-            ->add('ProUnitStockPhy' , TextType::class, [
-                'label' => 'Unité en commande',
-                'attr' => [
-                    'placeholder' => '',
-                ],
-            ])
-            ->add('proUnitOnOrder' , TextType::class, [
-                'label' => 'Unité en commande',
-                'attr' => [
-                    'placeholder' => '',
-                ],
-            ] )
-            ->add('proDiscontinued' , TextType::class, [
-                'label' => 'Discontinued',
-                'attr' => [
-                    'placeholder' => '',
-                ],
-            ])
+
             ->add('proNote' , TextType::class, [
                 'label' => 'Note du produit',
                 'attr' => [
@@ -81,33 +52,19 @@ class ProductType extends AbstractType
                 ],
             ])
 
-            ->add('material', EntityType::class, [
-                'class' => Material::class,
-                'label' => "Matériel pour l'affiche",
-                'expanded'  => true,
-                'multiple'  => true,
-                'attr' => [
-                    'placeholder' => '',
-                ],
-            ])
-            ->add('format', EntityType::class, [
-                'class' => Format::class,
-                'label' => 'Format',
-                'expanded' => true,
-                'multiple' => true,
-                'attr' => [
-                    'placeholder' => '',
-                ],
-            ])
-            ->add('theme', EntityType::class, [
+            ->add('Theme', EntityType::class, [
+                'label' => "Theme de l'image",
+                'required' => false,
                 'class' => Theme::class,
-                'label' => "Theme de l'affiche",
-                'expanded'  => true,
-                'multiple'  => true,
-                'attr' => [
-                    'placeholder' => '',
-                ],
             ])
+
+            ->add('picture', FileType::class, [
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false
+            ])
+
 
 ;
     }

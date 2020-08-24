@@ -15,7 +15,7 @@ class Product
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $id;
 
@@ -45,12 +45,6 @@ class Product
     private $orderDetails;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $picture;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Theme::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -61,10 +55,16 @@ class Product
      */
     private $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="product", orphanRemoval=true, cascade={"persist"})
+     */
+    private $picture;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->picture = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,17 +151,6 @@ class Product
         return $this;
     }
 
-    public function getPicture(): ?Picture
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?Picture $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
 
     public function getTheme(): ?Theme
     {
@@ -201,6 +190,41 @@ class Product
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Picture[]
+     */
+    public function getPicture(): Collection
+    {
+        return $this->picture;
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->picture->contains($picture)) {
+            $this->picture[] = $picture;
+            $picture->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->picture->contains($picture)) {
+            $this->picture->removeElement($picture);
+            // set the owning side to null (unless already changed)
+            if ($picture->getProduct() === $this) {
+                $picture->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function setPicture(Picture $image)
+    {
     }
 }
 

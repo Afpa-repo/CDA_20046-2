@@ -6,10 +6,13 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @Vich\Uploadable
  */
 class User implements UserInterface
 {
@@ -59,21 +62,46 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user")
      */
     private $orders;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="user")
      */
     private $role;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="users")
-     */
-    private $picture;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="users")
      */
     private $adress;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="user", fileNameProperty="imageName", size="imageSize")
+     *
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string|null
+     */
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var int|null
+     */
+    private $imageSize;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTimeInterface|null
+     */
+    private $updatedAt;
 
 
     public function __construct()
@@ -175,12 +203,11 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->role;
-        $role_id = $roles ->getID();
+        $role_id = $roles->getID();
 
         if ($role_id == "1") {
             $roles = ["ROLE_USER"];
-        }
-        else  {
+        } else {
             $roles = ["ROLE_ADMIN"];
         }
         return array_unique($roles);
@@ -201,15 +228,68 @@ class User implements UserInterface
         // TODO: Implement eraseCredentials() method.
     }
 
-    public function getPassword() : ?string
+    public function getPassword(): ?string
     {
         return (string)$this->UserPassword;
     }
 
-    public function setPassword(string $password): self {
+    public function setPassword(string $password): self
+    {
         $this->UserPassword = $password;
 
         return $this;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $updatedAt
+     */
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -255,17 +335,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPicture(): ?picture
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?picture $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
 
     public function getAdress(): ?Address
     {
