@@ -56,9 +56,9 @@ class ProductRepository extends ServiceEntityRepository
     public function findSearch(SearchData $search): array
     {
         $query = $this
-            ->createQueryBuilder('p')
-            ->select('c', 'p')
-            ->join('p.categories', 'c');
+            ->createQueryBuilder('p');
+            // ->select('c', 'p')
+            // ->join('p.categories', 'c');
 
         if (!empty($search->q)) {
             $query = $query
@@ -66,11 +66,11 @@ class ProductRepository extends ServiceEntityRepository
                 ->setParameter('q', "%{$search->q}%");
         }
 
-        if (!empty($search->categories)) {
-            $query = $query
-                ->andWhere('c.themeid IN (:categories)')
-                ->setParameter('categories', $search->categories);
-        }
+        // if (!empty($search->categories)) {
+        //     $query = $query
+        //         ->andWhere('c.themeid IN (:categories)')
+        //         ->setParameter('categories', $search->categories);
+        // }
 
         return $query->getQuery()->getResult();
 
