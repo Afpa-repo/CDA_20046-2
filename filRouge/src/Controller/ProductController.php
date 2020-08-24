@@ -40,13 +40,6 @@ class ProductController extends AbstractController
         $firstrow = array_shift($unitPrice);
         
 
-        $query = $this->getDoctrine()->getRepository(Product::class)->findAll();
-        $product = $paginator->paginate(
-            $query, // Requête contenant les données à paginer (ici nos produits)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            6 // Nombre de résultats par page
-        );
-
 
         $data = new SearchData();
         $data->page = $request->get('page', 1);
@@ -54,9 +47,15 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
 
-        return $this->render('product/index.html.twig', [
-       
-            'product' => $product,
+
+        $query = $this->getDoctrine()->getRepository(Product::class)->findAll();
+        $products = $paginator->paginate(
+            $query, // Requête contenant les données à paginer (ici nos produits)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+        return $this->render('product/index.html.twig', [       
+
             'minprice' => $firstrow[0],
             'products' => $products,
             'form' => $form->createView()
