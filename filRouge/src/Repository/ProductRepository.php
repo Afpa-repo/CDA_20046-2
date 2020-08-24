@@ -56,21 +56,21 @@ class ProductRepository extends ServiceEntityRepository
     public function findSearch(SearchData $search): array
     {
         $query = $this
-            ->createQueryBuilder('p');
-            // ->select('c', 'p')
-            // ->join('p.categories', 'c');
+            ->createQueryBuilder('p')
+            ->select('themes', 'p')
+            ->join('p.theme', 'themes');
 
-        if (!empty($search->q)) {
+        if (!empty($search->recherche)) {
             $query = $query
-                ->andWhere('p.proName LIKE :q')
-                ->setParameter('q', "%{$search->q}%");
+                ->andWhere('p.proName LIKE :recherche')
+                ->setParameter('recherche', "%{$search->recherche}%");
         }
 
-        // if (!empty($search->categories)) {
-        //     $query = $query
-        //         ->andWhere('c.themeid IN (:categories)')
-        //         ->setParameter('categories', $search->categories);
-        // }
+        if (!empty($search->themes)) {
+            $query = $query
+                ->andWhere('p.theme IN (:themes)')
+                ->setParameter('themes', $search->themes);
+        }
 
         return $query->getQuery()->getResult();
 
