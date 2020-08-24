@@ -61,7 +61,6 @@ class ProductFixture extends Fixture
             $stock->setDiscontinued(rand(0, 1));
             $stock->setFlag(rand(0, 1));
 
-            $image->setExtension("jpg");
             $image->setName("kek");
             $image->setProduct($product);
 

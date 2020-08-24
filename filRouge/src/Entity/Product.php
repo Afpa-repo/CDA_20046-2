@@ -56,7 +56,7 @@ class Product
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="product", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="product", orphanRemoval=true, cascade={"persist"})
      */
     private $picture;
 

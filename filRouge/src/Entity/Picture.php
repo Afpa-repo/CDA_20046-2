@@ -21,11 +21,6 @@ class Picture
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=15)
-     */
-    private $extension;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -47,22 +42,9 @@ class Picture
         $this->suppliers = new ArrayCollection();
     }
 
-
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getExtension(): ?string
-    {
-        return $this->extension;
-    }
-
-    public function setExtension(string $extension): self
-    {
-        $this->extension = $extension;
-
-        return $this;
     }
 
 

@@ -93,6 +93,7 @@ class ProductController extends AbstractController
                 $img->setName($fichier);
                 $product->addPicture($img);
             }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();

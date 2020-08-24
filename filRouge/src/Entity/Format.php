@@ -52,6 +52,10 @@ class Format
         return $this;
     }
 
+    public function __toString() {
+        return $this->formatName;
+    }
+
     /**
      * @return Collection|Stock[]
      */
