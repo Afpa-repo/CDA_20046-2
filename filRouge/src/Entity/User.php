@@ -66,11 +66,6 @@ class User implements UserInterface
     private $role;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Picture::class, inversedBy="users")
-     */
-    private $picture;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="users")
      */
     private $adress;
@@ -256,17 +251,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPicture(): ?picture
-    {
-        return $this->picture;
-    }
 
-    public function setPicture(?picture $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
 
     public function getAdress(): ?Address
     {

@@ -7,12 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
-use Vich\UploaderBundle\Entity\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PictureRepository::class)
- * @Vich\Uploadable
  */
 class Picture
 {
@@ -29,14 +26,9 @@ class Picture
     private $extension;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="picture")
-     */
-    private $users;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $link;
+    private $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Suppliers::class, mappedBy="picture")
@@ -44,34 +36,15 @@ class Picture
     private $suppliers;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="picture")
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="picture")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $products;
+    private $product;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string
-     */
-    private $image;
-
-    /**
-     * @Vich\UploadableField(mapping="images", fileNameProperty="image")
-     * @var File
-     */
-    private $imageFile;
-
-    /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime
-     */
-
-    private $updatedAt;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
         $this->suppliers = new ArrayCollection();
-        $this->products = new ArrayCollection();
     }
 
 
@@ -92,86 +65,15 @@ class Picture
         return $this;
     }
 
-    public function setImageFile(?File $imageFile = null): void
-    {
-        $this->imageFile = $imageFile;
 
-        if ($imageFile)
-        {
-            $this->updatedAt = new \DateTime('now');
-        }
+    public function getName(): ?string
+    {
+        return $this->name;
     }
 
-    public function getImageFile(): ?File
+    public function setName(string $link): self
     {
-        return $this->imageFile;
-    }
-
-    public function setImage(string $image)
-    {
-        $this->image = $image;
-    }
-
-    public function getImage(): string
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param \DateTime $updatedAt
-     */
-    public function setUpdatedAt(\DateTime $updatedAt): void
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt(): \DateTime
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setPicture($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getPicture() === $this) {
-                $user->setPicture(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getLink(): ?string
-    {
-        return $this->link;
-    }
-
-    public function setLink(string $link): self
-    {
-        $this->link = $link;
+        $this->name = $link;
 
         return $this;
     }
@@ -207,35 +109,19 @@ class Picture
         return $this;
     }
 
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProducts(): Collection
+    public function getProduct(): ?Product
     {
-        return $this->products;
+        return $this->product;
     }
 
-    public function addProduct(Product $product): self
+    public function setProduct(?Product $product): self
     {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->setPicture($this);
-        }
+        $this->product = $product;
 
         return $this;
     }
 
-    public function removeProduct(Product $product): self
-    {
-        if ($this->products->contains($product)) {
-            $this->products->removeElement($product);
-            // set the owning side to null (unless already changed)
-            if ($product->getPicture() === $this) {
-                $product->setPicture(null);
-            }
-        }
+    
 
-        return $this;
-    }
 
 }

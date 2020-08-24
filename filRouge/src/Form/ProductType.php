@@ -109,6 +109,13 @@ class ProductType extends AbstractType
                 ],
             ])
 
+            ->add('picture', FileType::class, [
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false
+            ])
+
 ;
     }
 

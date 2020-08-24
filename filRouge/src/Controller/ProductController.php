@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Picture;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Data\SearchData;
@@ -71,6 +72,25 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Récupération des img transmises
+            $images = $form->get('picture')->getData();
+
+            // Boucle sur les images
+            foreach($images as $image) {
+                // Génération d'un nouveau nom de fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                // On stocke l'image dans la bdd (son nom)
+                $img = new Picture();
+                $img->setName($fichier);
+                $product->addPicture($img);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();

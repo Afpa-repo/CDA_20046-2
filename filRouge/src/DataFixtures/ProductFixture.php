@@ -62,9 +62,8 @@ class ProductFixture extends Fixture
             $stock->setFlag(rand(0, 1));
 
             $image->setExtension("jpg");
-            $image->setLink("http://placeimg.com/640/360/any");
-            $image->setImage("$i.jpg");
-            $image->setupdatedAt(new \DateTime());
+            $image->setName("kek");
+            $image->setProduct($product);
 
             $product->setProName("produit n°$i");
             $product->setProNote($i + 1);
@@ -84,7 +83,6 @@ class ProductFixture extends Fixture
 
             $material->setSupplier($supplier);
 
-            $user->setPicture($image);
             $user->setRole($role);
             $user->setAdress($address);
             $user->setUserLastName("Nom $i");
