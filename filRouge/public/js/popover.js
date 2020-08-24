@@ -7,39 +7,42 @@ else if (window.ActiveXObject) { // IE 6 et antérieurs
 }
 
 
-(function() {
-  var httpRequest;
-  document.getElementById("radio-format-1").addEventListener('change', makeRequest);
 
-  function makeRequest() {
-    httpRequest = new XMLHttpRequest();
 
-    if (!httpRequest) {
-      alert('Abandon :( Impossible de créer une instance de XMLHTTP');
-      return false;
-    }
-    httpRequest.onreadystatechange = alertContents;
-    httpRequest.open('GET', 'show.html.twig');
-    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    httpRequest.send();
-  }
 
-  function alertContents() {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-      if (httpRequest.status === 200) {
-        alert(httpRequest.responseText);
-      } else {
-        alert('Il y a eu un problème avec la requête.');
-      }
-    }
-  }
-})();
+/* function() { */
+//   var httpRequest;
+//   document.getElementById("radio-format-1").addEventListener('change', makeRequest);
+
+//   function makeRequest() {
+//     httpRequest = new XMLHttpRequest();
+
+//     if (!httpRequest) {
+//       alert('Abandon :( Impossible de créer une instance de XMLHTTP');
+//       return false;
+//     }
+//     httpRequest.onreadystatechange = alertContents;
+//     httpRequest.open('GET', 'show.html.twig');
+//     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//     httpRequest.send();
+//   }
+
+//   function alertContents() {
+//     if (httpRequest.readyState === XMLHttpRequest.DONE) {
+//       if (httpRequest.status === 200) {
+//         alert(httpRequest.responseText);
+//       } else {
+//         alert('Il y a eu un problème avec la requête.');
+//       }
+//     }
+//   }
+// })();
 
 
 
 $(function () {
-    $('[data-toggle="popover"]').popover()
-  })
+  $('[data-toggle="popover"]').popover()
+})
 
   // $(document).ready(function(){
   //     $('.formulaire').submit(function(){
@@ -49,8 +52,10 @@ $(function () {
   //       var qte = $('.formCheckQte').val();
 
   //       alert (format + mat + qte);
-    
+
   //     });
 
   //   });
+
+
 

@@ -97,6 +97,20 @@ class ProductController extends AbstractController
      */
     public function show(int $id, Product $product, StockRepository $stockRepository, FormatRepository $formatRepository, MaterialRepository $materialRepository): Response
     {
+// $form = $this->createForm(ProductType::class, $product);
+// $form = $this->handleRequest($request);
+// if ($form->isSubmitted() &&$form->isValid()) {
+//     $this->getDoctrine()->getManager()->flush();
+
+//     return $this->redirectToRoute('product',['id'=>'$product'->get);
+
+// }
+// return $this->render('product/show.html.twig', [
+//     'product' => $product,
+//     'form' => $form->createView(),
+//     ]);
+// }
+
 
             // $stockRepository = $stockRepository->findall();
 
@@ -144,6 +158,29 @@ $firstrow = array_shift($unitPrice);
 
         ]);
     }
+
+/**
+ * @Route("/{id}/{format}/{matos}", name="ajax", methods={"GET"})
+     * @param int $id
+     * @param int $format
+     * @param int $matos
+ */
+public function ajax($format, $matos, StockRepository $stockRepository){
+    if (!empty($format)&&!empty($matos))
+    {
+        $stocks = $stockRepository->findAll();
+        foreach($stocks as $id => $item) {
+            if($item->getMaterial()->getId() == $matos && $item->getFormat()->getId() == $format) {
+
+                $itemPrice = $item->getUnitPrice();
+// dd($itemPrice);
+                return $this->render('product/show.html.twig', [
+                    'price' => $itemPrice,
+                ]);
+            }
+        }
+    }
+}
 
 
 
