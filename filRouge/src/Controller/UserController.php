@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Picture;
 use App\Entity\Role;
 use App\Entity\User;
 
@@ -54,6 +55,7 @@ class UserController extends AbstractController
         ));
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $user->setRole($role);
             $entityManager->persist($user);
