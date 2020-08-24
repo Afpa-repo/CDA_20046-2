@@ -26,7 +26,7 @@ class ProductFixture extends Fixture
             $stock = new Stock();
             $format = new Format();
             $material = new Material();
-            $image = new Picture();
+            $picture = new Picture();
             $role = new Role();
             $theme = new Theme();
             $address = new Address();
@@ -61,8 +61,8 @@ class ProductFixture extends Fixture
             $stock->setDiscontinued(rand(0, 1));
             $stock->setFlag(rand(0, 1));
 
-            $image->setName("kek");
-            $image->setProduct($product);
+            $picture->setName("https://picsum.photos/297/300");
+            $picture->setProduct($product);
 
             $product->setProName("produit n°$i");
             $product->setProNote($i + 1);
@@ -91,7 +91,7 @@ class ProductFixture extends Fixture
             $user->setUserGender("male Alpha");
             $user->setUserEmail("Beuhtatoss$i@gmail.pom");
             $user->setUserPassword(password_hash("motdepasse", PASSWORD_DEFAULT));
-            $user->setImageName('$i.jpg');
+            $user->setImageName('https://picsum.photos/297/300');
             $user->setImageSize(1);
             $user->setUpdatedAt(new \DateTime);
 
