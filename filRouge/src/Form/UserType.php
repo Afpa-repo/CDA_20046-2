@@ -83,6 +83,13 @@ class UserType extends AbstractType
                     'Femme' => 'Femme',
 
                 ]
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'label' => "Votre avatar"
+
+
             ]);
 
 
