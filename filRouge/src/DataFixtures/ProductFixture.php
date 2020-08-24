@@ -91,6 +91,10 @@ class ProductFixture extends Fixture
             $user->setUserGender("male Alpha");
             $user->setUserEmail("Beuhtatoss$i@gmail.pom");
             $user->setUserPassword(password_hash("motdepasse", PASSWORD_DEFAULT));
+            $user->setImageName('$i.jpg');
+            $user->setImageSize(1);
+            $user->setUpdatedAt(new \DateTime);
+
 
             $manager->persist($tag);
             $manager->persist($address);

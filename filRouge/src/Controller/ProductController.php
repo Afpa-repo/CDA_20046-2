@@ -12,6 +12,7 @@ use App\Repository\StockRepository;
 use App\Repository\FormatRepository;
 use App\Repository\MaterialRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -207,5 +208,29 @@ $firstrow = array_shift($unitPrice);
         return $this->redirectToRoute('product_index');
     }
 
+    /**
+     * @Route("/delete/picture/{id}", name="picture_prod_delete", methods={"DELETE"})
+     */
+    public function deletePicture(Picture $picture, Request $request) {
+        $data = json_decode($request->getContent(), true);
+
+        // On vérifie si le token est valide
+        if($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])){
+            // On va chercher l'image là où elle est stockée
+            $name = $picture->getName();
+            // On supprime le fichier
+            unlink($this->getParameter('images_directory').'/'.$name);
+
+            // On supprime l'entrée de la base
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($picture);
+            $em->flush();
+
+            // On répond en json
+            return new JsonResponse(['success' => 1]);
+        }else {
+            return new JsonResponse(['error' => 'Token invalide'], 400);
+        }
+    }
 
 }
