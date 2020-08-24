@@ -14,7 +14,7 @@ class CartService
     protected $session;
     protected $productRepository;
     protected $stockRepository;
-    private $security;
+    protected $security;
 
     /**
      * @param SessionInterface $session
@@ -78,14 +78,10 @@ class CartService
                     'stock' => $this->stockRepository->find($idstock),
                     'quantity' => $qte,
                     'userid' => $users,
-
                 ];
             }
-
         }
-
         return (object)$panierWithData;
-
     }
 
     /**
