@@ -6,6 +6,7 @@ namespace App\Service\Cart;
 use App\Repository\ProductRepository;
 use App\Repository\StockRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Security;
 
 
 class CartService
@@ -13,18 +14,19 @@ class CartService
     protected $session;
     protected $productRepository;
     protected $stockRepository;
+    private $security;
 
     /**
-     *
      * @param SessionInterface $session
      * @param ProductRepository $productRepository
      * @param StockRepository $stockRepository
      */
-    public function __construct(SessionInterface $session, ProductRepository $productRepository, StockRepository $stockRepository)
+    public function __construct(SessionInterface $session, ProductRepository $productRepository, StockRepository $stockRepository, Security $security)
     {
         $this->session = $session;
         $this->productRepository = $productRepository;
         $this->stockRepository = $stockRepository;
+        $this->security = $security;
     }
 
     /**
@@ -53,28 +55,37 @@ class CartService
      * Recuperation du panier complet
      * @return object
      */
+
     public function getFullCart(): object
     {
-        $panier = $this->session->get('panier', []);
 
+        $panier = $this->session->get('panier', []);
+        $users = $this->security->getUser();
         $panierWithData = [];
+
         /* boucle sur la panier et attribut un tableau des valeur du produit et sa quantité */
 
         foreach ($panier as $idproduct => $item) {
             foreach ($item as $idstock => $qte) {
 
                 $panierWithData[] = [
+
                     'product' => $this->productRepository->find($idproduct),
+
                     /*
                     $formatmaterialID = La valeur que retourne le ajax a Dan
                       'unitprice'=> $this->stockRepository->find($formatmaterialID),*/
                     'stock' => $this->stockRepository->find($idstock),
                     'quantity' => $qte,
-//              'userid' => ,
+                    'userid' => $users,
+
                 ];
             }
+
         }
+
         return (object)$panierWithData;
+
     }
 
     /**
