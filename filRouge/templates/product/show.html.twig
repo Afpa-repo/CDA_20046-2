@@ -74,7 +74,7 @@
             </div>
         </div>
 
-<form method="post" class="formulaire">
+<form  class="formulaire">
     <div class="form-group col-8">
         <div class="row">
             <div class="col-9">
@@ -86,22 +86,20 @@
                     </tr>
                     <tr>
                         <th>Prix</th>
-
+                        {# <td>{{ stocks.unitPrice }}</td> #}
                     </tr>
                     <tr>
                         <th>Format</th>
                         <td>
                             {# <td>{{defaultprice }} €  {% if app.request.method == POST and </td> #}
-                        <div class="form-checkformat btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="form-check-label btn btn-outline-light active">
-                            <input class="form-check-input" type="radio" name="format" id="radio-format-1" value="A3" autocomplete="off" checked=""> A3
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        {% for format in formats %}
+                            <label class="label btn btn-outline-light active">
+                            <input class="formCheckFormat" type="radio" name="format" id="radio-format-1" value="{{ format.id }}" autocomplete="off" checked=""> {{ format.formatName }}
                         </label>
-                            <label class="form-check-label btn btn-outline-light">
-                            <input class="form-check-input" type="radio" name="format" id="radio-format-2" value="A2" autocomplete="off"> A2
-                        </label>
-                            <label class="form-check-label btn btn-outline-light">
-                            <input class="form-check-input" type="radio" name="format" id="radio-format-3" value="A1" autocomplete="off"> A1
-                        </label>
+                        {% endfor %}
+
+
                         {# <input type="button" id="btn" value="Show Selected Value"> #}
                         </div>
                         </td>
@@ -114,19 +112,12 @@
                     <tr>
                         <th>Support</th>
                         <td>
-                       <div class="form-checkmat btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="form-check-label btn btn-outline-light active">
-                            <input class="form-check-input" type="radio" name="materiaux" id="radio-materiaux-1" value="Papier" autocomplete="off" checked=""> Papier
+                       <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                          {% for material in materials %}
+                            <label class="label btn btn-outline-light active">
+                            <input class="formCheckMat" type="radio" name="mat" id="radio-mat-1" value="{{ material.id }}" autocomplete="off" checked=""> {{ material.materialName }}
                         </label>
-                            <label class="form-check-label btn btn-outline-light">
-                            <input class="form-check-input" type="radio" name="materiaux" id="radio-materiaux-2" value="Toile" autocomplete="off"> Toile
-                        </label>
-                            <label class="btn btn-outline-light">
-                            <input class="form-check-input" type="radio" name="materiaux" id="radio-materiaux-3" value="Bois" autocomplete="off"> Bois
-                        </label>
-                            <label class="form-check-label btn btn-outline-light">
-                            <input class="form-check-input" type="radio" name="materiaux" id="radio-materiaux-4" value="Métal" autocomplete="off"> Métal
-                        </label>
+                        {% endfor %}
                             {# <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
                             <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
                             <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
@@ -143,7 +134,7 @@
                 <th>Quantité</th>
                 <td>
                     <label for="quantitySelect">
-                    <input class="form-checkqte-input border border-light rounded-0 p-1" type="number" id="quantite" value="1" min="0" max="100" step="1"/>
+                    <input class="formCheckMat input border border-light rounded-0 p-1" type="number" id="quantite" value="1" min="0" max="100" step="1"/>
                     </label>
                 </td>
             </tr>
@@ -155,11 +146,12 @@
 
             {# {{ path('cart_add', {'idproduct': product.id, 'idstock' : idstock , "qte" : qte }) }} #}
 
-{#            <input type="button" class="btn btn-danger" id="btn" href="{{ path('cart_add', {'id': product.id}) }}" value="Ajouter au panier"></input>#}
+            {#<input type="button" class="btn btn-danger" id="btn" href="{{ path('cart_add', {'id': product.id}) }}" value="Ajouter au panier"></input>#}
 
-            <a class="btn btn-danger" href="{{ path('cart_add', {'idproduct': 4, 'idstock' : 1 , "qte" : 2 }) }}">Ajouter au panier</a>
+            {# <a class=" submit btn btn-danger" href="{{ path('cart_add', {'idproduct': 4, 'idstock' : 1 , "qte" : 2 }) }}">Ajouter au panier</a> #}
 
             {# <a class="btn btn-danger" href="{{ path('cart_add', {'id': product.id,'stockid' : stock.id}) }}">Ajouter au panier</a> #}
+            <input class="submit" type="submit" value="Ajouter">
 
             {# {{ include('product/_delete_form.html.twig') }} #}
             {# </div>  #}
@@ -265,7 +257,8 @@
   </div>#}
 </div>
     <script>
-        const btn = document.querySelector('#btn'); 
+
+        {# const btn = document.querySelector('#btn'); 
             btn.onclick = function () {
                 let value=[]  //créa tableau
                     const rbs1 = document.querySelectorAll('input[name="format"]');  //décla constante
@@ -282,6 +275,6 @@
                                 }
                                 alert(value + rbs3);
                                 window.location.replace("../cart/add/" +value[1]+ "/" +value[0]+ "/" +rbs3)
-            };
+            }; #}
     </script>
 {% endblock %}

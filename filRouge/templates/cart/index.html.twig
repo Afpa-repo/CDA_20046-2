@@ -5,16 +5,14 @@
 {% block body %}
 
     {% if items | length > 0 %}
-
-
 <div class="container-fluid">
     <div class="row ">
         <div class="col-8 mt-4">
-
             <div class="row border-bottom ">
                 <div class="col-3">
                     <h5>Votre panier</h5>
                 </div>
+
                 <div class="col-1 offset-8">
                     <h5>Prix</h5>
                 </div>
@@ -22,32 +20,41 @@
             </div>
 
             {# Boucle pour display la liste des articles dans le panier #}
+            {% for i in 0..items|length-1 %}
 
-            {% for item in items %}
                 <div class="row border-bottom mt-3">
                     <div class="col-2">
-                        <img class="img-fluid" src="{{ asset ("images/index/retro.png") }}" alt="" width="150px"></div>
+                        <img class="img-fluid" src="{{ asset ("images/index/retro.png") }}" alt="" width="150px">
+                    </div>
                     <div class="col-10">
                         <div class="row h-100">
-                            <div class="col-4"><h4>{{ item.product.proName }}</h4>
+                            <div class="col-4"><h4>{{ items[i].product.proName }}</h4>
                             </div>
-                            <div class="col-1 offset-7"><h5>{{ item.stock.unitprice }} €</h5>
+                            <div class="col-2 "><h5>{{ items[i].stock.material.materialName }} </h5>
+                            </div>
+                            <div class="col-2"><h5>{{ items[i].stock.format.formatName }} </h5>
+                            </div>
+                            <div class="col-1 "><h5>{{ items[i].stock.unitprice }} €</h5>
+
                             </div>
                             <div class="row mt-5 pt-4">
                                 <div class="col-2">
 
                                     {# Select quantity / Boucle #}
-                                    <select id="quantityCart">
-                                        <option> Qté: {{ item.quantity }}</option>
-                                        {% for i in 1..10 %}
-                                            {% if item.quantity != i %}
-                                                <option value="{{ i }}"> Qté: {{ i }}</option>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </select>
+                                    <form action="">
+                                        <label for="quantityCart"></label>{#<input id="quantityCart" type="number"
+                                                                                 class="form-control form-control-sm"
+                                                                                 value="{{ items[i].quantity }}">#}
+
+
+                                        {{ form(form) }}
+                                    </form>
                                 </div>
-                                <div class="col-2"><a href="{{ path('cart_remove', {'idproduct': 1 , 'idstock' : 1  }) }}"
-                                                      class="small">
+
+
+                                <div class="col-2"><a
+                                            href="{{ path('cart_remove', {'idproduct': items[i].product.id , 'idstock' : items[i].stock.id  }) }}"
+                                            class="small">
                                         Supprimer
                                     </a></div>
                                 <div class="col-3"><a href="#" class="small">
@@ -69,88 +76,86 @@
                     <p> Sous Total ({{ items|length }} articles) :</p>
                 </div>
                 <div class="col-1">
-                    <h4> €</h4>
+                    <h4>{{ total }} €</h4>
                 </div>
             </div>
 
-            <p class="small">Le prix et la disponibilité des articles sur Link sont sujets à changement. Le panier est
+            <p class="small">Le prix et la disponibilité des articles sur Link sont sujets à changement. Le panier
+                est
                 un
                 lieu temporaire où est stockée une liste de vos articles et où se reflète le prix le plus récent de
                 chaque
                 article.
 
-                Vous avez un chèque-cadeau ou un bon de réduction ? Nous vous demanderons de saisir votre code au moment
+                Vous avez un chèque-cadeau ou un bon de réduction ? Nous vous demanderons de saisir votre code au
+                moment
                 de
                 payer.</p>
         </div>
-            {# Si le panier est vide #}
-            {% else %}
+        {# Si le panier est vide #}
+        {% else %}
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-8 mt-4">
 
-            <div class="container-fluid">
-                <div class="row ">
-                    <div class="col-8 mt-4">
-
-                        <div class="row border-bottom ">
-                            <div class="col-3">
-                                <h5>Votre panier</h5>
-                            </div>
-                            <div class="col-1 offset-8">
-                                <h5>Prix</h5>
-                            </div>
-                            <hr>
+                    <div class="row border-bottom ">
+                        <div class="col-3">
+                            <h5>Votre panier</h5>
                         </div>
-
-                        <div class="row border-bottom mt-3">
-                            <div class="col-2">
-                                <p>Le panier est vide ! </p>
-                            </div>
+                        <div class="col-1 offset-8">
+                            <h5>Prix</h5>
                         </div>
+                        <hr>
+                    </div>
 
-                        <div class="row border-bottom mt-5">
-                            <div class="col-3">
-                                <h5>Suggestion :</h5>
-                            </div>
-                            <div class="col-1 offset-8">
-                                <h5>Prix</h5>
-                            </div>
-                        </div>
-                        {# boucle for sur les suggested content #}
-                        <div class="row border-bottom mt-3">
-                            <div class="col-2">
-                                <img class="img-fluid" src="{{ asset ("images/index/retro.png") }}" alt=""
-                                     width="150px"></div>
-                            <div class="col-10">
-                                <div class="row h-100">
-                                    <div class="col-4"><h4>nom de la suggestion</h4>
-                                    </div>
-                                    <div class="col-1 offset-7"><h5>20€</h5>
-                                    </div>
-                                    <div class="row mt-5 pt-4">
-                                        <div class="col-2">
-
-                                            {# Select quantity / Boucle #}
-                                            <select id="quantityCart">
-                                                <option> Qté: 1</option>
-                                                {% for i in 2..10 %}
-                                                    <option value="{{ i }}"> Qté: {{ i }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                        <div class="col-5 offset-2"><a href="{{ path('cart_add',{'idproduct': 1 , 'idstock' : 1 , "qte" : 2 })  }}"
-                                                                       class="small">
-                                                Ajouté au panier
-                                            </a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
+                    <div class="row border-bottom mt-3">
+                        <div class="col-2">
+                            <p>Le panier est vide ! </p>
                         </div>
                     </div>
-                    {# fin de la boucle sur le suggested content #}
 
-                    {# Fin de la condition  panier.length #}
-                    {% endif %}
+                    <div class="row border-bottom mt-5">
+                        <div class="col-3">
+                            <h5>Suggestion :</h5>
+                        </div>
+                        <div class="col-1 offset-8">
+                            <h5>Prix</h5>
+                        </div>
+                    </div>
+                    {# boucle for sur les suggested content #}
 
+                    <div class="row border-bottom mt-3">
+                        <div class="col-2">
+                            <img class="img-fluid" src="{{ asset ("images/index/retro.png") }}" alt=""
+                                 width="150px"></div>
+                        <div class="col-10">
+                            <div class="row h-100">
+                                <div class="col-4"><h4>nom de la suggestion</h4>
+                                </div>
+                                <div class="col-1 offset-7"><h5>20€</h5>
+                                </div>
+                                <div class="row mt-5 pt-4">
+                                    <div class="col-2">
+
+
+                                        {{ form(form) }}
+
+                                    </div>
+                                    <div class="col-5 offset-2"><a
+                                                href="{{ path("cart_add",{'idproduct':1,'idstock':1,'qte':1}) }}"
+                                                class="small">
+                                            Ajouté au panier
+                                        </a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                {# fin de la boucle sur le suggested content #}{#
+                #}
+                {# Fin de la condition  panier.length #}
+                {% endif %}
 
 
                 <div class="col-3 offset-1 mt-4">
@@ -158,7 +163,7 @@
                         <div class="col-12 p-0">
 
                             <div class="card card-header text-center">
-                                <h5 class="card-title">Sous Total ({{ items|length }} articles : €
+                                <h5 class="card-title">Sous Total ({{ items|length }} articles : {{ total }} €
                                     )</h5>
 
                                 {% if is_granted('ROLE_USER') %}
@@ -183,7 +188,8 @@
                                          width="100px" alt="">
                                     <p>Nom du produit : </p>
                                     <p>prix : </p>
-                                    <a href="#" class="btn btn-dark btn-sm">Ajouté au panier</a>
+                                    <a href="{{ path("cart_add",{'idproduct':1,'idstock':1,'qte':1}) }}"
+                                       class="btn btn-dark btn-sm">Ajouté au panier</a>
                                 </div>
                             </div>
 
