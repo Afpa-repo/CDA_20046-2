@@ -1,22 +1,12 @@
 {{ form_start(form) }}
 
-    {{ form_row(form.q)}}
+    {{ form_row(form.recherche)}}
 
     <h4>Thèmes</h4>
-    {{ form_row(form.categories) }}
-
-    {# <h4>Prix</h4>
-    <div class="row">
-        <div class="col-md-6">
-            {{ form_row(form.min) }}
-        </div>
-        <div class="col-md-6">
-            {{ form_row(form_max) }}
-        </div>
-    </div> #}
+    {{ form_row(form.themes) }}
 
     <h4>Promotions</h4>
     {{ form_row(form.promo) }}
 
-<button type="submit" class="btn btn-primary w-100">Filtrer</button>
+<button type="submit" class="btn btn-primary w-75 mb-4 mt-4">Filtrer</button>
 {{ form_end(form) }}

@@ -18,33 +18,19 @@ class SearchForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('q', TextType::class, [
+            ->add('recherche', TextType::class, [
                 'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Rechercher'
                 ]
             ])
-            ->add('categories', EntityType::class, [
+            ->add('themes', EntityType::class, [
                 'label' => false,
                 'required' => false,
                 'class' => Theme::class,
                 'expanded' => true,
                 'multiple' => true
-            ])
-            ->add('min', NumberType::class, [
-                'label' => false,
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Prix min'
-                ]
-            ])
-            ->add('max', NumberType::class, [
-                'label' => false,
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Prix max'
-                ]
             ])
             ->add('promo', CheckboxType::class, [
                 'label' => 'En promotion',
