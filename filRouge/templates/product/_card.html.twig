@@ -1,7 +1,7 @@
 <div class="card">
-	<img class="img-fluid w-60 mt-4" src="{{ asset ("images/index/catalogue@2x.png") }}" alt="">
+	<img class="img-fluid w-60 mt-4" src="{{ asset ("https://picsum.photos/436/430") }}" alt="">
 	<div class="card-body">
-		<h5 class="card-title">{{ product.ProName}}</h5>
+		<h5 class="card-title">{{ product.ProName }}</h5>
 		<div class="card-title">{# {{ product.unit_price }} #}
 			{# {% if product.promo %} #}
 			{# {% if product.promo %}
@@ -10,6 +10,7 @@
 		</div>
 		<p class="text text-muted">{{ product.ProDescription|striptags }}</p>
 		<a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-primary">Détails</a>
+
 	</div>
 	{% for c in product.theme %}
 		<em class="text-muted text-primary text-italic">#{{ c.name }}</em>

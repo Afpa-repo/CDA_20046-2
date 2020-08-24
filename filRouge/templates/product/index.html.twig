@@ -5,13 +5,13 @@
 
 {% block body %}
 
-	{# Navbar #}
+    {# Navbar #}
 
 
-	{# Header #}
+    {# Header #}
 
-		<h1 class="text-left ml-3"> Product index</h1>
-	{# <div class="row">
+    <h1 class="text-left ml-3"> Product index</h1>
+    {# <div class="row">
 																									<div
 																										class="col-3">
 																							
@@ -29,50 +29,51 @@
 																									</div>
 																								</div> #}
 
-	{#Filtre de recherche#}
-	<div class="row p-0 m-0">
-		<div class="col-3">
-			{% include 'product/_filter.html.twig' with {form: form} only %}
+    {# Filtre de recherche #}
+    <div class="row p-0 m-0">
+        <div class="col-3">
+            {% include 'product/_filter.html.twig' with {form: form} only %}
 
-			{#Tags#}
-			<h2>TAGS</h2>
-			<textarea id="tags" name="tags"></textarea>
-		</div>
-
-
-		{#Promotion#}
-		<div class="col-9">
-			<a href="{{ path('product_index') }}">
-				<img class="img-fluid" src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt=""></a>
-			<div class="count mt-2">
-				<h1>
-					<b>Liste des produits({{ products.getTotalItemCount }})</b>
-				</h1>
-			</div>
-
-			{#Affichage produits#}
-			<div class="row">
-				{% for product in products %}
-					<div class="col-4 text-center mt-3">
-						<div class="grid">
-							{% include 'product/_card.html.twig' with {product: product} only %}
-						</div>
-					</div>
-				{% endfor %}
-
-				{#Pagination#}
-				<div class="col-12">
-					<div class="navigation mt-5">
-						{{ knp_pagination_render(products) }}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+            {# Tags #}
+            <h2>TAGS</h2>
+            <textarea id="tags" name="tags"></textarea>
+        </div>
 
 
-{# <img class="img-fluid w-100" src="{{ asset ("images/index/cat@2x.png") }}" alt=""></a> #}{# Tags<div class="row p-0 m-0">
+        {# Promotion #}
+        <div class="col-9">
+            <a href="{{ path('product_index') }}">
+                <img class="img-fluid" src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}"
+                     alt=""></a>
+            <div class="count mt-2">
+                <h1>
+                    <b>Liste des produits({{ products.getTotalItemCount }})</b>
+                </h1>
+            </div>
+
+            {# Affichage produits #}
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-4 text-center mt-3">
+                        <div class="grid">
+                            {% include 'product/_card.html.twig' with {product: product} only %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {# Pagination #}
+                <div class="col-12">
+                    <div class="navigation mt-5">
+                        {{ knp_pagination_render(products) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    {# <img class="img-fluid w-100" src="{{ asset ("images/index/cat@2x.png") }}" alt=""></a> #}{# Tags<div class="row p-0 m-0">
 														<div class="col-3 mt-5">
 															<h2>TAGS</h2>
 															<textarea id="tags" name="tags"></textarea>
@@ -96,9 +97,9 @@
 																			</h6>
 																		</p>
 																		<a href="{{ path('product_show', {'id': item.id}) }}" class="btn btn-primary">Détails</a>
-																		{#           <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-dark">Modifier</a>#}
-{# {% else %} 
+																		{#           <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-dark">Modifier</a> #}
+    {# {% else %}
 																																																																																											</div>																								actions : <td colspan="11">no records found</td> #}
-{# </div>
+    {# </div>
 																																							
 																																									{% endfor %} #}{% endblock %}
