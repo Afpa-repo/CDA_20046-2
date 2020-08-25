@@ -27,11 +27,11 @@
 		<div class="col-9">
 			<a href="{{ path('product_index') }}">
 				<img class="img-fluid" src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt=""></a>
-			<div class="count mt-2">
-				<h1>
-					<b>Liste des produits({{ products.getTotalItemCount }})</b>
-				</h1>
-			</div>
+			{# <div class="count mt-2">
+							<h1>
+								<b>Liste des produits({{ products.getTotalItemCount }})</b>
+							</h1>
+						</div> #}
 
 			{# Affichage produits #}
 			<div class="row">
@@ -45,8 +45,8 @@
 
 				{# Pagination #}
 				<div class="col-12">
-					<div class="navigation mt-5">
-						{{ knp_pagination_render(products) }}
+					<div
+						class="navigation mt-5">{# {{ knp_pagination_render(products) }} #}
 					</div>
 				</div>
 			</div>

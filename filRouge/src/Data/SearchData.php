@@ -21,9 +21,4 @@ class SearchData
      */
     public $themes = [];
 
-    /**
-     * @var boolean
-     */
-    public $promo = false;
-
 }

@@ -38,23 +38,30 @@ class ProductController extends AbstractController
             asort($unitPrice);
         }
         $firstrow = array_shift($unitPrice);
-        
 
 
         $data = new SearchData();
+
+
+
+
         $data->page = $request->get('page', 1);
+        $data->theme  = $request->get('themes', []);
+        $data->search  = $request->get('recherche', "");
+
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
+
         $products = $productRepository->findSearch($data);
 
 
-        $query = $this->getDoctrine()->getRepository(Product::class)->findAll();
-        $products = $paginator->paginate(
-            $query, // Requête contenant les données à paginer (ici nos produits)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            6 // Nombre de résultats par page
-        );
-        return $this->render('product/index.html.twig', [       
+        // $query = $this->getDoctrine()->getRepository(Product::class)->findAll();
+        // $products = $paginator->paginate(
+        //     $query, // Requête contenant les données à paginer (ici nos produits)
+        //     $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+        //     6 // Nombre de résultats par page
+        // );
+        return $this->render('product/index.html.twig', [
 
             'minprice' => $firstrow[0],
             'products' => $products,
@@ -78,7 +85,7 @@ class ProductController extends AbstractController
             $images = $form->get('picture')->getData();
 
             // Boucle sur les images
-            foreach($images as $image) {
+            foreach ($images as $image) {
                 // Génération d'un nouveau nom de fichier
                 $fichier = md5(uniqid()) . '.' . $image->guessExtension();
 
@@ -108,7 +115,7 @@ class ProductController extends AbstractController
     }
 
 
-// Association prix
+    // Association prix
     /**
      * @Route("/{id}", name="product_show", methods={"GET"})
      * @param int $id
@@ -118,90 +125,90 @@ class ProductController extends AbstractController
      */
     public function show(int $id, Product $product, StockRepository $stockRepository, FormatRepository $formatRepository, MaterialRepository $materialRepository): Response
     {
-// $form = $this->createForm(ProductType::class, $product);
-// $form = $this->handleRequest($request);
-// if ($form->isSubmitted() &&$form->isValid()) {
-//     $this->getDoctrine()->getManager()->flush();
+        // $form = $this->createForm(ProductType::class, $product);
+        // $form = $this->handleRequest($request);
+        // if ($form->isSubmitted() &&$form->isValid()) {
+        //     $this->getDoctrine()->getManager()->flush();
 
-//     return $this->redirectToRoute('product',['id'=>'$product'->get);
+        //     return $this->redirectToRoute('product',['id'=>'$product'->get);
 
-// }
-// return $this->render('product/show.html.twig', [
-//     'product' => $product,
-//     'form' => $form->createView(),
-//     ]);
-// }
+        // }
+        // return $this->render('product/show.html.twig', [
+        //     'product' => $product,
+        //     'form' => $form->createView(),
+        //     ]);
+        // }
 
 
-            // $stockRepository = $stockRepository->findall();
+        // $stockRepository = $stockRepository->findall();
 
-            // $unitPrice = $stockRepository->find(1)->getUnitPrice();
-            // foreach ($stockRepository as $item) {
-            //  dd($item);
-            // $materialid= $item->getmaterial()->getid();
-            // $formatid= $item->getformat()->getid();}
+        // $unitPrice = $stockRepository->find(1)->getUnitPrice();
+        // foreach ($stockRepository as $item) {
+        //  dd($item);
+        // $materialid= $item->getmaterial()->getid();
+        // $formatid= $item->getformat()->getid();}
 
-            // $radio1_value
-            // $radio2_value
+        // $radio1_value
+        // $radio2_value
 
-            //             if($materialid = $radio1_value && $formatId = $radio2_value ) {
+        //             if($materialid = $radio1_value && $formatId = $radio2_value ) {
 
-                //     if ($formulaire->isSubmitted()) {
-                //     return $this->redirectToRoute('product_index');
-                // }
+        //     if ($formulaire->isSubmitted()) {
+        //     return $this->redirectToRoute('product_index');
+        // }
 
-            //             }
-            //             // $materialId[$key] = [$item1->getMaterialId()];
-            //             // $formatId[$key] = [$item2->getFormatId()];
-            
-$unitPrice = $stockRepository->findall();
-$formats = $formatRepository->findall();
-$materials = $materialRepository->findall();
-$stocks = $stockRepository->findall();
+        //             }
+        //             // $materialId[$key] = [$item1->getMaterialId()];
+        //             // $formatId[$key] = [$item2->getFormatId()];
 
-foreach ($unitPrice as $key => $item) {
-    $unitPrice[$key] = [$item->getUnitPrice()];
-    asort($unitPrice);
-}
-$firstrow = array_shift($unitPrice);
+        $unitPrice = $stockRepository->findall();
+        $formats = $formatRepository->findall();
+        $materials = $materialRepository->findall();
+        $stocks = $stockRepository->findall();
+
+        foreach ($unitPrice as $key => $item) {
+            $unitPrice[$key] = [$item->getUnitPrice()];
+            asort($unitPrice);
+        }
+        $firstrow = array_shift($unitPrice);
 
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            'defaultprice' =>$firstrow[0],
+            'defaultprice' => $firstrow[0],
             'formats' => $formats,
             'materials' => $materials,
             'stocks' => $stocks,
             // 'idstock' => $combo->getUnitPrice()
 
-                // 'idstock'=> $idstock,
-                // 'qte'=> $qte
+            // 'idstock'=> $idstock,
+            // 'qte'=> $qte
 
         ]);
     }
 
-/**
- * @Route("/{id}/{format}/{matos}", name="ajax", methods={"GET"})
+    /**
+     * @Route("/{id}/{format}/{matos}", name="ajax", methods={"GET"})
      * @param int $id
      * @param int $format
      * @param int $matos
- */
-public function ajax($format, $matos, StockRepository $stockRepository){
-    if (!empty($format)&&!empty($matos))
+     */
+    public function ajax($format, $matos, StockRepository $stockRepository)
     {
-        $stocks = $stockRepository->findAll();
-        foreach($stocks as $id => $item) {
-            if($item->getMaterial()->getId() == $matos && $item->getFormat()->getId() == $format) {
+        if (!empty($format) && !empty($matos)) {
+            $stocks = $stockRepository->findAll();
+            foreach ($stocks as $id => $item) {
+                if ($item->getMaterial()->getId() == $matos && $item->getFormat()->getId() == $format) {
 
-                $itemPrice = $item->getUnitPrice();
-// dd($itemPrice);
-                return $this->render('product/show.html.twig', [
-                    'price' => $itemPrice,
-                ]);
+                    $itemPrice = $item->getUnitPrice();
+                    // dd($itemPrice);
+                    return $this->render('product/show.html.twig', [
+                        'price' => $itemPrice,
+                    ]);
+                }
             }
         }
     }
-}
 
 
 
@@ -248,15 +255,16 @@ public function ajax($format, $matos, StockRepository $stockRepository){
     /**
      * @Route("/delete/picture/{id}", name="picture_prod_delete", methods={"DELETE"})
      */
-    public function deletePicture(Picture $picture, Request $request) {
+    public function deletePicture(Picture $picture, Request $request)
+    {
         $data = json_decode($request->getContent(), true);
 
         // On vérifie si le token est valide
-        if($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])){
+        if ($this->isCsrfTokenValid('delete' . $picture->getId(), $data['_token'])) {
             // On va chercher l'image là où elle est stockée
             $name = $picture->getName();
             // On supprime le fichier
-            unlink($this->getParameter('images_directory').'/'.$name);
+            unlink($this->getParameter('images_directory') . '/' . $name);
 
             // On supprime l'entrée de la base
             $em = $this->getDoctrine()->getManager();
@@ -265,9 +273,8 @@ public function ajax($format, $matos, StockRepository $stockRepository){
 
             // On répond en json
             return new JsonResponse(['success' => 1]);
-        }else {
+        } else {
             return new JsonResponse(['error' => 'Token invalide'], 400);
         }
     }
-
 }

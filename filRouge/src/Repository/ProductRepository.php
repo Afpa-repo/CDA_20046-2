@@ -73,6 +73,5 @@ class ProductRepository extends ServiceEntityRepository
         }
 
         return $query->getQuery()->getResult();
-
     }
 }
