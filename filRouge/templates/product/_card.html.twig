@@ -1,14 +1,23 @@
-<div class="card">
-	<a href="{{ path('product_show', {'id': product.id}) }}"><img class="img-fluid w-60 mt-4" src="{{ asset ("https://picsum.photos/436/430") }}" alt=""></a>
-	<div class="card-body">
-		<h5 class="card-title">{{ product.ProName }}</h5>
-		<p class="text text-muted">{{ product.ProDescription|striptags }}</p>
-		<p class="text-danger">
-			<b>À partir de {#{{ minprice }}#} €</b>
-		</p>
-		<a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-primary">Détails</a>
+<div class="card border-0">
 
-		<p class="text-muted mt-3">#{{ product.theme.themeName }}</p>
+    {% for picture in product.picture %}
+        {% if loop.first %}
+        <a href="{{ path('product_show', {'id': product.id}) }}">
+            <img src="{{ asset('/images/uploadprod/' ~ picture.name) }}" class="img-fluid w-60 mt-4" alt="">
+        </a>
+{% endif%}
 
-	</div>
+    {% endfor %}
+
+    <div class="card-body ">
+        <h5 class="card-title">{{ product.ProName }}</h5>
+        <p class="text text-muted">{{ product.ProDescription|striptags }}</p>
+        <p class="text-danger">
+            <b>À partir de {# {{ minprice }} #} €</b>
+        </p>
+        <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-dark">Détails</a>
+
+        <p class="text-muted mt-3">#{{ product.theme.themeName }}</p>
+
+    </div>
 </div>

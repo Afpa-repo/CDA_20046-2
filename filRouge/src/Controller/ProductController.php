@@ -7,6 +7,7 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Data\SearchData;
 use App\Form\SearchForm;
+use App\Repository\PictureRepository;
 use App\Repository\ProductRepository;
 use App\Repository\StockRepository;
 use App\Repository\FormatRepository;
@@ -28,17 +29,16 @@ class ProductController extends AbstractController
      * @param Request $request
      * @param ProductRepository $productRepository
      * @param PaginatorInterface $paginator
-     * @param StockRepository $stockRepository
      * @return Response
      */
-    public function index(Request $request, ProductRepository $productRepository, PaginatorInterface $paginator, StockRepository $stockRepository): Response
+    public function index(Request $request, ProductRepository $productRepository, PaginatorInterface $paginator, PictureRepository $pictureRepository): Response
     {
-        $unitPrice = $stockRepository->findall();
+     /*   $unitPrice = $stockRepository->findall();
         foreach ($unitPrice as $key => $item) {
             $unitPrice[$key] = [$item->getUnitPrice()];
             asort($unitPrice);
         }
-        $firstrow = array_shift($unitPrice);
+        $firstrow = array_shift($unitPrice);*/
 
         $data = new SearchData();
         $data->page = $request->get('page', 1);
@@ -54,9 +54,11 @@ class ProductController extends AbstractController
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             6 // Nombre de résultats par page
         );
+
         return $this->render('product/index.html.twig', [
-            'minprice' => $firstrow[0],
+   /*         'minprice' => $firstrow[0],*/
             'products' => $products,
+
             'form' => $form->createView()
         ]);
     }
