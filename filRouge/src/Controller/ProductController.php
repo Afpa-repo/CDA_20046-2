@@ -55,7 +55,6 @@ class ProductController extends AbstractController
             6 // Nombre de résultats par page
         );
         return $this->render('product/index.html.twig', [
-            'minprice' => $firstrow[0],
             'products' => $products,
             'form' => $form->createView()
         ]);

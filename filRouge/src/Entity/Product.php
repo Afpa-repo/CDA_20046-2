@@ -226,5 +226,10 @@ class Product
     public function setPicture(Picture $image)
     {
     }
+
+    public function __toString() {
+
+
+}
 }
 
