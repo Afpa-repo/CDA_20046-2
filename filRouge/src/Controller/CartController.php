@@ -44,7 +44,6 @@ class CartController extends AbstractController
         return $this->redirectToRoute("cart");
     }
 
-
     /**
      * @Route("/cart/update/", name="cart_update", methods={"POST"})
      * @param CartService $cartService
@@ -58,14 +57,13 @@ class CartController extends AbstractController
         $idproduct = $request->request->get("product");
         $idstock = $request->request->get("stock");
 
-        if($qte = 0){
+        // si la qte est de 0 on delete l'article du panier sinon on update la qte
+        if($qte == 0){
             $cartService->remove($idproduct, $idstock);
             return $this->redirectToRoute("cart");
+        }else {
+            $cartService->update($idproduct, $idstock, $qte);
+            return $this->redirectToRoute("cart");
         }
-
-        $cartService->update($idproduct, $idstock, $qte);
-        return $this->redirectToRoute("cart");
     }
-
-
 }

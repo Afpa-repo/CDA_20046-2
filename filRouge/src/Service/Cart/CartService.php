@@ -88,8 +88,9 @@ class CartService
     public function remove(int $idproduct, int $idstock)
     {
         $panier = $this->session->get('panier', []);
-
         /* si c'est different de vide on unset la valeur */
+
+
         if (!empty($panier[$idproduct][$idstock])) {
             unset($panier[$idproduct][$idstock]);
         }

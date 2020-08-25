@@ -117,38 +117,24 @@ class ProductController extends AbstractController
      */
     public function show(int $id, Product $product, StockRepository $stockRepository, FormatRepository $formatRepository, MaterialRepository $materialRepository): Response
     {
-
-        $unitPrice = $stockRepository->findall();
         $formats = $formatRepository->findall();
         $materials = $materialRepository->findall();
         $stocks = $stockRepository->findall();
-
-        foreach ($unitPrice as $key => $item) {
-            $unitPrice[$key] = [$item->getUnitPrice()];
-            asort($unitPrice);
-        }
-        $firstrow = array_shift($unitPrice);
-
-
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'formats' => $formats,
             'materials' => $materials,
             'stocks' => $stocks,
-            // 'idstock' => $combo->getUnitPrice()
-
-            // 'idstock'=> $idstock,
-            // 'qte'=> $qte
-
         ]);
     }
 
     /**
      * @Route("/{id}/{format}/{matos}", name="ajax", methods={"POST"})
-     * @param int $id
      * @param int $format
      * @param int $matos
+     * @param StockRepository $stockRepository
+     * @return Response
      */
     public function ajax($format, $matos, StockRepository $stockRepository)
     {
@@ -166,8 +152,6 @@ class ProductController extends AbstractController
             }
         }
     }
-
-
 
     /**
      * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
