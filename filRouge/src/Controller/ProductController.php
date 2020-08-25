@@ -31,7 +31,7 @@ class ProductController extends AbstractController
      * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function index(Request $request, ProductRepository $productRepository, PaginatorInterface $paginator, PictureRepository $pictureRepository): Response
+    public function index(Request $request, ProductRepository $productRepository, PaginatorInterface $paginator): Response
     {
      /*   $unitPrice = $stockRepository->findall();
         foreach ($unitPrice as $key => $item) {
