@@ -1,10 +1,10 @@
 <div class="card">
-	<img class="img-fluid w-60 mt-4" src="{{ asset ("https://picsum.photos/436/430") }}" alt="">
+	<a href="{{ path('product_show', {'id': product.id}) }}"><img class="img-fluid w-60 mt-4" src="{{ asset ("https://picsum.photos/436/430") }}" alt=""></a>
 	<div class="card-body">
 		<h5 class="card-title">{{ product.ProName }}</h5>
 		<p class="text text-muted">{{ product.ProDescription|striptags }}</p>
 		<p class="text-danger">
-			<b>À partir de ... €</b>
+			<b>À partir de {#{{ minprice }}#} €</b>
 		</p>
 		<a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-primary">Détails</a>
 

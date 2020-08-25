@@ -44,19 +44,6 @@ class CartController extends AbstractController
         return $this->redirectToRoute("cart");
     }
 
-    /**
-     * @Route("/cart/remove/{idproduct}/{idstock}",name ="cart_remove")
-     * @param int $idproduct
-     * @param int $idstock
-     * @param CartService $cartService
-     * @return RedirectResponse
-     */
-    public function remove(int $idproduct, int $idstock, CartService $cartService)
-    {
-        $cartService->remove($idproduct, $idstock);
-
-        return $this->redirectToRoute("cart");
-    }
 
     /**
      * @Route("/cart/update/", name="cart_update", methods={"POST"})
@@ -66,11 +53,15 @@ class CartController extends AbstractController
      */
     public function update(CartService $cartService,Request $request)
     {
-        $qte =$request->request->get("quantity");
-        $idproduct =$request->request->get("product");
-        $idstock =$request->request->get("stock");
+        // recuperation des valeurs du form transmise en POST
+        $qte = $request->request->get("quantity");
+        $idproduct = $request->request->get("product");
+        $idstock = $request->request->get("stock");
 
-dump( $_POST);
+        if($qte = 0){
+            $cartService->remove($idproduct, $idstock);
+            return $this->redirectToRoute("cart");
+        }
 
         $cartService->update($idproduct, $idstock, $qte);
         return $this->redirectToRoute("cart");

@@ -25,7 +25,9 @@ class ProductController extends AbstractController
 {
     /**
      * @Route("/", name="product_index", methods={"GET"})
+     * @param Request $request
      * @param ProductRepository $productRepository
+     * @param PaginatorInterface $paginator
      * @param StockRepository $stockRepository
      * @return Response
      */
@@ -53,7 +55,6 @@ class ProductController extends AbstractController
             6 // Nombre de résultats par page
         );
         return $this->render('product/index.html.twig', [
-
             'minprice' => $firstrow[0],
             'products' => $products,
             'form' => $form->createView()
