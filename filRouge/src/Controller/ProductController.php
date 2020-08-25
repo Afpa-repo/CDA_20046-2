@@ -145,7 +145,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/{format}/{matos}", name="ajax", methods={"GET"})
+     * @Route("/{id}/{format}/{matos}", name="ajax", methods={"POST"})
      * @param int $id
      * @param int $format
      * @param int $matos
@@ -159,7 +159,7 @@ class ProductController extends AbstractController
 
                     $itemPrice = $item->getUnitPrice();
                    
-                    return $this->render('product/show.html.twig', [
+                    return $this->render('product/price.html.twig', [
                         'price' => $itemPrice,
                     ]);
                 }
