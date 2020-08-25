@@ -23,7 +23,6 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class ProductController extends AbstractController
 {
-
     /**
      * @Route("/", name="product_index", methods={"GET"})
      * @param ProductRepository $productRepository
@@ -39,28 +38,20 @@ class ProductController extends AbstractController
         }
         $firstrow = array_shift($unitPrice);
 
-
         $data = new SearchData();
-
-
-
-
         $data->page = $request->get('page', 1);
-        $data->theme  = $request->get('themes', []);
-        $data->search  = $request->get('recherche', "");
+        $data->theme = $request->get('themes', []);
+        $data->search = $request->get('recherche', "");
 
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
 
         $products = $productRepository->findSearch($data);
-
-
-        // $query = $this->getDoctrine()->getRepository(Product::class)->findAll();
-        // $products = $paginator->paginate(
-        //     $query, // Requête contenant les données à paginer (ici nos produits)
-        //     $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-        //     6 // Nombre de résultats par page
-        // );
+        $products = $paginator->paginate(
+            $products, // Requête contenant les données à paginer (ici nos produits)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
         return $this->render('product/index.html.twig', [
 
             'minprice' => $firstrow[0],

@@ -61,24 +61,16 @@ class CartController extends AbstractController
     /**
      * @Route("/cart/update/", name="cart_update", methods={"POST"})
      * @param CartService $cartService
+     * @param Request $request
      * @return RedirectResponse
      */
     public function update(CartService $cartService,Request $request)
     {
-
-
-
-
         $qte =$request->request->get("quantity");
         $idproduct =$request->request->get("product");
         $idstock =$request->request->get("stock");
 
-
-
 dump( $_POST);
-
-
-
 
         $cartService->update($idproduct, $idstock, $qte);
         return $this->redirectToRoute("cart");
