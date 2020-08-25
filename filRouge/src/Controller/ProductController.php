@@ -118,41 +118,6 @@ class ProductController extends AbstractController
      */
     public function show(int $id, Product $product, StockRepository $stockRepository, FormatRepository $formatRepository, MaterialRepository $materialRepository): Response
     {
-// $form = $this->createForm(ProductType::class, $product);
-// $form = $this->handleRequest($request);
-// if ($form->isSubmitted() &&$form->isValid()) {
-//     $this->getDoctrine()->getManager()->flush();
-
-//     return $this->redirectToRoute('product',['id'=>'$product'->get);
-
-// }
-// return $this->render('product/show.html.twig', [
-//     'product' => $product,
-//     'form' => $form->createView(),
-//     ]);
-// }
-
-
-            // $stockRepository = $stockRepository->findall();
-
-            // $unitPrice = $stockRepository->find(1)->getUnitPrice();
-            // foreach ($stockRepository as $item) {
-            //  dd($item);
-            // $materialid= $item->getmaterial()->getid();
-            // $formatid= $item->getformat()->getid();}
-
-            // $radio1_value
-            // $radio2_value
-
-            //             if($materialid = $radio1_value && $formatId = $radio2_value ) {
-
-                //     if ($formulaire->isSubmitted()) {
-                //     return $this->redirectToRoute('product_index');
-                // }
-
-            //             }
-            //             // $materialId[$key] = [$item1->getMaterialId()];
-            //             // $formatId[$key] = [$item2->getFormatId()];
             
 $unitPrice = $stockRepository->findall();
 $formats = $formatRepository->findall();
@@ -168,7 +133,7 @@ $firstrow = array_shift($unitPrice);
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            'defaultprice' =>$firstrow[0],
+            //'defaultprice' =>$firstrow[0],
             'formats' => $formats,
             'materials' => $materials,
             'stocks' => $stocks,
@@ -181,7 +146,7 @@ $firstrow = array_shift($unitPrice);
     }
 
 /**
- * @Route("/{id}/{format}/{matos}", name="ajax", methods={"GET"})
+ * @Route("/{id}/{format}/{matos}", name="ajax", methods={"POST"})
      * @param int $id
      * @param int $format
      * @param int $matos
@@ -195,7 +160,7 @@ public function ajax($format, $matos, StockRepository $stockRepository){
 
                 $itemPrice = $item->getUnitPrice();
 // dd($itemPrice);
-                return $this->render('product/show.html.twig', [
+                return $this->render('product/price.html.twig', [
                     'price' => $itemPrice,
                 ]);
             }

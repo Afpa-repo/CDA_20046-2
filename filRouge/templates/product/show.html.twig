@@ -1,285 +1,300 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product{% endblock %}
+{% block title %}Product
+{% endblock %}
 
 {% block body %}
 
 
+	<div class="container mt-2 col-12">
+		<h1>Fiche produit</h1>
+
+		<div class="row mt-3 col-12">
+			{# <div class="col col-6"> #}
+			{# Emplacement photo #}
+				<div class="card text-center col-4"> <div class="card-header">
+					Photo 01
+				</div>
+				<div class="card-body">
+					<h1 class="card-title">Visuel Principal</h1>
+					<p class="card-text">Image nude</p>
+					<a href="#!" class="btn btn-dark" data-toggle="modal" data-target="#infos" class="btn btn-secondary">Link</a>
+					{# Carrousel #}
+					<div class="modal fade" id="infos">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">
+										<span>&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div id="carousel" class="carousel slide" data-ride="carousel">
+										<ol class="carousel-indicators">
+											<li data-target=".carousel" data-slide-to="0" class="active"></li>
+											<li data-target=".carousel" data-slide-to="1"></li>
+											<li data-target=".carousel" data-slide-to="2"></li>
+										</ol>
+										<div class="carousel-inner">
+											<div class="carousel-item active">
+												<img class="d-block" src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="wheel">
+												<div class="carousel-caption">
+													<p>Vue principale</p>
+													<p></p>
+												</div>
+											</div>
+											<div class="carousel-item">
+												<img class="d-block" src="{{ asset("images/index/kam-idris-YS_81Cj8kHY-unsplash.jpg") }}" alt="wheel">
+												<div class="carousel-caption">
+													<p>En situation</p>
+													<p></p>
+												</div>
+											</div>
+											<div class="carousel-item">
+												<img class="d-block" src="{{ asset("images/index/zhuo-cheng-you-C3saHwqX1aA-unsplash.jpg") }}" alt="wheel">
+												<div class="carousel-caption">
+													<p>Zoom</p>
+													<p></p>
+												</div>
+											</div>
+										</div>
+										<a class="carousel-control-prev" href="#carousel" data-slide="prev">
+											<span class="carousel-control-prev-icon"></span>
+										</a>
+										<a class="carousel-control-next" href="#carousel" data-slide="next">
+											<span class="carousel-control-next-icon"></span>
+										</a>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<form method="POST" action="" id="formcom">
+				<div class="form-group col-8">
+					<div class="row">
+						<div class="col-9">
+							<table class="table">
+								<tbody>
+									<tr>
+										<th>Nom</th>
+										<td>{{ product.proName }}</td>
+									</tr>
+									<tr>
+										<th>Prix</th>
+										{# <td>{{ stocks.unitPrice }}</td> #}
+										<td id="price"></td>
+									</tr>
+									<tr>
+										<th>Format</th>
+										<td>
+											{# <td>{{defaultprice }} €  {% if app.request.method == POST and </td> #}
+											<div class="btn-group btn-group-toggle" data-toggle="buttons">
+												{% for format in formats %}
+													{% if format.id == 1%}
+														<label class="label btn btn-outline-light active m-1">
+															<input class="formCheckFormat" type="radio" name="format" id="radio-format-{{ format.id }}" value="{{ format.id }}" autocomplete="off" checked>
+															{{ format.formatName }}
+														</label>
+													{% else %}
+													<label class="label btn btn-outline-light active m-1">
+														<input class="formCheckFormat" type="radio" name="format" id="radio-format-{{ format.id }}" value="{{ format.id }}" autocomplete="off">
+														{{ format.formatName }}
+													</label>
+                                                    {% endif %}
+												{% endfor %}
 
 
-<div class="container mt-2 col-12">
-    <h1>Fiche produit</h1>
+												{# <input type="button" id="btn" value="Show Selected Value"> #}
+											</div>
+										</td>
+									</tr>
 
-    <div class="row mt-3 col-12">
-        {# <div class="col col-6"> #}
-        {# Emplacement photo #}
-        <div class="card text-center col-4">
-            <div class="card-header">
-                Photo 01
-            </div>
-            <div class="card-body">
-                <h4 class="card-title">Visuel Principal</h4>
-                <p class="card-text">Image nude</p>
-                <a href="#!" class="btn btn-dark" data-toggle="modal" data-target="#infos" class="btn btn-secondary">Link</a>
-                    {# Carrousel #}
-                    <div class="modal fade" id="infos">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                                </button>
-                            </div>
-                        <div class="modal-body">
-                            <div id="carousel" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target=".carousel" data-slide-to="0" class="active"></li>
-                                    <li data-target=".carousel" data-slide-to="1"></li>
-                                    <li data-target=".carousel" data-slide-to="2"></li>
-                                </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block" src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="wheel">
-                                    <div class="carousel-caption">
-                                        <p>Vue principale<p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block" src="{{ asset("images/index/kam-idris-YS_81Cj8kHY-unsplash.jpg") }}" alt="wheel">
-                                    <div class="carousel-caption">
-                                        <p>En situation<p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block" src="{{ asset("images/index/zhuo-cheng-you-C3saHwqX1aA-unsplash.jpg") }}" alt="wheel">
-                                    <div class="carousel-caption">
-                                        <p>Zoom<p>
-                                    </div>
-                                </div>
-                            </div>
-                                <a class="carousel-control-prev" href="#carousel" data-slide="prev">
-                                    <span class="carousel-control-prev-icon"></span>
-                                </a>
-                                <a class="carousel-control-next" href="#carousel" data-slide="next">
-                                    <span class="carousel-control-next-icon"></span>
-                                </a>  
-                            </div>
-                        </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-        </div>
+									<tr>
+										<th>Libellé</th>
+										<td>{{ product.proLib }}</td>
+									</tr>
+									<tr>
+										<th>Support</th>
+										<td>
+											<div class="btn-group btn-group-toggle" data-toggle="buttons">
+												{% for material in materials %}
+													{% if material.id == 1%}
+													<label class="label btn btn-outline-light active m-1">
+														<input class="formCheckMat" type="radio" name="matos" id="radio-mat-{{ material.id }}" value="{{ material.id }}" autocomplete="off" checked>
+														{{ material.materialName }}
+													</label>
+                                                    {% else %}
+                                                    <label class="label btn btn-outline-light active m-1">
+														<input class="formCheckMat" type="radio" name="matos" id="radio-mat-{{ material.id }}" value="{{ material.id }}" autocomplete="off">
+														{{ material.materialName }}
+													</label>
+                                                    {% endif %}
+												{% endfor %}
+												{# <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
+												                            <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
+												                            <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
+												                            <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem"> #}
+											</td>
+										</td>
+									</tr>
+									<tr>
+										<th>Evaluation</th>
+										<td>{{ product.proNote }}
+											{# <i class="ri-star-line"></i></td> #}
+										</td>
+									</tr>
 
-<form  action="#" id="formcom">
-    <div class="form-group col-8">
-        <div class="row">
-            <div class="col-9">
-                <table class="table">
-                <tbody>
-                    <tr>
-                        <th>Nom</th>
-                        <td>{{ product.proName }}</td>
-                    </tr>
-                    <tr>
-                        <th>Prix</th>
-                        {# <td>{{ stocks.unitPrice }}</td> #}
-                        <td id="price"></td>
-                    </tr>
-                    <tr>
-                        <th>Format</th>
-                        <td>
-                            {# <td>{{defaultprice }} €  {% if app.request.method == POST and </td> #}
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        {% for format in formats %}
-                            <label class="label btn btn-outline-light active m-1">
-                            <input class="formCheckFormat" type="radio" name="format" id="radio-format-1" value="{{ format.id }}" autocomplete="off"> {{ format.formatName }}
-                        </label>
-                        {% endfor %}
+									<tr>
+										<th>Quantité</th>
+										<td>
+											<label for="quantitySelect">
+												<input class="qte input border border-light rounded-0 p-1" type="number" id="quantite" value="1" min="0" max="100" step="1"/>
+											</label>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<a class="btn btn-outline-light" href="{{ path('product_index') }}">Retour à la liste</a>
+							{# <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a> #}
 
 
-                        {# <input type="button" id="btn" value="Show Selected Value"> #}
-                        </div>
-                        </td>
-                    </tr>
+							{# {{ path('cart_add', {'idproduct': product.id, 'idstock' : idstock , "qte" : qte }) }} #}
 
-                    <tr>
-                        <th>Libellé</th>
-                        <td>{{ product.proLib }}</td>
-                    </tr>
-                    <tr>
-                        <th>Support</th>
-                        <td>
-                       <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                          {% for material in materials %}
-                            <label class="label btn btn-outline-light active m-1">
-                            <input class="formCheckMat" type="radio" name="matos" id="radio-mat-1" value="{{ material.id }}" autocomplete="off"> {{ material.materialName }}
-                        </label>
-                        {% endfor %}
-                            {# <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
-                            <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
-                            <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem">
-                            <img src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="" class="rounded-circle mr-4" style="height:3rem; width:3rem"> #}
-                        </td>
-                    </tr>
-                <tr>
-                <th>Evaluation</th>
-                <td>{{ product.proNote }}
-                {# <i class="ri-star-line"></i></td> #}
-            </tr>
+							{#<input type="button" class="btn btn-danger" id="btn" href="{{ path('cart_add', {'id': product.id}) }}" value="Ajouter au panier"></input>#}
 
-            <tr>
-                <th>Quantité</th>
-                <td>
-                    <label for="quantitySelect">
-                    <input class="qte input border border-light rounded-0 p-1" type="number" id="quantite" value="1" min="0" max="100" step="1"/>
-                    </label>
-                </td>
-            </tr>
-        </tbody>
-        </table>
-            <a class="btn btn-outline-light" href="{{ path('product_index') }}">Retour à la liste</a>
-            {# <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a> #}
+							{# <a class=" submit btn btn-danger" href="{{ path('cart_add', {'idproduct': 4, 'idstock' : 1 , "qte" : 2 }) }}">Ajouter au panier</a> #}
+
+							{# <a class="btn btn-danger" href="{{ path('cart_add', {'id': product.id,'stockid' : stock.id}) }}">Ajouter au panier</a> #}
+						{# <input class="submit" type="submit" value="Ajouter"> {{ include('product/_delete_form.html.twig') }} #}
+							{# </div>  #}
+						</div>
+					</div>
+				</div>
+			</form>
+
+			{# Autres vues #}
+			<div class="row col-12 mt-2">
+				<div class="card text-center col-2 mr-2">
+					<div class="card-header">
+						Photo 02
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">Aperçu</h4>
+						<p class="card-text">Mise en situation</p>
+						<a href="#!" class="btn btn-light">Link</a>
+					</div>
+				</div>
+				<div class="card text-center col-2">
+					<div class="card-header">
+						Photo 03
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">Aperçu</h4>
+						<p class="card-text">Gros plan</p>
+						<a href="#!" class="btn btn-light">Link</a>
+					</div>
+				</div>
+			</div>
 
 
-            {# {{ path('cart_add', {'idproduct': product.id, 'idstock' : idstock , "qte" : qte }) }} #}
+			{# Description produit #}
+			<div class="row col-12 mt-2">
+				<div class="col-4 p-0">
+					<p class="font-weight-bold mt-2">Description du produit</p>
+					<p>{{ product.proDescription }}</p>
+				</div>
+			</div>
 
-            {#<input type="button" class="btn btn-danger" id="btn" href="{{ path('cart_add', {'id': product.id}) }}" value="Ajouter au panier"></input>#}
+			{# Infos complémentaires #}
+			<div class="row col-12 mt-2">
+				<div class="col-4 p-0 border-right text-center">
+					<p>
+						<i class="ris ri-truck-line ri-2x"></i>
+					</p>
+					<p class="font-weight-bold mt-2" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Délais de livraison" data-html="true" data-content="<b>Ink.com.</b> s'engage à vous livrer en 3 à 5 jours ouvrés. Une livraison express en 24h est disponible, moyennant un somme forfaitaire de 390€. La livraison est offerte dès 187 articles commandés. Une date de livraison garantie vous sera indiquée lors du passage de la commande.">Livraison gratuite
+					</p>
+				</div>
+				<div class="col-4 p-0 text-center">
+					<p>
+						<i class="ris ri-refresh-line ri-2x"></i>
+					</p>
+					<p class="font-weight-bold mt-2" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Vous avez changé d’avis ?" data-html="true" data-content="Pour toute commande effectuée sur <b>Ink.com</b> vous avez 15 jours à partir de la date de réception de votre commande pour changer d'avis. Puis 15 jours à partir de la date de rétractation pour nous retourner votre article, gratuitement en contactant nos services.">Satisfait ou remboursé
+					</p>
+				</div>
+				<div class="col-4 p-0 border-left text-center">
+					<p>
+						<i class="ris ri-lock-2-line ri-2x"></i>
+					</p>
+					<p class="font-weight-bold mt-2" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Paiement 100% sécurisé" data-html="true" data-content="Pour chaque commande, vous pouvez utiliser votre Carte Bleue, Visa, ou Mastercard en toute sécurité, grâce au système de protection et de cryptage SSL fourni par la banque d'Azerbaïdjan. La facture est disponible aussitôt la facturation de vos articles effectuée, sur votre compte <b>Ink.com.</b>">Paiement sécurisé
+					</p>
+				</div>
+			</div>
 
-            {# <a class=" submit btn btn-danger" href="{{ path('cart_add', {'idproduct': 4, 'idstock' : 1 , "qte" : 2 }) }}">Ajouter au panier</a> #}
+			{# Carrousel #}
+			{# <div id="carousel" class="carousel slide col-6" data-ride="carousel">
+			  <ol class="carousel-indicators">
+			    <li data-target=".carousel" data-slide-to="0" class="active"></li>
+			    <li data-target=".carousel" data-slide-to="1"></li>
+			    <li data-target=".carousel" data-slide-to="2"></li>
+			  </ol>
+			  <div class="carousel-inner">
+			    <div class="carousel-item active">
+			      <img class="d-block w-100 h-50rem" src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="wheel">
+			      <div class="carousel-caption">
+			        <h3>Vue principale</h3>
+			      </div>
+			    </div>
+			    <div class="carousel-item">
+			      <img class="d-block w-100 h-50rem" src="{{ asset("images/index/kam-idris-YS_81Cj8kHY-unsplash.jpg") }}" alt="wheel">
+			      <div class="carousel-caption">
+			        <h3>En situation</h3>
+			      </div>
+			    </div>
+			    <div class="carousel-item">
+			      <img class="d-block w-100 h-50rem" src="{{ asset("images/index/zhuo-cheng-you-C3saHwqX1aA-unsplash.jpg") }}" alt="wheel">
+			      <div class="carousel-caption">
+			        <h3>Zoom</h3>
+			      </div>
+			    </div>
+			  </div>
+			  <a class="carousel-control-prev" href="#carousel" data-slide="prev">
+			    <span class="carousel-control-prev-icon"></span>
+			  </a>
+			  <a class="carousel-control-next" href="#carousel" data-slide="next">
+			    <span class="carousel-control-next-icon"></span>
+			  </a>  
+			  </div>#}
+		</div>
+		<script>
 
-            {# <a class="btn btn-danger" href="{{ path('cart_add', {'id': product.id,'stockid' : stock.id}) }}">Ajouter au panier</a> #}
-            <input class="submit" type="submit" value="Ajouter">
+			{# const btn = document.querySelector('#btn');
+btn.onclick = function () {
+let value = [] // créa tableau
+const rbs1 = document.querySelectorAll('input[name="format"]'); // décla constante
+const rbs2 = document.querySelectorAll('input[name="materiaux"]');
+const rbs3 = document.getElementById("quantite").value;
+let tab = [rbs1, rbs2] // mise en tableau
+for (const rbs of tab) { // lecture
+for (const rb of rbs) { // renommage
+if (rb.checked) {
+value.push(rb.value);
+break;
+}
+}
+}
+alert(value + rbs3);
+window.location.replace("../cart/add/" + value[1] + "/" + value[0] + "/" + rbs3)
+};
+#}
+		</script>
+	{% endblock %}
+	{% block javascripts  %}
 
-            {# {{ include('product/_delete_form.html.twig') }} #}
-            {# </div>  #}
-            </div>
-        </div>
-    </div>
-</form>
-
-   {# Autres vues #}
-    <div class="row col-12 mt-2">
-        <div class="card text-center col-2 mr-2">
-            <div class="card-header">
-                Photo 02
-            </div>
-            <div class="card-body">
-                <h4 class="card-title">Aperçu</h4>
-                <p class="card-text">Mise en situation</p>
-                <a href="#!" class="btn btn-light">Link</a>
-            </div>
-        </div>
-        <div class="card text-center col-2">
-            <div class="card-header">
-                Photo 03
-            </div>
-            <div class="card-body">
-                <h4 class="card-title">Aperçu</h4>
-                <p class="card-text">Gros plan</p>
-                <a href="#!" class="btn btn-light">Link</a>
-            </div>
-        </div>
-    </div>
-
-
-{# Description produit #}
-    <div class="row col-12 mt-2">
-        <div class="col-4 p-0">
-            <p class="font-weight-bold mt-2">Description du produit</p>
-            <p>{{ product.proDescription }}</p>
-        </div>
-    </div>
-
-{# Infos complémentaires #}
-    <div class="row col-12 mt-2">
-        <div class="col-4 p-0 border-right text-center">
-            <p><i class="ris ri-truck-line ri-2x"></i></p>
-            <p class="font-weight-bold mt-2" data-container="body" data-toggle="popover" data-placement="bottom"
-                data-title = "Délais de livraison"
-                data-html="true"
-                data-content="<b>Ink.com.</b> s'engage à vous livrer en 3 à 5 jours ouvrés. Une livraison express en 24h est disponible, moyennant un somme forfaitaire de 390€. La livraison est offerte dès 187 articles commandés. Une date de livraison garantie vous sera indiquée lors du passage de la commande.">Livraison gratuite
-            </p>
-        </div>
-        <div class="col-4 p-0 text-center">
-            <p><i class="ris ri-refresh-line ri-2x"></i></p>
-            <p class="font-weight-bold mt-2" data-container="body" data-toggle="popover" data-placement="bottom"
-                data-title = "Vous avez changé d’avis ?"
-                data-html="true"
-                data-content="Pour toute commande effectuée sur <b>Ink.com</b> vous avez 15 jours à partir de la date de réception de votre commande pour changer d'avis. Puis 15 jours à partir de la date de rétractation pour nous retourner votre article, gratuitement en contactant nos services.">Satisfait ou remboursé
-            </p>
-        </div>
-        <div class="col-4 p-0 border-left text-center">
-            <p><i class="ris ri-lock-2-line ri-2x"></i></p>
-            <p class="font-weight-bold mt-2" data-container="body" data-toggle="popover" data-placement="bottom"
-                data-title = "Paiement 100% sécurisé"
-                data-html="true"
-                data-content="Pour chaque commande, vous pouvez utiliser votre Carte Bleue, Visa, ou Mastercard en toute sécurité, grâce au système de protection et de cryptage SSL fourni par la banque d'Azerbaïdjan. La facture est disponible aussitôt la facturation de vos articles effectuée, sur votre compte <b>Ink.com.</b>">Paiement sécurisé
-            </p>
-        </div>
-    </div>
-
-{# Carrousel #}
-    {# <div id="carousel" class="carousel slide col-6" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target=".carousel" data-slide-to="0" class="active"></li>
-    <li data-target=".carousel" data-slide-to="1"></li>
-    <li data-target=".carousel" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100 h-50rem" src="{{ asset('images/index/sterling-lanier-DY6h8v2rqzM-unsplash.jpg') }}" alt="wheel">
-      <div class="carousel-caption">
-        <h3>Vue principale</h3>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100 h-50rem" src="{{ asset("images/index/kam-idris-YS_81Cj8kHY-unsplash.jpg") }}" alt="wheel">
-      <div class="carousel-caption">
-        <h3>En situation</h3>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100 h-50rem" src="{{ asset("images/index/zhuo-cheng-you-C3saHwqX1aA-unsplash.jpg") }}" alt="wheel">
-      <div class="carousel-caption">
-        <h3>Zoom</h3>
-      </div>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carousel" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#carousel" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>  
-  </div>#}
-</div>
-    <script>
-
-        {# const btn = document.querySelector('#btn'); 
-            btn.onclick = function () {
-                let value=[]  //créa tableau
-                    const rbs1 = document.querySelectorAll('input[name="format"]');  //décla constante
-                    const rbs2 = document.querySelectorAll('input[name="materiaux"]');
-                    const rbs3 = document.getElementById("quantite").value;
-                        let tab=[rbs1,rbs2] //mise en tableau
-                        for (const rbs of tab) { //lecture
-                            for (const rb of rbs) {//renommage
-                                if (rb.checked) {
-                                value.push(rb.value);
-                                break;
-                        }
-                            }
-                                }
-                                alert(value + rbs3);
-                                window.location.replace("../cart/add/" +value[1]+ "/" +value[0]+ "/" +rbs3)
-            }; #}
-    </script>
-    {% endblock %}
-    {% block javascripts  %}
-    <script src="{{ asset("js/popover.js") }}"></script>
-    <script src="{{ asset("js/stockIdDetail.js") }}"></script>
-    {% endblock %}
+		<script src="{{ asset("js/stockIdDetail.js") }}"></script>
+	{% endblock %}
