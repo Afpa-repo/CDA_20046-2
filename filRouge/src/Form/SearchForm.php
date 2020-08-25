@@ -32,10 +32,6 @@ class SearchForm extends AbstractType
                 'expanded' => true,
                 'multiple' => true
             ])
-            ->add('promo', CheckboxType::class, [
-                'label' => 'En promotion',
-                'required' => false,
-            ])
         ;
     }
 

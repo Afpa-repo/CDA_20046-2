@@ -40,24 +40,21 @@
                             </div>
                             <div class="row mt-5 pt-4">
                                 <div class="col-2">
+                                    <form method="post" action="{{ path("cart_update") }}" id="formUpdate_{{ i }}">
+                                        <label for="quantity_{{ i }}"></label><input name="quantity"
+                                                                                     id="quantity_{{ i }}"
+                                                                                     type="number">
+                                        <label for="product_{{ i }}"></label><input name="product" type="hidden" value="{{ items[i].product.id }}">
 
-
-
-
-{#                                    <input id="quantity.{{ i }}" type=""#}
-{#                                        {{ form(form[i]) }}#}
-
+                                        <label for="stock_{{ i }}"></label><input name="stock"
+                                                                                     type="hidden"
+                                                                                     id="stock_{{ i }}" value ="{{ items[i].stock.id }}">
+                                        <button type="submit">Update</button>
+                                    </form>
                                 </div>
 
 
-                                <div class="col-2"><a
-                                            href="{{ path('cart_remove', {'idproduct': items[i].product.id , 'idstock' : items[i].stock.id  }) }}"
-                                            class="small">
-                                        Supprimer
-                                    </a></div>
-                                <div class="col-3"><a href="#" class="small">
-                                        Mettre de coté
-                                    </a></div>
+
                                 <div class="col-5"><a href="#" class="small">
                                         Voir plus de produits similaires
                                     </a></div>
@@ -134,7 +131,7 @@
                                 </div>
                                 <div class="row mt-5 pt-4">
                                     <div class="col-2">
-                                        {{ form(form) }}
+
 
                                     </div>
                                     <div class="col-5 offset-2"><a

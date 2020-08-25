@@ -70,7 +70,7 @@ class ProductFixture extends Fixture
             $product->setProDescription("<h3>Description du produit n°$i</h3><p>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
             </p>");
-            $product->setPicture($image);
+            $product->setPicture($picture);
             $product->setTheme($theme);
 
 
@@ -78,7 +78,7 @@ class ProductFixture extends Fixture
             $supplier->setSuppliCompanyName("Beuhnana n°$i");
             $supplier->setSuppliMail("Beuhnana$i@gmail.pom");
             $supplier->setSuppliPhone("666-666-6$i");
-            $supplier->setPicture($image);
+            $supplier->setPicture($picture);
 
             $material->setSupplier($supplier);
 
@@ -103,7 +103,7 @@ class ProductFixture extends Fixture
             $manager->persist($format);
             $manager->persist($material);
             $manager->persist($stock);
-            $manager->persist($image);
+            $manager->persist($picture);
             $manager->persist($product);
             $manager->persist($supplier);
             $manager->persist($user);

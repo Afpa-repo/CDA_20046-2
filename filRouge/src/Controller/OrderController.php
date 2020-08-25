@@ -35,68 +35,71 @@ class OrderController extends AbstractController
         $this->productRepository = $productRepository;
         $this->userRepository = $userRepository;
     }
-    public function load(EntityManagerInterface $manager, CartService  $cartService)
+
+    public function load(EntityManagerInterface $manager, CartService $cartService)
     {
 
 
+        $cartService = $cartService->getFullCart();
 
-$cartService = $cartService->getFullCart();
-dd($cartService);
         $date = new \DateTime();
         $dateShipping = $date->add(new \DateInterval('P1Y'));
 
         $order = new Order();
-        $user =$this->userRepository->find(1);
+        $user = $this->userRepository->find(1);
 
-        $order->setUser($user);
-        $order->setAddress($user->getAdress());
+
         $order->setOrderDate($date);
         $order->setOrderDateShipping($dateShipping);
         $order->setOrderType(1);
         $order->setOrderShippingCost(rand(0, 100));
 
-        foreach($cartService as $key => $value) {
-            
-                $orderDetail = new OrderDetail($key);
+        foreach ($cartService as $key => $value) {
 
-        //dd($value["stock"]);
-                $orderDetail->setProduct($value["product"]);
-                $orderDetail->setOrders($order);
-                $orderDetail->setSupplier($value["stock"]->getMaterial()->getSupplier());
-                $orderDetail->setStock($value["stock"]);
-                $orderDetail->setOrderdetailUnitPrice($value["stock"]->getUnitPrice());
-                $orderDetail->setOrderdetailQuantity($value["quantity"]);
-                $orderDetail->setOrderdetailDiscount(rand(1, 10) / 10);
-                $orderDetail->setOrderdetailTva(rand(0,100));
+            $user = $value['user'];
+            dump($user);
+            $order->setUser($user);
+            $order->setAddress($user->getAdress());
+
+            $orderDetail = new OrderDetail($key);
+
+            //dd($value["stock"]);
+            $orderDetail->setProduct($value["product"]);
+            $orderDetail->setOrders($order);
+            $orderDetail->setSupplier($value["stock"]->getMaterial()->getSupplier());
+            $orderDetail->setStock($value["stock"]);
+            $orderDetail->setOrderdetailUnitPrice($value["stock"]->getUnitPrice());
+            $orderDetail->setOrderdetailQuantity($value["quantity"]);
+            $orderDetail->setOrderdetailDiscount(rand(1, 10) / 10);
+            $tva = ($orderDetail->getOrderdetailQuantity() * $orderDetail->getOrderdetailUnitPrice()) * 0.20;
+            $orderDetail->setOrderdetailTva($tva);
 
             $manager->persist($orderDetail);
-            }
+        }
 
 
-$manager->persist($order);
+        $manager->persist($order);
 
-$manager->flush();
+        $manager->flush();
 
-}
+    }
 
-/**
- * @Route("/order/submit", name="order_submit")
- * @param EntityManagerInterface $manager
- * @param CartService $cartService
- * @return Response
- */
-public
-function submit(EntityManagerInterface $manager, CartService $cartService)
-{
-
-
+    /**
+     * @Route("/order/submit", name="order_submit")
+     * @param EntityManagerInterface $manager
+     * @param CartService $cartService
+     * @return Response
+     */
+    public
+    function submit(EntityManagerInterface $manager, CartService $cartService)
+    {
 
 
-    $this->load($manager, $cartService);
+        $this->load($manager, $cartService);
 
 
-    return $this->render('order/index.html.twig', [
-        'controller_name' => 'OrderController',
-    ]);
-}
+        return $this->render('order/index.html.twig', [
+            'controller_name' => 'OrderController',
+        ]);
+    }
 }
