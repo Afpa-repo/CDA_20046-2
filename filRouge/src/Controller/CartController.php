@@ -2,12 +2,8 @@
 
 namespace App\Controller;
 
-use App\Repository\StockRepository;
 use App\Service\Cart\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,39 +19,14 @@ class CartController extends AbstractController
      */
     public function index(CartService $cartService, Request $request)
     {
-        $renderform = [];
-        $item = [];
-
+           $item = [];
         foreach ($cartService->getFullCart() as $key => $items) {
-
             $item[] = $items;
-
-            $stockid[$key] =  $items['stock']->getid();
-            $idproduct[$key] =$items['product']->getid();
-
-            $form[$key] = $this->createFormBuilder()
-                ->add('quantity', NumberType::class)
-                ->add('update', SubmitType::class)
-                ->getForm();
-
-            $form[$key]->handleRequest($request);
-
-            $renderform[$key] = $form[$key]->createView();
-
-            if ($form[$key]->isSubmitted() && $form[$key]->isValid()) {
-                $data = $form[$key]->getData();
-                $quantity[$key] = $data['quantity'];
-
-                return $this->redirect($this->generateUrl('cart_update', array('idproduct' => $idproduct[$key],
-                    'idstock' => $stockid[$key], 'qte' => $quantity[$key])));
-            }
         }
-
         return $this->render('cart/index.html.twig', [
             'items' => $item,
             'total' => $cartService->total(),
             'CartNotification' => sizeof($item),
-            'form' => $renderform
         ]);
     }
 
@@ -88,15 +59,27 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/update/{idproduct}/{idstock}/{qte}", name="cart_update")
-     * @param int $idproduct
-     * @param int $idstock
-     * @param int $qte
+     * @Route("/cart/update/", name="cart_update", methods={"POST"})
      * @param CartService $cartService
      * @return RedirectResponse
      */
-    public function update(int $idproduct, int $idstock, int $qte, CartService $cartService)
+    public function update(CartService $cartService,Request $request)
     {
+
+
+
+
+        $qte =$request->request->get("quantity");
+        $idproduct =$request->request->get("product");
+        $idstock =$request->request->get("stock");
+
+
+
+dump( $_POST);
+
+
+
+
         $cartService->update($idproduct, $idstock, $qte);
         return $this->redirectToRoute("cart");
     }
