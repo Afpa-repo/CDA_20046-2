@@ -50,7 +50,7 @@ class Suppliers
     private $picture;
 
     /**
-     * @ORM\OneToMany(targetEntity=Material::class, mappedBy="supplier")
+     * @ORM\OneToMany(targetEntity=Material::class, mappedBy="supplier", cascade={"persist"})
      */
     private $materials;
 

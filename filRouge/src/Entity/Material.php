@@ -30,7 +30,7 @@ class Material
     private $stocks;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Suppliers::class, inversedBy="materials")
+     * @ORM\ManyToOne(targetEntity=Suppliers::class, inversedBy="materials", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $supplier;

@@ -226,5 +226,9 @@ class Product
     public function setPicture(Picture $image)
     {
     }
+
+    public function setProduct(Product $product)
+    {
+    }
 }
 
