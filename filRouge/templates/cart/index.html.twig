@@ -25,14 +25,13 @@
                     <div class="col-2">
                         {% for picture in items[i].product.picture %}
                             {% if loop.first %}
+                                <img
+                                        src="{{ asset('/images/uploadprod/' ~ picture.name) }}"
+                                        class="img-fluid w-60 mt-4 d-block" alt="wheel">
 
-                                       <img
-                                                    src="{{ asset('/images/uploadprod/' ~ picture.name) }}"
-                                                    class="img-fluid w-60 mt-4 d-block" alt="wheel">
-
-                                {% endif %}
+                            {% endif %}
                         {% endfor %}
-                                           </div>
+                    </div>
                     <div class="col-10">
                         <div class="row h-100">
                             <div class="col-4"><h4>{{ items[i].product.proName }}</h4>
@@ -52,11 +51,13 @@
                                         <label for="quantity_{{ i }}"></label><input name="quantity"
                                                                                      id="quantity_{{ i }}"
                                                                                      type="number">
-                                        <label for="product_{{ i }}"></label><input name="product" type="hidden" value="{{ items[i].product.id }}">
+                                        <label for="product_{{ i }}"></label><input name="product" type="hidden"
+                                                                                    value="{{ items[i].product.id }}">
 
                                         <label for="stock_{{ i }}"></label><input name="stock"
-                                                                                     type="hidden"
-                                                                                     id="stock_{{ i }}" value ="{{ items[i].stock.id }}">
+                                                                                  type="hidden"
+                                                                                  id="stock_{{ i }}"
+                                                                                  value="{{ items[i].stock.id }}">
                                         <button type="submit">Update</button>
                                     </form>
                                 </div>

@@ -53,8 +53,8 @@ class OrderController extends AbstractController
         foreach ($cartService as $key => $value) {
 
             $user = $value['user'];
-            dump($user);
             $order->setUser($user);
+
             $order->setAddress($user->getAdress());
 
             $orderDetail = new OrderDetail($key);
