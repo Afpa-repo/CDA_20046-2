@@ -38,16 +38,12 @@ class OrderController extends AbstractController
 
     public function load(EntityManagerInterface $manager, CartService $cartService)
     {
-
-
         $cartService = $cartService->getFullCart();
 
         $date = new \DateTime();
         $dateShipping = $date->add(new \DateInterval('P1Y'));
 
         $order = new Order();
-        $user = $this->userRepository->find(1);
-
 
         $order->setOrderDate($date);
         $order->setOrderDateShipping($dateShipping);

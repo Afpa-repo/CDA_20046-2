@@ -23,8 +23,16 @@
             {% for i in 0..items|length-1 %}
                 <div class="row border-bottom mt-3">
                     <div class="col-2">
-                        <img class="img-fluid" src="{{ asset ("images/index/retro.png") }}" alt="" width="150px">
-                    </div>
+                        {% for picture in items[i].product.picture %}
+                            {% if loop.first %}
+
+                                       <img
+                                                    src="{{ asset('/images/uploadprod/' ~ picture.name) }}"
+                                                    class="img-fluid w-60 mt-4 d-block" alt="wheel">
+
+                                {% endif %}
+                        {% endfor %}
+                                           </div>
                     <div class="col-10">
                         <div class="row h-100">
                             <div class="col-4"><h4>{{ items[i].product.proName }}</h4>
