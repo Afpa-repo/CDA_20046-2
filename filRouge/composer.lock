@@ -513,6 +513,18 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
+<<<<<<< HEAD
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineBundle.git",
+                "reference": "22add179ebca928650180c72fe84f2958d0c33b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/22add179ebca928650180c72fe84f2958d0c33b0",
+                "reference": "22add179ebca928650180c72fe84f2958d0c33b0",
+=======
             "version": "2.1.2",
             "source": {
                 "type": "git",
@@ -523,6 +535,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/f5153089993e1230f5d8acbd8e126014d5a63e17",
                 "reference": "f5153089993e1230f5d8acbd8e126014d5a63e17",
+>>>>>>> 8f2f1d068450c4d16f78f1107649ab3eccce1039
                 "shasum": ""
             },
             "require": {
@@ -615,7 +628,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
+            "time": "2020-08-24T16:33:16+00:00"
+=======
             "time": "2020-08-25T10:57:15+00:00"
+>>>>>>> 8f2f1d068450c4d16f78f1107649ab3eccce1039
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",

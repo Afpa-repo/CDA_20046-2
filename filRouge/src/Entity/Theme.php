@@ -86,5 +86,9 @@ class Theme
     {
         return $this->themeName;
     }
+
+    public function setTheme(Theme $theme)
+    {
+    }
 }
 
